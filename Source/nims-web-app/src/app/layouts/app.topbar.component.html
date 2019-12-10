@@ -1,0 +1,213 @@
+<div class="layout-topbar d-flex justify-content-between">
+  <div>
+    <a class="logo" [routerLink]="['/#']">
+      <img src="assets/layout/images/Logo_Viette-02.png" alt="viettel"/>
+    </a>
+    <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
+    <span class="hamberger_menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+    </a>
+  </div>
+  <div>
+    <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)"
+       *ngIf="app.profileMode==='top' || app.isHorizontal()">
+      <img src="assets/img/icon/ava.png">
+      <span>{{hrStorage.getUserToken().userId}}</span>
+      <i class="pi pi-caret-down"></i>
+    </a>
+    <ul id="topbar-usermenu" class="usermenu usermenu-overlay fadeInDown"
+        [ngClass]="{'usermenu-active': app.topbarMenuActive}">
+      <li #profile [ngClass]="{'menuitem-active':app.activeTopbarItem === profile}">
+        <a href="#" (click)="app.onTopbarItemClick($event,profile)">
+          <i class="fa fa-fw fa-user"></i>
+          <span class="topbar-item-name">Profile</span>
+        </a>
+      </li>
+      <li #settings [ngClass]="{'menuitem-active':app.activeTopbarItem === settings}">
+        <a href="#" (click)="app.onTopbarItemClick($event,settings)">
+          <i class="fa fa-fw fa-cog"></i>
+          <span class="topbar-item-name">Settings</span>
+          <i class="layout-menuitem-toggler fa fa-fw fa-angle-down"></i>
+        </a>
+        <ul class="fadeInDown">
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick($event)">
+              <i class="fa fa-fw fa-paint-brush"></i>
+              <span>Change Theme</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick($event)">
+              <i class="fa fa-fw fa-star-o"></i>
+              <span>Favorites</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick($event)">
+              <i class="fa fa-fw fa-lock"></i>
+              <span>Lock Screen</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick($event)">
+              <i class="fa fa-fw fa-picture-o"></i>
+              <span>Wallpaper</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li #messages [ngClass]="{'menuitem-active':app.activeTopbarItem === messages}">
+        <a href="#" (click)="app.onTopbarItemClick($event,messages)">
+          <i class="fa fa-fw fa-envelope-o"></i>
+          <span class="topbar-item-name">Messages</span>
+          <i class="layout-menuitem-toggler fa fa-fw fa-angle-down"></i>
+        </a>
+        <ul class="fadeInDown">
+          <li role="menuitem">
+            <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
+              <img src="assets/layout/images/avatar1.png" width="25"/>
+              <span>Give me a call</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
+              <img src="assets/layout/images/avatar2.png" width="25"/>
+              <span>Sales reports attached</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
+              <img src="assets/layout/images/avatar3.png" width="25"/>
+              <span>About your invoice</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
+              <img src="assets/layout/images/avatar2.png" width="25"/>
+              <span>Meeting today at 10pm</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" class="topbar-message" (click)="app.onTopbarSubItemClick($event)">
+              <img src="assets/layout/images/avatar4.png" width="25"/>
+              <span>Out of office</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li #notifications [ngClass]="{'menuitem-active':app.activeTopbarItem === notifications}">
+        <a href="#" (click)="app.onTopbarItemClick($event,notifications)">
+          <i class="fa fa-fw fa-bell-o"></i>
+          <span class="topbar-item-name">User Role</span>
+          <i class="layout-menuitem-toggler fa fa-fw fa-angle-down"></i>
+        </a>
+        <ul class="fadeInDown">
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick(200)">
+              <i class="fa fa-fw fa-tasks"></i>
+              <span>User Cấp tập đoàn</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick(201)">
+              <i class="fa fa-fw fa-calendar-check-o"></i>
+              <span>User cấp khu vực</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick(202)">
+              <i class="fa fa-fw fa-download"></i>
+              <span>User cấp tỉnh</span>
+            </a>
+          </li>
+          <li role="menuitem">
+            <a href="#" (click)="app.onTopbarSubItemClick(203)">
+              <i class="fa fa-fw fa-plane"></i>
+              <span>user cấp huyện</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div class="language">
+      <a href="#">
+        <img alt="" src="{{language.img}}">
+        <!--      <span>{{language.label}}</span>-->
+        <!--      <i class="pi pi-angle-down"></i>-->
+      </a>
+      <ul>
+        <li *ngFor="let lang of languages">
+          <a (click)="onSelected(lang)">
+            <img alt="" src="{{lang.img}}">
+            <span>{{lang.label}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="language timezone">
+      <!--    <span class="tit_header">Time zone</span>-->
+      <a href="#" class="link_timezone">
+        <span>+07:00</span>
+        <i class="pi pi-angle-down"></i>
+      </a>
+      <ul>
+        <li>
+          <a href="#">
+            <span>+06:00</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span>+06:30</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span>+07:00</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span>+07:30</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span>+08:00</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span>+08:30</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="language theme_top">
+      <a href="#">
+        <img src="assets/img/nims/theme.png" alt="">
+        <!--      <span>Theme</span>-->
+      </a>
+      <ul>
+        <li>
+          <a (click)="app.onTopbarSwitchThemeClick(1)">
+            <div class="dark_color"></div>
+          </a>
+        </li>
+        <li>
+          <a (click)="app.onTopbarSwitchThemeClick(2)">
+            <div class="blue_color"></div>
+          </a>
+        </li>
+        <li>
+          <a (click)="app.onTopbarSwitchThemeClick(3)">
+            <div class="green_color"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

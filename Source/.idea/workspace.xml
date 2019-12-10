@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc8d236f-deca-4a57-b9f5-1f8085c9e56e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/nims-services/transmission-service/src/main/java/com/viettel/nims/transmission/dao/InfraCableLanesDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nims-services/transmission-service/src/main/java/com/viettel/nims/transmission/dao/InfraCableLanesDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nims-services/transmission-service/src/main/java/com/viettel/nims/transmission/dao/InfraCablesDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nims-services/transmission-service/src/main/java/com/viettel/nims/transmission/dao/InfraCablesDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nims-services/transmission-service/src/main/java/com/viettel/nims/transmission/model/InfraCableLanesBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nims-services/transmission-service/src/main/java/com/viettel/nims/transmission/model/InfraCablesBO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/Jenkinsfile_bootstrap" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/Jenkinsfile_bootstrap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/cicd/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/cicd/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons-service/src/main/java/com/viettel/nims/commons/service/base/GenericDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons-service/src/main/java/com/viettel/nims/commons/service/base/GenericDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/client/form/ConfigSmsGateWayForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/client/form/ConfigSmsGateWayForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/client/form/ErrorLoginOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/client/form/ErrorLoginOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/client/form/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/client/form/UserLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/BrokenMaterialBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatAuthenOtpBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatComeStationReasonBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatConfigManagementBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatDepartmentBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatLocationBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatMajorTypeBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatTaskErrorBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatTaskReasonBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CatTaskTypeBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CfgWsBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/CfgWsBO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/ConfigSignalBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupChannelMapBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupConfigReceiverNoticeBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupLogCallWsBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupNotificationMessageBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupServiceSurveyBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupTaskInfoBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupTaskManagementBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupTaskReviewManagementBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupTeamStaffBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/GroupWhiteListSignalBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MapStationKeyBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MessageBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCatSuppliesBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCatWorkBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCatWorkLevel1BO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCatWorkLevel2BO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCatWorkMajorBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnConfigDistanceBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnConfigPointBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCriticalImageBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCriticalPointBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnCriticalSuppliesBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnPartnerMaintainBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnWorkBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnWorkCableCurrentBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnWorkCurrentBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnWorkTaskBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/MnWorkTaskCurrentBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SmartKeyBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SmartkeyActionHistory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SmartkeyPassHistory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/StationCTVBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/StationInOutBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SubStockModelRelWS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SubStockModelRelWS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SysUsersBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SysUsersImageBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/SysUsersTokenBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/V_DepartmentBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/V_DepartmentFullBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/entity/V_DeptFullBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/pool/MyServiceLogHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/pool/MyServiceLogHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/DataUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/DataUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/JGeometryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/JGeometryType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/PassVtSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/PassVtSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/SendSmsMT.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/SendSmsMT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/ServiceTaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/ServiceTaskType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/TaskUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/TaskUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/UserTokenVsmart.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/java/com/viettel/nims/commons/util/UserTokenVsmart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/commons/src/main/resources/META-INF/spring.factories" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/commons/src/main/resources/META-INF/spring.factories" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/configuration-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/configuration-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/commons-service/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/commons-service/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/commons-service/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/commons-service/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/gateway-service/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/gateway-service/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/geo-service/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/configuration-service/src/main/resources/config/geo-service/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/deploy/docker-compose-services-stack-dev-remote.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/deploy/docker-compose-services-stack-dev-remote.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/deploy/docker-compose-services-stack-staging.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/deploy/docker-compose-services-stack-staging.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/deploy/docker-compose-services-stack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/deploy/docker-compose-services-stack.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/geo-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/geo-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/controller/InfraStationsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/controller/InfraStationsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/model/common/BboxForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/model/common/BboxForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/service/InfraStationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/service/InfraStationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/service/base/GenericDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/geo-service/src/main/java/com/viettel/nims/geo/service/base/GenericDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/nims-project-web" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nims-services/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nims-services/pom.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/nims-services" />
+  </component>
+  <component name="ProjectId" id="1QM0GNHDIQUh8NDkzCkkfiXHJ8u" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/nims-services" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc8d236f-deca-4a57-b9f5-1f8085c9e56e" name="Default Changelist" comment="" />
+      <created>1567565061784</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1567565061784</updated>
+      <workItem from="1567565069882" duration="205000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

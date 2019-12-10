@@ -1,0 +1,15 @@
+
+  ::ng-deep{
+      .ui-tree-selectable{
+        width: 100%;
+      }
+      
+       .ui-progressbar{
+        border: 1px solid gray !important;
+      }
+      .ui-progressbar-value {
+        // border: 0 none;
+        // margin: 0;
+        background: #0faf16 !important;
+    }
+  }

@@ -1,0 +1,379 @@
+<app-spinner></app-spinner>
+<p-scrollPanel [style]="{width: '100%', height: '768px'}" styleClass="custom-sidebar clearfix">
+  <div class="content_wrapper">
+    <p-messages key="messCable"></p-messages>
+    <p-toast position="bottom-right" key="success" [style]="{marginTop: '80px'}"></p-toast>
+    <form [formGroup]="formAdd" (ngSubmit)="onSubmit()">
+      <div *ngIf="action != 'view'">
+        <div class="content-section implementation">
+          <div class="ui-g ui-fluid">
+            <!-- ma nha tram start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0 pt-0">
+              <div class="line_form ui-g ui-fluid" hasError="stationId">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'station.stationCode' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content py-0 pt-0">
+                  <div class="input_more_form">
+                    <autocomplete-search-control #autocompleteStation [header]="headerStation"
+                                                 [control]="formControls['_stationId']"
+                                                 [contentType]="station"
+                                                 [displayFieldType]="'station'"
+                                                 [disabled]="action == 'view' || action == 'edit'" [type]="'station'"
+                                                 (onChange)="onChangeRowSelectStation($event)"
+                                                 (onClean)="onClearRowSelect()" tabindex="1">
+                    </autocomplete-search-control>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ma nha tram end-->
+
+            <!-- ODF dau start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid" hasError="sourceId">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.ODFfist' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <select-filter id="select-filter" [property]="f['sourceId']" [options]="listODFFist" optionLabel="label"
+                                 optionValue="value" (onChange)="onChangeODF($event)" [filter]="false"
+                                 [disabled]="action == 'view' || action == 'edit'" tabindex="2">
+                  </select-filter>
+                  <label class="ui-g-12 ui-md-4 name_label pt-0" *ngIf="action == 'view'">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- ODF dau end-->
+
+            <!-- ODF cuoi start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid"  hasError="destId">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.ODFend' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <select-filter id="select-filter" [property]="f['destId']" [options]="listODFEnd" optionLabel="label"
+                                 optionValue="value" (onChange)="onChangeODF($event)" [filter]="false"
+                                 [disabled]="action == 'view' || action == 'edit'" tabindex="3">
+                  </select-filter>
+                  <label class="ui-g-12 ui-md-4 name_label pt-0" *ngIf="action == 'view'">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- ODF dau end-->
+
+            <!-- form fields row 2-->
+            <!-- chi so doan cap start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.cableIndex' | translate}}
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <input type="text" class="input_form form-control" formControlName="cableIndex" maxlength="2"
+                    [readOnly]="action == 'view' || action == 'edit'"
+                         (blur)="onChangeCableIndex()" positiveInteger tabindex="4">
+                </div>
+              </div>
+            </div>
+            <!-- chi so doan cap end-->
+
+            <!-- ma doan cap start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid" hasError="cableCode">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.cableCode' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <input type="text" pInputText class="input_form form-control" formControlName="cableCode"
+                         [readOnly]="action == 'view' || action == 'edit'" tabindex="5"
+                         >
+                </div>
+              </div>
+            </div>
+            <!-- ma doan cap end-->
+
+            <!-- ma loai cap start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid" hasError="cableTypeId">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.cableTypeCode' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <select-filter id="select-filter" [property]="f['cableTypeId']" [options]="listCable" optionLabel="label"
+                                 optionValue="value" [disabled]="action == 'view' || action == 'edit'" tabindex="6">
+                  </select-filter>
+                </div>
+              </div>
+            </div>
+            <!-- ma loai cap end-->
+
+            <!-- form fields row 3-->
+            <!-- do dai cap start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid" hasError="length">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.cableLength' | translate }} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <input type="text" formControlName="length" [readonly]="action == 'view'" class="input_form form-control"
+                  decimalThreeTenths  tabindex="7">
+                  <!-- <input-search-control type="text" formControlName="length" [disabled]="action == 'view'"
+                  decimalThreeTenths  tabindex="7">
+                    </input-search-control> -->
+                </div>
+              </div>
+            </div>
+            <!-- do dai cap end-->
+            <!-- trang thai start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'common.label.status' | translate}} <span class="text-danger">*</span>
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                  <!-- <select-filter [property]="f['status']" [options]="statusList" optionLabel="label"   [disabled]="action == 'view'"
+                  optionValue="value">
+                   </select-filter> -->
+                  <p-dropdown [options]="statusList" formControlName="status"
+                              [disabled]="action == 'view'" tabindex="8"></p-dropdown>
+
+                  <label class="ui-g-12 ui-md-4 name_label pt-0" *ngIf="action == 'view'">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- trang thai end-->
+
+            <!-- ngay lap dat start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'cable.installationDate' | translate}}
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                  <p-calendar formControlName="installationDate" dateFormat="dd/mm/yy" showIcon="true"
+                              (onInput)="onInput($event)" [disabled]="action == 'view'" tabindex="9">
+                  </p-calendar>
+                  <a class="icon-clear-date" (click)="onClearDatePicker()"><i class="x_ico"></i></a>
+                </div>
+              </div>
+            </div>
+            <!-- ngay lap dat end-->
+
+            <!-- form fields row 4-->
+            <!-- Ghi chu start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-4 name_label pt-0">
+                  {{'station.note' | translate}}
+                </label>
+                <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <textarea rows="5" cols="50" pInputTextarea formControlName="note" maxlength="500"
+                          [readonly]="action == 'view'" tabindex="10"></textarea>
+                </div>
+              </div>
+            </div>
+            <!-- Ghi chu end-->
+          </div>
+        </div>
+        <div class="line_btn_form mt-0">
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn_form" tabindex="11">
+              <i class="add_ico"></i>
+              <span [innerHTML]="'common.button.storage' | translate"></span>
+            </button>
+            <button type="button" (click)="onClosedTab()" class="btn_form02" tabindex="12">
+              <i class="exit_ico"></i>
+              <span [innerHTML]="'common.label.cancel' | translate"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--Form xem thong tin-->
+      <div *ngIf="action == 'view'">
+        <div class="content-section implementation">
+          <label class="view-title-label">
+            {{'cable.manage.infor' | translate}}
+          </label>
+          <div class="ui-g ui-fluid px-1">
+
+            <!-- ma nha tram -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'station.stationCode' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{viewData.stationCode}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- ODF dau -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.ODFfist' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{viewData.sourceCode}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- ODF cuoi -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.ODFend' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{viewData.destCode}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- form fields row 2-->
+
+            <!-- Chi so doan cap -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.cableIndex' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{f['cableIndex'].value}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ma doan cap -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.cableCode' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{viewData.cableCode}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ma loai cap -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.cableTypeCode' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{viewData.cableTypeCode}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- form fields row 3-->
+
+            <!-- Do dai cap -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.cableLength' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{viewData.length}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- ngay lap dat -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'cable.installationDate' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{f['installationDate'].value | date:'dd/MM/yyyy'}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trang thai -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'common.label.status' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{f['status'].value}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- form fields row 4-->
+
+            <!-- Ghi chu -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+              <div class="line_form ui-g ui-fluid">
+                <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                  {{'station.note' | translate}}<span>:</span>
+                </label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <label class="view-detail mb-0">
+                    {{f['note'].value}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <hr/>
+        <div class="line_btn_form mt-0">
+          <button type="button" (click)="onClosed()" class="btn_form02">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.button.close' | translate"></span>
+          </button>
+          <button type="button" (click)="update()" class="btn_form">
+            <i class="repair_ico"></i>
+            <span [innerHTML]="'common.label.update' | translate"></span>
+          </button>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</p-scrollPanel>
+
+<p-toast position="center" key="equal" (onClose)="onReject('equal')" [modal]="true"
+         styleClass="ui-toast-confirm" [autoZIndex]="true">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: left">
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+  </ng-template>
+</p-toast>
+
+<p-toast position="bottom-right" key="checkOdfExisted"></p-toast>
+
+

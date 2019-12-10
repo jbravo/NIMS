@@ -1,0 +1,27 @@
+<div class="content_wrapper">
+    <div class="line_btn_form">
+      <button type="submit" class="btn_form" (click)="viewLayer()">
+        <i class="add_ico"></i>
+        <span [innerHTML]="'common.label.status.active' | translate"></span>
+      </button>
+      <button type="button" class="btn_form02" (click)="closePopup()">
+        <i class="exit_ico"></i>
+        <span [innerHTML]="'common.label.cancel' | translate"></span>
+      </button>
+    </div>
+    <div class="content-section implementation">
+      <div class="ui-g ui-fluid">
+          <!-- Danh sách đối tượng hiển thị-->
+          <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-12">
+              <b>{{'layer.show.listObject' | translate}}</b>
+            </div>
+            <div class="ui-g-6" *ngFor="let checkBox of listObjectCheckBoxes">
+              <p-checkbox  [value]="checkBox.name" [(ngModel)]="selectedNames"  label="{{ checkBox.label | translate }}"></p-checkbox>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+</div>

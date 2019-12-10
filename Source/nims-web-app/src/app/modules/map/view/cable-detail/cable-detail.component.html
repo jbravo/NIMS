@@ -1,0 +1,125 @@
+<div class="detail_search_gmap">
+  <form [formGroup]="formGroup">
+
+    <div class="header_search_map">
+
+      <div class="tool_detail_map">
+        <a href="#"><i class="delete_tool"></i></a>
+        <a (click)="clickItem()"><i class="repair_ico"></i></a>
+      </div>
+      <div class="content_detail_map">
+        <!-- diem dau start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.source_id' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['sourceCode'].value}}
+            </p>
+          </div>
+        </div>
+        <!-- diem dau end-->
+
+        <!-- diem cuoi start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.dest_id' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['destCode'].value}}
+            </p>
+          </div>
+        </div>
+        <!-- diem cuoi end-->
+
+        <!-- Ma doan cap start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.cable_code' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['cableCode'].value}}
+            </p>
+          </div>
+        </div>
+
+        <!-- ma cong trinh start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.construction_code' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['constructionCode'].value}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Ma loai cap start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.cable_type_code' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['cableTypeId'].value}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Chieu dai start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.length' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['length'].value}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Trang thai start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.status' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['status'].value}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Ngay lap dat start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'cable.installationDate' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['installationDate'].value}}
+            </p>
+          </div>
+        </div>
+
+        <!-- Ghi chu start-->
+        <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+              {{'station.note' | translate}}:
+            </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['note'].value}}
+            </p>
+          </div>
+          <!-- Ghi chu end-->
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

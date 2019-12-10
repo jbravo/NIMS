@@ -1,0 +1,87 @@
+<div class="list_tab">
+		<ul>
+			<li>
+				<span>Danh mục</span>
+			</li>
+			<li class="active">
+				<span>Thêm mới</span>
+				<i class="exit_tab"></i>
+			</li>
+		</ul>
+	</div>
+
+  <div class="tab_content" id="tab_menu">
+      <div class="breadcrumb_link">
+          <ul>
+            <li><a href="#">Quản lý hạ tầng</a></li>
+            <li>/</li>
+            <li><a href="#">Quản lý hạ tầng</a></li>
+            <li>/</li>
+            <li><a href="#">Quản lý thiết bị</a></li>
+            <li>/</li>
+            <li><span>Chi tiết thiết bị</span></li>
+          </ul>
+      </div>
+      
+      <div class="content_right">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+              <div class="line_form ui-g">
+                <label class="ui-g-12 ui-md-4 name_label">Dự án</label>
+                <div class="ui-g-12 ui-md-8">
+                    <p-dropdown [options]="selsect" [(ngModel)]="dropdown"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+              <div class="line_form ui-g">
+                <label class="ui-g-12 ui-md-4 name_label">Trạm</label>
+                <div class="ui-g-12 ui-md-8">
+                    <div class="input_more_form">
+                        <input class="input_form"  pinputtext="" placeholder="Autocomple" type="text" ng-reflect-type="text">
+                        <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+              <div class="line_form ui-g">
+                <label class="ui-g-12 ui-md-4 name_label">Loại thiết bị</label>
+                <div class="ui-g-12 ui-md-8">
+                    <p-dropdown [options]="selsect" [(ngModel)]="dropdown"></p-dropdown>
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+              <div class="line_form ui-g">
+                <label class="ui-g-12 ui-md-4 name_label">Mã thiết bị</label>
+                <div class="ui-g-12 ui-md-8">
+                    <input class="input_form"  pinputtext="" placeholder="Nhập" type="text" ng-reflect-type="text">
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+              <div class="line_form ui-g">
+                <label class="ui-g-12 ui-md-4 name_label">Tên thiết bị</label>
+                <div class="ui-g-12 ui-md-8">
+                    <input class="input_form"  pinputtext="" placeholder="Nhập" type="text" ng-reflect-type="text">
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+              <div class="line_form ui-g">
+                <label class="ui-g-12 ui-md-4 name_label">Số serial</label>
+                <div class="ui-g-12 ui-md-8">
+                    <input class="input_form"  pinputtext="" placeholder="Nhập" type="text" ng-reflect-type="text">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="line_btn_form">
+              <a href="#" class="btn_form02"><i class="exit_ico"></i> <span>Thoát</span></a>
+              <a href="#" class="btn_form"><i class="add_ico"></i> <span>Tìm kiếm</span></a>
+          </div>
+      </div>
+      
+  </div>
+

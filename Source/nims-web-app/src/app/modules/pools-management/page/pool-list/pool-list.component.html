@@ -1,0 +1,394 @@
+<app-spinner></app-spinner>
+<p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 140px)'}">
+  <div class="content_wrapper">
+    <form id="formSearch" [formGroup]="formSearch">
+      <!-- <p-panel header="{{'common.label.search.info' | translate}}" [toggleable]="true" [style]="{'margin-bottom':'8px'}"> -->
+      <div id="searchArea">
+        <div class="search_header" *ngIf="advanceSearch == false">
+          <div class="form_search">
+            <input-search-control [type]="'pool'" formControlName="basicInfo" [isKeepFocus]="true" [showBtn]="true"
+              (onSearch)="basicSearchFunc()">
+            </input-search-control>
+
+          </div>
+          <a class="search_advanced" (click)="showAdvance()">{{'common.label.advanced.search' | translate}}</a>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="content-section implementation" *ngIf="advanceSearch">
+          <div class="ui-g ui-fluid line_form">
+            <!-- Row 1 -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'pool.poolCode' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <input type="text" pInputText class="input_form" formControlName="poolCode">
+            </div>
+
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'pool.deptName' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <div class="input_more_form">
+                <autocomplete-search-control [header]="headerDept" [control]="formControls['deptName']"
+                  [contentType]="dept" [displayFieldType]="'dept'" [type]="'dept'"
+                  (onChange)="onChangeRowSelectDept($event)" (onClean)="onClearRowSelect()">
+                </autocomplete-search-control>
+              </div>
+            </div>
+
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'pool.locationName' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <div class="input_more_form">
+                <autocomplete-search-control [header]="headerLocation" [control]="formControls['locationName']"
+                  [contentType]="location" [displayFieldType]="'location'" [type]="'location'"
+                  [disabled]="!formControls['deptName'].value">
+                </autocomplete-search-control>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-g ui-fluid line_form">
+            <!-- Row 2 -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label">
+              {{'pool.poolTypeCode' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content">
+              <div class="input_more_form">
+                <select-filter [property]="f['poolTypeId']" [options]="poolTypeList" optionLabel="label"
+                  optionValue="value">
+                </select-filter>
+              </div>
+            </div>
+
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label">
+              {{'pool.ownerId' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content">
+              <div class="input_more_form">
+                <select-filter [property]="f['ownerId']" [options]="ownerList" optionLabel="label" optionValue="value">
+                </select-filter>
+              </div>
+            </div>
+          </div>
+
+          <div class="line_btn_form">
+            <button (click)="advanceSearchFunc()" class=" btn_form"><i
+                class="search_ico"></i><span>{{'common.button.search' | translate}}</span></button>
+            <a class="btn_collapse" (click)="hideAdvance()"> {{'common.label.advanced.search.hide' | translate}}</a>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- </p-panel>
+    <p-panel header="{{'common.label.listData' | translate}}" [toggleable]="true"> -->
+      <hr />
+      <div id="listArea" class="list_btn_grid">
+        <div class="panel panel-default">
+          <div class="panel-body panel-table">
+            <p-table #dt [columns]="selectedColumns" [value]="resultList.listData" [rows]="10"
+              [totalRecords]="resultList.totalRecords" [responsive]="true" [paginator]="true"
+              [(selection)]="selectedResult" [scrollable]="true" [resizableColumns]="true"
+              [rowsPerPageOptions]="[5,10,15,20,25,30]" (onRowSelect)="onRowSelect($event)" [lazy]="true"
+              [ngClass]="{'cell-text-pre-wrap': isCollapse}" (onLazyLoad)="onLazyLoad($event);">
+              <ng-template pTemplate="caption">
+
+                <button href="#" class="btn_grid" pTooltip="{{'common.label.add' | translate}}" tooltipPosition="top"><i
+                    class="add_ico" (click)="saveOrEdit()" *hasPermission="['action.create','resource.pool']"></i>
+                </button>
+                <button href="#" class="btn_grid" pTooltip="{{'common.label.import' | translate}}" *hasPermission="['action.import','resource.pool']"
+                  (click)="showDialog()" tooltipPosition="top" ><i class="import_ico"></i>
+                </button>
+                <button href="#" class="btn_grid" pTooltip="{{'common.label.export' | translate}}"
+                  tooltipPosition="top"><i class="export_excel_ico" (click)="confirmExportExcel()"></i>
+                </button>
+                <button class="btn_grid" pTooltip="{{'common.button.delete' | translate}}" tooltipPosition="top" *hasPermission="['action.delete','resource.pool']"><i
+                    class="delete_ico" (click)="onDelete(null, this.selectedResult)"></i>
+                </button>
+                <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" [ngModelOptions]="{standalone: true}"
+                  dataKey="id" optionLabel="headerTranslate" defaultLabel="" [filter]="true"
+                  filterBy="label, value.headerTranslate" resetFilterOnHide="true" [showToggleAll]="true"
+                  styleClass="ui-multiselect-columns-option" (onChange)="onChangeCols($event)" dropdownIcon="toggle_ico"
+                  pTooltip="{{'common.label.hidenColumn' | translate}}" tooltipPosition="top" appendTo="body">
+                </p-multiSelect>
+              </ng-template>
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:3rem">
+                  <col style="width:3rem">
+                  <col style="width:10rem">
+                  <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th rowspan="2" class="text-center size-2">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th>
+                  <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                  <th rowspan="2" translate class="text-center size-6">common.table.action</th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                    class="text-center" (contextmenu)="onLinkRightClickedHeader(col.field, $event)">
+                    {{col.header | translate}}
+                    <p-sortIcon [field]="col.field">
+                    </p-sortIcon>
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" [ngSwitch]="col.typeFilter">
+                    <input *ngSwitchCase="'input'" pInputText type="text"
+                      (input)="searchInTable($event.target.value, col.field)"
+                      onkeydown="if (event.keyCode == 13) {return false;}">
+
+                    <input *ngSwitchCase="'longitude'" pInputText type="text"
+                      (input)="searchInTable($event.target.value, col.field)"
+                      onkeydown="if (event.keyCode == 13) {return false;}"
+                      oninput="this.value = this.value.replace(/[^-.0-9]/g, '')">
+
+                    <input *ngSwitchCase="'latitude'" pInputText type="text"
+                      (input)="searchInTable($event.target.value, col.field)"
+                      onkeydown="if (event.keyCode == 13) {return false;}"
+                      oninput="this.value = this.value.replace(/[^-.0-9]/g, '')">
+
+
+                    <p-dropdown *ngSwitchCase="'poolTypeCode'" appendTo="body" optionLabel="label"
+                      [options]="poolTypeList" formControlName="{{col.field}}" [style]="{'width':'100%'}"
+                      [showClear]="true" filter="true" (onChange)="searchInTable($event.value, col.field)"
+                      [emptyFilterMessage]="'common.label.noData' | translate"></p-dropdown>
+
+
+                    <p-autoComplete *ngSwitchCase="'deptName'" appendTo="body" [suggestions]="filteredDept"
+                      field="label" (completeMethod)="callFunctionFilter($event, 'deptName')"
+                      (onSelect)="searchInTable($event.value, 'deptName')" (onClear)="searchInTable('', 'deptName')"
+                      [size]="30" [minLength]="1">
+                    </p-autoComplete>
+
+                    <p-autoComplete *ngSwitchCase="'locationName'" appendTo="body" [suggestions]="filteredLocation"
+                      field="label" (completeMethod)="callFunctionFilter($event, 'locationName')"
+                      (onSelect)="searchInTable($event.value, 'locationName')"
+                      (onClear)="searchInTable('', 'locationName')" [size]="30" [minLength]="1">
+                    </p-autoComplete>
+
+
+                    <p-dropdown *ngSwitchCase="'ownerName'" appendTo="body" optionLabel="label" [options]="ownerList"
+                      formControlName="{{col.field}}" [style]="{'width':'100%'}" [showClear]="true" filter="true"
+                      (onChange)="searchInTable($event.value.value, col.field)"
+                      [emptyFilterMessage]="'common.label.noData' | translate"></p-dropdown>
+
+                    <p-dropdown *ngSwitchCase="'status'" appendTo="body" [options]="statusList"
+                      [style]="{'width':'100%'}" (onChange)="searchInTable($event.value, col.field)"></p-dropdown>
+                    <p-calendar *ngSwitchCase="'inputDate'" (onSelect)="searchInTable($event, col.field)"
+                      id="icon-calendar-table" showButtonBar="false" showIcon="true"
+                      (onClearClick)="onClearCalenDa(col.field)" appendTo="body" formControlName="{{col.field}}"
+                      dateFormat="dd/mm/yy" >
+                    </p-calendar>
+                  </th>
+                </tr>
+
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                <tr>
+                  <td class="text-center size-2">
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                  </td>
+                  <td class="text-center size-2">{{index}}</td>
+                  <td class="size-6">
+                    <div class="d-flex justify-content-center">
+                      <a class="btn_action" pTooltip="{{'common.label.view.detail' | translate}}" tooltipPosition="top"
+                        (click)="showDetail(rowData.poolId, 'view')" *hasPermission="['action.view','resource.pool']">
+                        <i class="more_ico"></i>
+                      </a>
+                      <a class="btn_action" pTooltip="{{'common.label.edit' | translate}}" tooltipPosition="top"
+                        (click)="saveOrEdit(rowData.poolId, 'edit')" *hasPermission="['action.update','resource.pool']">
+                        <i class="repair_ico"></i>
+                      </a>
+                      <a class="btn_action" pTooltip="{{'common.button.delete' | translate}}" tooltipPosition="top"
+                        (click)="onDelete(rowData, null)" *hasPermission="['action.delete','resource.pool']">
+                        <i class="remove_ico"></i>
+                      </a>
+                      <!-- <a class="btn_action" pTooltip="{{'common.label.import.file' | translate}}" tooltipPosition="top">
+                      <i class="attact_ico"></i>
+                    </a> -->
+                    </div>
+                  </td>
+                  <td *ngFor="let col of columns" [ngClass]="col.classField" [ngSwitch]="col.field"
+                    (contextmenu)="onLinkRightClickedRow(rowData[col.field], $event)"
+                    [rightClickCopy]="rowData[col.field]" (dblclick)="showDetail(rowData.poolId, 'view')">
+                    <div *ngSwitchCase="'constructionDate'">
+                      {{rowData[col.field] | date :environments.dateFormat}}
+                    </div>
+                    <div *ngSwitchCase="'deliveryDate'">
+                      {{rowData[col.field] | date :environments.dateFormat}}
+                    </div>
+                    <div *ngSwitchCase="'acceptanceDate'">
+                      {{rowData[col.field] | date :environments.dateFormat}}
+                    </div>
+                    <div class="cell-data" *ngSwitchDefault>{{rowData[col.field]}}</div>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="summary">
+                <span *ngIf="last > 0">{{'pagination.record.from' | translate}} {{first + 1}}-{{last}}
+                  {{'pagination.of' | translate}} {{resultList.totalRecords}} {{'pagination.record' | translate}}</span>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+      <!-- </p-panel> -->
+    </form>
+  </div>
+</p-scrollPanel>
+<!--toast confirm delete-->
+<p-toast position="center" key="DelPools" (onClose)="onReject()" [modal]="true" styleClass="ui-toast-confirm"
+  [autoZIndex]="true">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <h3>{{message.summary}}</h3>
+      <!-- <p>{{message.detail}}</p> -->
+    </div>
+    <div class="btn_modal_footer" style="text-align: center">
+      <a (click)="onConfirm(message.data)" class="btn_modal_action"
+        style="color: white">{{'common.label.yes' | translate}}</a>
+      <a (click)="onReject()" class="btn_modal_cancel" style="color: #007CBB">{{'common.label.no' | translate}}</a>
+    </div>
+  </ng-template>
+</p-toast>
+<!-- <p-toast key="leftCopy" position="top-right"></p-toast> -->
+<p-toast key="rightDown" position="bottom-right"></p-toast>
+
+<p-dialog id="confirm-dialog" [(visible)]="displayConfirmDelete" [modal]="true" [responsive]="true"
+  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false"
+  [draggable]="false">
+  <h4>{{'common.button.confirm' | translate}}</h4>
+  <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{'pool.message.confirm.delete' | translate}}</p>
+  <p-footer>
+    <button type="button" pButton (click)="onSubmitDelete()" label="{{'common.label.yes' | translate}}"></button>
+    <button #focus type="button" pButton (click)="onHideConfirmDelete()" label="{{'common.label.no' | translate}}"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="{{'common.warning.delete.title' | translate}}" [(visible)]="displayWarningMessDelete" [modal]="true"
+  [responsive]="true" [style]="{width: '600px'}" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false"
+  [draggable]="false">
+  <!-- thieu -->
+  <div class="row">
+    <div class="col-12">
+      <p class="mb-2" *ngFor="let item of warningMessPool; let i = index">{{i + 1}} .
+        {{item}}
+      </p>
+    </div>
+  </div>
+  <p-footer >
+    <button *ngIf="isConfirmDelHang" type="button" pButton (click)="onSubmitDeleteHang()" label="{{'common.label.yes' | translate}}"></button>
+    <button *ngIf="isConfirmDelHang" #focus type="button" pButton (click)="onHideConfirmDeleteHang()" label="{{'common.label.no' | translate}}"
+      class="ui-button-secondary"></button>
+  </p-footer>
+  <!-- thieu -->
+</p-dialog>
+
+<p-dialog id="confirm-dialog" [(visible)]="displayConfirmExport" [modal]="true" [responsive]="true"
+  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false"
+  [draggable]="false">
+  <h4>{{'common.button.confirm' | translate}}</h4>
+  <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    <span *ngIf="exportAll">
+      {{'pool.export.all' | translate}}
+    </span>
+    <span *ngIf="!exportAll">
+      {{'pool.export.choose' | translate}}
+    </span>
+  </p>
+  <p-footer>
+    <button type="button" pButton (click)="onSubmitExport()" label="{{'common.label.yes' | translate}}"></button>
+    <button #focusExport type="button" pButton (click)="onHideConfirmExport()" label="{{'common.label.no' | translate}}"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog id="import-file-dialog" [showHeader]="false" [(visible)]="importDialog" [modal]="true" [responsive]="true"
+  [style]="{width: '700px', minWidth: '500px'}">
+  <p-tabView>
+    <p-tabPanel header="{{'common.label.add' | translate}}">
+      <div class="ui-g ui-fluid line_form">
+        <label class="ui-g-12 ui-md-2 ui-lg-2 control-label text-right">{{'controls.choseFile' | translate}}</label>
+        <div class="ui-g-12 ui-md-9 ui-lg-9">
+          <upload-control #fileA [fileId]="'add'" [accept]="'.xls,.xlsx'"
+                          (onFileChange)="changeFile($event,1)"></upload-control>
+<!--          <file-selector #fileA [accept]="'.xls,.xlsx'" (onFileChange)="changeFile($event,1)"></file-selector>-->
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <div class="ui-g-6 pt-0">
+            <a class="btn-table-common edit" (click)="downloadFileTemplate(1)" tabindex="2"
+              [innerHTML]="'station.download.file.teamplate' | translate">
+            </a>
+          </div>
+          <div class="ui-g-6 pt-0" *ngIf="resultImportAdd">
+            <a class="btn-table-common edit" (click)="downloadResult(resultImportAdd)" tabindex="3"
+              [innerHTML]="'station.download.file.result' | translate">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <a class="btn_modal_action" (click)="doImport(1)" tabindex="4"
+            style="color: white">{{'station.button.import' | translate}}</a>
+          <a class="btn_modal_cancel" (click)="closeImportPopup()" tabindex="5"
+            style="color: #007CBB">{{'common.status.six' | translate}}</a>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="{{'common.label.update' | translate}}">
+      <div class="ui-g ui-fluid line_form">
+        <label class="ui-g-12 ui-md-2 ui-lg-2 control-label text-right">{{'controls.choseFile' | translate}}</label>
+        <div class="ui-g-12 ui-md-9 ui-lg-9">
+          <upload-control #fileE [fileId]="'edit'" [accept]="'.xls,.xlsx'"
+                          (onFileChange)="changeFile($event,2)"></upload-control>
+<!--          <file-selector #fileE [accept]="'.xls,.xlsx'" (onFileChange)="changeFile($event,2)"></file-selector>-->
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <div class="ui-g-6 pt-0">
+            <a class="btn-table-common edit" tabindex="2" (click)="downloadFileTemplate(2)"
+              [innerHTML]="'station.download.file.teamplate' | translate">
+            </a>
+          </div>
+          <div class="ui-g-6 pt-0">
+            <a class="btn-table-common edit edit" tabindex="3" *ngIf="resultImportEdit"
+              (click)="downloadResult(resultImportEdit)" [innerHTML]="'station.download.file.result' | translate">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <a class="btn_modal_action" (click)="doImport(2)" tabindex="4"
+            style="color: white">{{'station.button.import' | translate}}</a>
+          <a class="btn_modal_cancel" (click)="closeImportPopup()" tabindex="5"
+            style="color: #007CBB">{{'common.status.six' | translate}}</a>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</p-dialog>
+<p-contextMenu #contextMenu [model]="items" appendTo="body"></p-contextMenu>

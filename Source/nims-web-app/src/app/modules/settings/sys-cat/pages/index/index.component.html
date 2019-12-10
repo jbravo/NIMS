@@ -1,0 +1,15 @@
+<div class="content">
+  <!-- <have-permission [actionCode]="'action.view'" [resourceCode]="'resource.sysCat'"> -->
+  <div class="row">
+    <div class="col-md-3">
+      <app-sys-cat-type [sysCatSearchComp]="sysCatSearchComp"></app-sys-cat-type>
+    </div>
+    <div class="col-md-9 no-padding-left">
+      <sys-cat-search #sysCatSearchComp></sys-cat-search>
+    </div>
+  </div>
+  <!-- </have-permission> -->
+  <!-- <have-not-permission [actionCode]="'action.view'" [resourceCode]="'resource.sysCat'">
+    Bạn không có quyền với chức năng này
+  </have-not-permission> -->
+</div>

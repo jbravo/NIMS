@@ -1,0 +1,14 @@
+@media screen and (max-width: 1366px) {
+  form {
+    margin-bottom: 15px;
+  }
+}
+.invalid-control-longLat {
+  border-color: #dc3545 !important;
+}
+
+.invalid-control-longLat:focus {
+  outline: none;
+}
+
+

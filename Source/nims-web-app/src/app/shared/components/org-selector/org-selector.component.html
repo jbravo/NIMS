@@ -1,0 +1,7 @@
+<div class="input-group picker selector">
+    <input type="text" (focus)="onFocus()" class="form-control" #displayName [readOnly]="disabled" />
+    <div class="input-group-append">
+      <button class="btn btn-info chosen" type="button" (click)="onChose()" #buttonChose [disabled]="disabled"><i class="fa fa-search"></i></button>
+      <button *ngIf="!isRequiredField" (click)="delete()" class="btn btn-danger" type="button" [disabled]="disabled"><i class="fa fa-times"></i></button>
+    </div>
+</div>

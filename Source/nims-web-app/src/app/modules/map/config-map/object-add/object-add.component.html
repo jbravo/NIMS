@@ -1,0 +1,60 @@
+<div class="content_wrapper">
+  <p-panel header="{{'map.objAdd.header' | translate}}" [toggleable]="true" [style]="{'margin-bottom':'15px'}">
+  <div class="content-section implementation">
+    <div class="ui-g ui-fluid line_form">
+      <!-- Row 1 -->
+      <!-- Nhom doi tuong -->
+      <label class="ui-g-12 ui-md-2 ui-lg-2 name_label">
+        {{'map.config.groupObj' | translate}}
+      </label>
+      <div class="ui-g-12 ui-md-10 ui-lg-4 ui-inputgroup">
+        <input type="text" pInputText class="input_form">
+      </div>
+      <!-- Ma doi tuong -->
+      <label class="ui-g-12 ui-md-2 ui-lg-2 name_label">
+        {{'map.config.groupObj.code' | translate}}
+      </label>
+      <div class="ui-g-12 ui-md-10 ui-lg-4">
+        <div class="input_more_form">
+          <input type="text" pInputText class="input_form">
+          <!--<autocomplete-search-control [control]="f['_deptId']" [contentType]="dept"-->
+          <!--(onChange)="onChangeRowSelect($event)"></autocomplete-search-control>-->
+        </div>
+      </div>
+    </div>
+    <div class="line_btn_form">
+      <button type="button" class="btn_form">
+        <i class="add_ico"></i>
+        <span [innerHTML]="'common.label.add' | translate"></span>
+      </button>
+    </div>
+  </div>
+</p-panel>
+
+  <p-panel header="Danh sách đối tượng" [toggleable]="true">
+    <div id="listArea" class="list_btn_grid">
+    <div class="panel-body panel-table">
+      <p-table [value]="groupObjects" [(selection)]="selectedRecord">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="text-center size-12">{{'map.config.index' | translate}}</th>
+            <th class="text-center size-12">{{'map.config.groupObj.code' | translate}}</th>
+            <th class="text-center size-12">{{'map.config.groupObj.type' | translate}}</th>
+            <th class="text-center size-12">{{'map.config.groupObj.cancel' | translate}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-index="rowIndex+1">
+          <tr [pSelectableRow]="rowData">
+            <td>{{index}}</td>
+            <td></td>
+            <td></td>
+            <td class="text-center size-12"></td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+        </ng-template>
+      </p-table>
+    </div>
+    </div>
+  </p-panel>
+</div>

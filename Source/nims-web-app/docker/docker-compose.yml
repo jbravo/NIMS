@@ -1,0 +1,62 @@
+version: '3.2'
+
+volumes:
+  nims_logs: {}
+
+services:
+#  configuration-service:
+#    build:
+#      context: ../configuration-service
+#      args:
+#        PROJECT_VERSION: ${PROJECT_VERSION}
+#        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+#    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/configuration-service:${TAG}"
+#    container_name: "configuration-service"
+#    network_mode: "host"
+#    volumes: ['codien_logs:/app/log']
+#    environment:
+#      TZ: "Asia/Ho_Chi_Minh"
+#    restart: always
+#
+#  discovery-service:
+#    build:
+#      context: ../discovery-service
+#      args:
+#        PROJECT_VERSION: ${PROJECT_VERSION}
+#        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+#    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/discovery-service:${TAG}"
+#    container_name: "discovery-service"
+#    network_mode: "host"
+#    volumes: ['codien_logs:/app/log']
+#    environment:
+#      TZ: "Asia/Ho_Chi_Minh"
+#    depends_on:
+#      - configuration-service
+#    restart: always
+#
+#  gateway-service:
+#    build:
+#      context: ../gateway-service
+#      args:
+#        PROJECT_VERSION: ${PROJECT_VERSION}
+#        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+#    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/gateway-service:${TAG}"
+#    container_name: "gateway-service"
+#    network_mode: "host"
+#    volumes: ['codien_logs:/app/log']
+#    environment:
+#      TZ: "Asia/Ho_Chi_Minh"
+#    depends_on:
+#      - configuration-service
+#      - discovery-service
+#    restart: always
+  nims-web-app:
+    container_name: nims-web
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8001:8002'
+
+

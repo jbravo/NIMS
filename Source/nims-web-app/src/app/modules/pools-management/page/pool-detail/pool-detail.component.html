@@ -1,0 +1,336 @@
+<div class="content_wrapper">
+  <form [formGroup]="formAdd">
+    <p-toast key="br" position="bottom-right"></p-toast>
+    <!-- {{viewContent | json}} -->
+    <!-- {{formAdd.value | json}} -->
+    <div class="ui-g-3 tree-list pl-0 pb-0">
+      <p-scrollPanel id="tree-list-data" [style]="{width: '100%', height: '100vh'}"
+        styleClass="custom-sidebar clearfix">
+        <div>
+          <p-tree [value]="treeNodes" selectionMode="single" [(selection)]="selectedNode"
+            (onNodeSelect)="onNodeSelect($event)">
+            <ng-template let-node pTemplate="default">
+              <span pTooltip="{{node.label}}" tooltipPosition="top">{{node.label}}</span>
+
+            </ng-template>
+          </p-tree>
+        </div>
+      </p-scrollPanel>
+    </div>
+    <!-- POOL Detail  -->
+    <span *ngIf="poolDetail">
+      <div class="ui-g-9 search-content pl-3 pr-2">
+        <label class="view-title-label">
+          {{'pool.manage.detail.info' | translate}}
+        </label>
+        <div class="ui-g ui-fluid px-1">
+          <!-- Don vi 1 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.deptName' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['deptId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Don vi end-->
+
+          <!-- Chi so be 2 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.poolNumber' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['numberPool'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Chi so be end -->
+
+          <!-- Ma be 3 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.poolCode' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['poolCode'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Ma be end-->
+
+          <!-- Ma loai be 4 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.poolTypeCode' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['poolTypeId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Ma loai be end-->
+
+          <!-- Dia ban 5 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'station.location' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['locationId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Dia ban end-->
+
+          <!-- Dia chi 6 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.address' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['address'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Dia chi end-->
+
+          <!-- ngay xay dung 7 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.constructionDate' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['constructionDate'].value | date:'dd/MM/yyyy'}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ngay xay dung end-->
+
+          <!-- ngay ban giao 8 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.deliveryDate' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['deliveryDate'].value | date:'dd/MM/yyyy'}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ngay ban giao end-->
+
+          <!-- ngay nghiem thu 9 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.acceptanceDate' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['acceptanceDate'].value | date:'dd/MM/yyyy'}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ngay nghiem thu end-->
+
+
+          <!-- Chu so huu 10 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.ownerId' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['ownerId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Chu so huu end-->
+
+          <!-- kinh do 11 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.longitude' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['longitude'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- kinh do end-->
+
+          <!-- Vi do 12 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.latitude' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['latitude'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Vi do end-->
+
+          <!-- Trang thai 13 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.status' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['status'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chu 14 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pool.note' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['note'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Ghi chu end-->
+        </div>
+      </div>
+
+      <div class="line-in-form-btn"></div>
+      <div class="line_btn_form mt-0">
+
+        <button type="button" (click)="onClosed()" class="btn_form02">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'common.button.out' | translate"></span>
+        </button>
+        <button type="submit" (click)="saveOrEdit()" ng-model="focusOnButton" class="btn_form">
+          <i class="add_ico"></i>
+          <span [innerHTML]="'common.label.update' | translate"></span>
+        </button>
+
+      </div>
+
+    </span>
+
+
+  </form>
+  <!-- Sleeve -->
+  <span *ngIf="PoolSleeve" class="ui-g-9 search-content pl-3 pr-2">
+    <sleeve-list [hideSearch]='childData' [parentPool]='parentPool'></sleeve-list>
+
+  </span>
+
+  <span *ngIf="cableLaneDetail" class="ui-g-9 search-content pl-3 pr-2">
+      <div id="listArea" class="list_btn_grid">
+        <div class="panel panel-default">
+          <p-toast position="bottom-right" key="kkkk" [autoZIndex]="true"></p-toast>
+          <div class="panel-body panel-table">
+            <p-table #dt [columns]="selectedColumns" [value]="cableLaneList.listData" [rows]="10" [totalRecords]="cableLaneList.totalRecords"
+              [responsive]="true" [paginator]="true" [(selection)]="selectedResult" [scrollable]="true"
+              [rowsPerPageOptions]="[5,10,15,20,25,30]" (onRowSelect)="onRowSelect($event)" [resizableColumns]="true"
+              [lazy]="true" (onLazyLoad)="onLazyLoad($event);">
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:3rem">
+                  <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                    class="text-center">
+                    {{col.header | translate}}
+                    <p-sortIcon [field]="col.field" class="ngIf field.selected "></p-sortIcon>
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" [ngSwitch]="col.typeFilter">
+                    <input *ngSwitchCase="'input'" pInputText type="text" (input)="searchInTable($event,col)">
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                <tr>
+                  <td class="text-center size-2">{{index}}</td>
+                  <td *ngFor="let col of columns" [ngClass]="col.classField" (copied)="copied($event)"
+                    [rightClickCopy]="rowData[col.field]">
+                    {{rowData[col.field]}}
+                  </td>
+                </tr>
+              </ng-template>
+              <!-- <ng-template pTemplate="summary">
+                <span *ngIf="dt?.totalRecords > 0">{{'pagination.record.from' | translate}}
+                  {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}
+                  {{'pagination.of' | translate}} {{dt?.totalRecords}} {{'pagination.record' | translate}}</span>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+3">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template> -->
+              <ng-template pTemplate="summary">
+                <span *ngIf="last > 0">{{'pagination.record.from' | translate}} {{first + 1}}-{{last}}
+                  {{'pagination.of' | translate}} {{cableLaneList.totalRecords}} {{'pagination.record' | translate}}</span>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+
+
+  </span>
+
+</div>
+
+<p-toast key="rightDown" position="bottom-right"></p-toast>

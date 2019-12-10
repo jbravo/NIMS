@@ -1,0 +1,20 @@
+<div class="left_footer_grid">Bản ghi {{first}}-{{last}} của {{totalRecords}} bản ghi</div>
+<div class="paginator_footer">
+  <button (click)="changePageToPrev($event)" class="paginator_back" [disabled]="page == 0">&laquo;</button>
+  <div class="paginator_page">
+    <a tabindex="0" *ngFor="let pageLink of pageLinks"
+       class="ui-paginator-page ui-paginator-element ui-state-default ui-corner-all"
+       (click)="onPageLinkClick($event, pageLink - 1)"
+       (keydown.enter)="onPageLinkClick($event, pageLink - 1)"
+       [ngClass]="{'active': (pageLink-1 == getPage())}">{{pageLink}}</a>
+  </div>
+  <button (click)="changePageToNext($event)" class="paginator_next" [disabled]="maxPage == page">&raquo;</button>
+</div>
+<div class="number_paginator">
+  <span>Hiển thị</span>
+  <p-dropdown  [options]="rowsPerPageItems"
+              [(ngModel)]="rows"
+              (onChange)="onRppChange($event)">
+  </p-dropdown>
+  <span>bản ghi/trang</span>
+</div>

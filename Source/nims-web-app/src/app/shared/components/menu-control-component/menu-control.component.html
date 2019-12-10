@@ -1,0 +1,105 @@
+<div #mainEmpTab class="mainEmpTabs vt-dropdown maxLeft" id="mainEmpTabs">
+  <button type="button" (mousedown)="getLocationDown($event)" (click)="opendialog($event)"
+    class="tabIconButton opacityIconSet" tabindex="-1" id="toggleTabsContent">
+    <span class="glyphicons glyphicons-show-thumbnails"></span>
+  </button>
+
+  <div class="leftNavigatorClass" id="leftNavigator">
+    <div id="leftNavigatorInner" class="vt-navigator-inner" *ngIf="viewParent == '0'">
+      <ul class="nav nav-boxed nav-justified">
+        <!-- <li id="Bonus-Descipline">
+          <a class="cdm-shortcut" routerLink="/staff-manager-controller/staff-manager-bonus-discipline" data-shortcut-key="Ctrl+Alt+E" title="{{'staffManagerBonusDiscipline.label.title.title' | translate}}">
+            <i class="text-primary glyphicons glyphicons-scale-classic"></i>
+            <span>{{'staffManagerBonusDiscipline.label.title.title' | translate}}</span>
+          </a>
+        </li> -->
+        <li id="Profile">
+          <a class="cdm-shortcut" routerLink="/staff-manager-controller/staff-manager-profile"
+            [queryParams]="{id:property}" data-shortcut-key=""
+            title="{{'staffManagerProfile.Label.profile' | translate}}">
+            <i class="text-primary glyphicons glyphicons-nameplate"></i>
+            <span>{{'staffManagerProfile.Label.profile' | translate}}</span>
+          </a>
+        </li>
+
+        <li id="additionalInformationT63">
+          <a class="cdm-shortcut" data-shortcut-key="" [routerLink]="['/party-member/detail-t63']"
+            [queryParams]="{id:property, viewParent:viewParent}"
+            title="{{'partymanager.label.adđitionalInformationT63' | translate}}">
+            <i class="text-primary glyphicons glyphicons-edit"></i>
+            <span>{{'partymanager.label.adđitionalInformationT63' | translate}}</span>
+          </a>
+        </li>
+        <li id="commonInforLink">
+          <a class="cdm-shortcut" data-shortcut-key=""
+            [routerLink]="['/staff-manager-controller/general-infomation/', property]"
+            title="{{'app.organization.commonInformation' | translate}}">
+            <i class="text-primary glyphicons glyphicons-user"></i>
+            <span>{{'app.organization.commonInformation' | translate}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="leftNavigatorInner" class="vt-navigator-inner" *ngIf="viewParent == '1'">
+      <ul class="nav nav-boxed nav-justified">
+        <li id="commonInforLink">
+          <a class="cdm-shortcut" data-shortcut-key=""
+            [routerLink]="['/party-member/general-informations/', property, action]"
+            title="{{'app.organization.commonInformation' | translate}}">
+            <i class="text-primary glyphicons glyphicons-user"></i>
+            <span>{{'app.organization.commonInformation' | translate}}</span>
+          </a>
+        </li>
+        <li id="commonInforLink">
+          <a class="cdm-shortcut" [routerLink]="['/party-member/detail-t63']"
+            [queryParams]="{id:property , action:action, viewParent:viewParent}" data-shortcut-key=""
+            title="{{'partymanager.label.adđitionalInformationT63' | translate}}">
+            <i class="text-primary glyphicons glyphicons-edit"></i>
+            <span>{{'partymanager.label.adđitionalInformationT63' | translate}}</span>
+          </a>
+        </li>
+
+        <li id="exportInfomation">
+          <a class="cdm-shortcut" data-shortcut-key="" (click)="exportReport()"
+            title="{{'label.menu.control.exportPartymemberRecords' | translate}}">
+            <i class="text-primary fa fa-file-word"></i>
+            <span>{{'label.menu.control.exportPartymemberRecords' | translate}}</span>
+          </a>
+        </li>
+        <li id="workHistory">
+          <a class="cdm-shortcut" routerLink="/work-process" [queryParams]="{id:property , action:action}"
+            title="{{'lable.workprocess.title' | translate}}">
+            <i class="text-primary glyphicons glyphicons-calendar"></i>
+            <span>{{'lable.workprocess.title' | translate}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="leftNavigatorInner" class="vt-navigator-inner" *ngIf="viewParent == '2'">
+        <ul class="nav nav-boxed nav-justified">
+          <li id="Profile">
+              <a class="cdm-shortcut" data-shortcut-key="" [routerLink]="['/protect-security/curriculum-vitae-security/general-infomation', property]"
+                title="{{'staffManagerProfile.Label.profile' | translate}}">
+                <i class="text-primary glyphicons glyphicons-edit"></i>
+                <span>{{'staffManagerProfile.Label.profile' | translate}}</span>
+              </a>
+            </li>
+          <li id="additionalInformationT63">
+            <a class="cdm-shortcut" data-shortcut-key="" [routerLink]="['/protect-security/curriculum-vitae-security/work-process', property]"
+              title="{{'protectsecurity.curriculumvitaesecurity.menu.title' | translate}}">
+              <i class="text-primary glyphicons glyphicons-edit"></i>
+              <span>{{'protectsecurity.curriculumvitaesecurity.menu.title' | translate}}</span>
+            </a>
+          </li>
+          <li id="commonInforLink">
+            <a class="cdm-shortcut" data-shortcut-key=""
+              [routerLink]="['/protect-security/curriculum-vitae-security/staff-manager-profile', property]"
+              title="{{'protectsecurity.curriculumvitaesecurity.menu.cv.title' | translate}}">
+              <i class="text-primary glyphicons glyphicons-user"></i>
+              <span>{{'protectsecurity.curriculumvitaesecurity.menu.cv.title' | translate}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+  </div>
+</div>

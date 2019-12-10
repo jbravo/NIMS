@@ -1,0 +1,31 @@
+version: '3.2'
+
+volumes:
+    vsmart_logs: {}
+
+services:
+{% for service_name, version in map_module_version.iteritems() %}
+  {{service_name}}:
+      build:
+        context: ../{{service_name}}
+        args:
+          SERVICE_VERSION: {{version}}
+          JDK_BASE_IMAGE: {{JDK_BASE_IMAGE}}
+      image: "{{IMAGE_REGISTRY_URL}}/vsmart/{{IMAGE_TYPE}}/{{service_name}}:{{version}}.{{BUILD_ID}}"
+      container_name: vsmart-{{service_name}}
+      network_mode: "host"
+      volumes: ['vsmart_logs:/app/log']
+      environment:
+        TZ: "Asia/Ho_Chi_Minh"
+{% if (service_name != 'configuration-service') and (service_name != 'discovery-service') %}
+      depends_on:
+         - configuration-service
+         - discovery-service
+      restart: always
+{% endif %}
+{% if service_name == 'discovery-service' %}
+      depends_on:
+         - configuration-service
+      restart: always
+{% endif %}
+{% endfor %}

@@ -1,0 +1,62 @@
+<div class="modal-body">
+  <form id="frmSaveSysCat" [formGroup]="formSave">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <strong class="text-u-c">
+                <i class="fa fa-th"></i>
+                <span *ngIf="!formSave.get('sysCatId').value" translate> app.sys_cat.sys_cat_add_title</span>
+                <span *ngIf="formSave.get('sysCatId').value" translate> app.sys_cat.sys_cat_edit_title</span>
+              </strong>
+              <div class="vt-absolute vt-shotcut-button-in-heading">
+                <span style="display: inline-block;" (click)="activeModal.close()" title="{{'common.button.close' | translate}}" class="btn btn-span btn-sm btn-info"><i class="fa fa-times"></i></span>
+              </div>
+          </div>
+          <div class="panel-body padding-xl">
+            <div class="ui-g">
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right required" translate> app.sys_cat.code</label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input type="text" name="code" class="form-control" formControlName="code"/>
+                <app-control-messages [control]="f['code']"></app-control-messages>
+              </div>
+              <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right required" translate> app.sys_cat.name</label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input type="text" name="name" class="form-control" formControlName="name" />
+                <app-control-messages [control]="f['name']"></app-control-messages>
+              </div>
+            </div>
+            <div class="ui-g">
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right" translate> app.sys_cat.sys_cat_type_name</label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input type="text" name="sysCatTypeName" class="form-control" formControlName="sysCatTypeName" disabled/>
+                <input type="hidden" name="sysCatTypeId" formControlName="sysCatTypeId" />
+              </div>
+              <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right" translate> app.sys_cat.sort_order</label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input type="text" name="sortOrder" class="form-control" formControlName="sortOrder" maxlength="10"/>
+                <app-control-messages [control]="f['sortOrder']"></app-control-messages>
+              </div>
+            </div>
+            <div class="ui-g">
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right" translate> app.sys_cat.is_default</label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <label class="i-switch bg-info m-t-xs m-r">
+                  <input type="checkbox" name="status" [value]="1" formControlName="status" />
+                  <i></i>
+                </label>
+              </div>
+            </div>
+            <div class="ui-g">
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right" translate> app.sys_cat.description</label>
+              <div class="ui-g-12 ui-md-9 ui-lg-9">
+                <textarea class="form-control" name="description" id="sysCatDescription" formControlName="description" columns="1" md-maxlength="250"></textarea>
+                <app-control-messages [control]="f['description']"></app-control-messages>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer vt-area-button">
+              <button type="submit" (click)="processSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.save' | translate"></button>
+              <button type="button" (click)="activeModal.close()" class="btn btn-sm btn-danger" [innerHTML]="'common.button.cancel' | translate"></button>
+          </div>
+      </div>
+  </form>
+</div>

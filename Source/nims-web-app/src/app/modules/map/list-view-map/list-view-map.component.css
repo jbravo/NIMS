@@ -1,0 +1,30 @@
+ul {
+  background-color: #fff;
+  padding: 5px;
+  border: 0;
+  border-radius: 0;
+  font: inherit;
+  list-style: none;
+  margin: 0;
+  outline: 0;
+  overflow: visible;
+  vertical-align: baseline;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+ul li {
+  list-style-type: none;
+  border-bottom: solid 1px #dddddd;
+  cursor: pointer;
+  display: list-item;
+  text-align: left;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+ul li:hover{
+  background-color: #00a6d2;
+}

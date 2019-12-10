@@ -1,0 +1,14 @@
+<div [hidden]="property && property.isHide">
+  <div class="input-group">
+    <input type="text" class="form-control" [placeholder]="property && property.dateFormat" [(ngModel)]="value" (input)="onChange($event.target.value)" />
+    <div class="input-group-append">
+      <button class="btn btn-info chosen" type="button" *ngIf="property && property.isTranslation" (click)="op.toggle($event)">
+        <i class="fa fa-globe"></i>
+      </button>
+    </div>
+  </div>
+  <p-overlayPanel #op [dismissable]="false" [showCloseIcon]="true" appendTo="body">
+    <multi-lang-input *ngIf="property && property.isTranslation" [objectId]="objectId" [property]="property" (onClose)="op.hide()" ></multi-lang-input>
+  </p-overlayPanel>
+  <app-control-messages [control]="formControlProp"></app-control-messages>
+</div>

@@ -1,0 +1,136 @@
+<!-- Diem dau-->
+<div class="ui-g ui-fluid"><!-- Row 1 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.source_id' | translate}}
+  </label>
+  <label class="ui-g-8 name_label" (click)="copyData(result.sourceId)">
+    {{result != null ? result.sourceId : ''}}
+  </label>
+</div>
+
+<!-- Diem cuoi -->
+<div class="ui-g ui-fluid"><!-- Row 2 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.dest_id' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.destId : ''}}
+  </label>
+</div>
+
+<!-- Ma doan cap -->
+<div class="ui-g ui-fluid"><!-- Row 1 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.cable_code' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{data.properties.cable_code}}
+  </label>
+</div>
+
+<!-- Ma cong trinh -->
+<div class="ui-g ui-fluid"><!-- Row 4 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.construction_code' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.constructionCode : ''}}
+  </label>
+</div>
+
+<!-- Loai cap -->
+<div class="ui-g ui-fluid"><!-- Row 5 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.cable_type_code' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.cableTypeCode : ''}}
+  </label>
+</div>
+
+<!-- Chieu dai -->
+<div class="ui-g ui-fluid"><!-- Row 6 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.length' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.length : ''}}
+  </label>
+</div>
+
+<!-- Trang thai -->
+<div class="ui-g ui-fluid"><!-- Row 7 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.status' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.status : ''}}
+  </label>
+</div>
+
+<!-- Ngay lap dat -->
+<div class="ui-g ui-fluid"><!-- Row 8 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.installationDate' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.installationDate : ''}}
+  </label>
+</div>
+
+<!-- Ghi chu -->
+<div class="ui-g ui-fluid"><!-- Row 9 -->
+  <label class="ui-g-4 name_label">
+    {{'cable.note' | translate}}
+  </label>
+  <label class="ui-g-8 name_label">
+    {{result != null ? result.note : ''}}
+  </label>
+</div>
+
+<!-- Ghi chu -->
+<div class="ui-g ui-fluid"><!-- Row 9 -->
+  <label class="ui-g-4 name_label">
+    cable_id
+  </label>
+  <label class="ui-g-8 name_label">
+    {{data.properties.cable_id}}
+  </label>
+</div>
+
+<!-- Ghi chu -->
+<div class="ui-g ui-fluid"><!-- Row 9 -->
+  <label class="ui-g-4 name_label">
+    coordinate
+  </label>
+  <label class="ui-g-8 name_label">
+    {{(data.geometry.coordinates)[0]}}
+  </label>
+</div>
+
+<!--&lt;!&ndash; Danh sách các đối tượng thuộc đoạn &ndash;&gt;-->
+<!--<div class="ui-g ui-fluid">&lt;!&ndash; Row 10 &ndash;&gt;-->
+  <!--<label class="ui-g-4 name_label">-->
+    <!--{{'cable.cable_code' | translate}}-->
+  <!--</label>-->
+  <!--<label class="ui-g-8 name_label">-->
+    <!--{{result != null ? station.stationCode  : ''}}-->
+  <!--</label>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Xem thông tin sợi cáp &ndash;&gt;-->
+<!--<div class="ui-g ui-fluid">&lt;!&ndash; Row 11 &ndash;&gt;-->
+  <!--<label class="ui-g-4 name_label">-->
+    <!--{{'cable.cable_code' | translate}}-->
+  <!--</label>-->
+  <!--<label class="ui-g-8 name_label">-->
+    <!--{{result != null ? station.stationCode  : ''}}-->
+  <!--</label>-->
+<!--</div>-->
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<p-toast></p-toast>
+<div class="ui-g-12 p-3">
+  <p-progressBar class="customProgress" [value]="value"></p-progressBar>
+</div>
+<div class="ui-g-12">
+  <h5>{{title}}</h5>
+</div>
+<div class="ui-g-3 pt-4">
+  <p-tree [value]="files" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="onNodeSelect($event)"
+          [contextMenu]="cm">
+  </p-tree>
+  <p-contextMenu #cm [model]="ctmenus"></p-contextMenu>
+</div>
+<div class="ui-g-9">
+  <ng-container *ngIf="selectedNode && !isLoadingData">
+    <calloff2-g *ngIf="selectedNode.id===TREE_NODES.CALL_OF_2G"></calloff2-g>
+    <calloff3-g *ngIf="selectedNode.id===TREE_NODES.CALL_OF_3G"></calloff3-g>
+    <calloff4-g *ngIf="selectedNode.id===TREE_NODES.CALL_OF_4G"></calloff4-g>
+    <radio-suggestion-infor *ngIf="selectedNode.id===TREE_NODES.THONG_TIN_DE_XUAT_VO_TUYEN"
+                            (listType)="onListType($event)"></radio-suggestion-infor>
+    <radio-information *ngIf="selectedNode.id===TREE_NODES.THONG_TIN_VI_TRI"></radio-information>
+    <ng-container *ngIf="files[2].children">
+      <ng-container *ngFor="let children of files[2].children">
+        <ng-container *ngFor="let sector of children.children">
+          <ng-container *ngIf="sector.id ===TREE_NODES.SECTOR_2G">
+            <sector *ngIf="selectedNode.id===sector.id && sector.index===selectedNode.index"
+                    [indexSector]="selectedNode.index"></sector>
+          </ng-container>
+          <ng-container *ngIf="sector.id ===TREE_NODES.SECTOR_3G">
+            <sector3g *ngIf="selectedNode.id===sector.id && sector.index===selectedNode.index"
+                      [indexSector]="selectedNode.index"></sector3g>
+          </ng-container>
+          <ng-container *ngIf="sector.id ===TREE_NODES.SECTOR_4G">
+            <sector4g *ngIf="selectedNode.id===sector.id && sector.index===selectedNode.index"
+                      [indexSector]="selectedNode.index"></sector4g>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <!--<ng-container *ngIf="files[2].children[1]">-->
+      <!--<ng-container *ngFor="let sector of files[2].children[1].children">-->
+      <!--<sector3g *ngIf="selectedNode.id===sector.id && sector.index===selectedNode.index"-->
+      <!--[indexSector]="selectedNode.index"></sector3g>-->
+      <!--</ng-container>-->
+      <!--</ng-container>-->
+      <!--<ng-container *ngIf="files[2].children[2]">-->
+      <!--<ng-container *ngFor="let sector of files[2].children[2].children">-->
+      <!--<sector4g *ngIf="selectedNode.id===sector.id && sector.index===selectedNode.index"-->
+      <!--[indexSector]="selectedNode.index"></sector4g>-->
+      <!--</ng-container>-->
+      <!--</ng-container>-->
+    </ng-container>
+
+
+  </ng-container>
+
+
+  <div class="p-3">
+    <!-- <button style="margin-left: 10px;" class=" btn btn-sm btn-primary float-right" type="button" (click)="onAddsector()">Add
+     sector</button>  -->
+    <button *ngIf="actionType=='new'" class=" btn btn-sm btn-success float-right" (click)="saveData()">Tạo mới</button>
+    <!-- <button *ngIf="actionType!=='view'" class=" btn btn-sm btn-success float-right mr-1" (click)="saveData()">Cập nhật thiết kế sau khảo sát</button> -->
+    <button *ngIf="actionType=='edit' && !checkHidePheDuyetBtn()"
+            class=" btn btn-sm btn-primary float-right mr-1" (click)="onAccept()">
+      {{getTitlePheDuyet(suggestStation)}}
+    </button>
+    <button *ngIf="actionType=='edit'" class=" btn btn-sm btn-success float-right" (click)="saveData()">Cập nhật
+    </button>
+  </div>
+</div>
+<p-dialog header="Title" [(visible)]="display" [style]="{width: '300px', height: '200px'}">
+  Content
+</p-dialog>

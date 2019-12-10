@@ -1,0 +1,15 @@
+<div class="content">
+    <have-permission actionCode="action.view" resourceCode="resource.empType">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <emp-type-search></emp-type-search>
+                </div>
+            </div>
+        </div>
+    </have-permission>
+
+    <have-not-permission actionCode="action.view" resourceCode="resource.empType" translate>
+        common.haveNotPermisstion
+    </have-not-permission>
+</div>

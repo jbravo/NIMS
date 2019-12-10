@@ -1,0 +1,15 @@
+<div class="content">
+    <have-permission [actionCode]="'action.view'" [resourceCode]="'resource.allowanceType'">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <allowance-type-search></allowance-type-search>
+                </div>
+            </div>
+        </div>
+    </have-permission>
+
+    <have-not-permission [actionCode]="'action.view'" [resourceCode]="'resource.allowanceType'" translate>
+        common.haveNotPermisstion
+    </have-not-permission>
+</div>

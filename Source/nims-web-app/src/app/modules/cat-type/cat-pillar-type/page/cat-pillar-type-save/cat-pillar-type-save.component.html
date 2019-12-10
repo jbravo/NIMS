@@ -1,0 +1,59 @@
+<div class="content_wrapper">
+  <p-messages></p-messages>
+  <form [formGroup]="formAdd">
+    <div class="content-section implementation">
+      <div class="ui-g ui-fluid">
+
+        <!-- Mã loại cột -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'pillar.type.code' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <input pInputText type="text" formControlName="pillarTypeCode" maxlength="30"  [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+        <!-- ma nha tram end-->
+
+        <!-- Chiều cao cột -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'pillar.type.height' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <input pInputText type="text" formControlName="height" maxlength="30"  [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+        <!-- Note -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'pillar.type.note' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <input pInputText type="text" formControlName="note" maxlength="30"  [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </div>
+
+    <div class="line_btn_form">
+      <button type="submit" (click)="onSubmit()" class="btn_form" *ngIf = "hide">
+        <i class="add_ico"></i>
+        <span [innerHTML]="'common.button.storage' | translate"></span>
+      </button>
+      <button type="button" (click)="onClose()" class="btn_form02">
+        <i class="exit_ico"></i>
+        <span [innerHTML]="'common.label.cancel' | translate"></span>
+      </button>
+    </div>
+  </form>
+</div>

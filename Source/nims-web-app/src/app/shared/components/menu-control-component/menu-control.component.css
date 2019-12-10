@@ -1,0 +1,266 @@
+.mainEmpTabs{
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    overflow: visible;
+    z-index: 1051;
+    border-radius: 50%;  
+   }
+   .mainEmpTabs .tabIconButton{
+       display: block;
+       height: 100%;
+       width: 100%;
+       text-align: center;
+       line-height: 53px;
+       font-size: 23px;
+       border-radius: 50%;
+       outline: none;
+       position: relative;
+       border: none;
+       background-color: #109bdc;
+       color: #dcf2f8;
+   }
+   .mainEmpTabs .tabIconButton.moving{
+       cursor: move;
+   }
+   .mainEmpTabs .tabIconButton .glyphicons{
+       -ms-transform:rotate(45deg);
+       -webkit-transform: rotate(45deg);
+       transform: rotate(45deg);
+       transition: all 0.2s ease;
+   }
+   
+   .mainEmpTabs.open .tabIconButton .glyphicons {
+     -ms-transform: rotate(0deg); /* IE 9 */
+     -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */ 
+     transform: rotate(0deg);
+   }
+   .mainEmpTabs .tabIconButton:BEFORE{
+     content: "";
+     position: absolute; 
+     left: -11px;
+     top: 50%;
+     margin-top: -8px; 
+     border-image: none; 
+     border-style: solid; 
+     border-width: 10px;
+     border-color: transparent transparent transparent #f3f3f3; 
+     display: none;
+     cursor: default; 
+     z-index:3;
+   }
+   .mainEmpTabs .leftNavigatorClass { 
+     position: absolute;
+     bottom: Opx;
+     right: 60px;
+     width: 960px;
+     background-color: #f3f3f3; 
+     padding: 8px;
+     /*display: none;*/
+     border: #e9e9e9 solid 1px; 
+     transition:all 200ms ease-in-out 0s;
+     transform: scale(0);
+   }
+   .mainEmpTabs.maxleft .leftNavigatorClass {
+     right: 60px; 
+     bottom: 0px; 
+     transform-origin: right center 0;
+   
+   }
+   .mainEmpTabs.maxLeft .tabIcon8utton:BEFORE {
+     border-color:transparent transparent transparent #f3f3f3; 
+     left: -11px;
+     top: 50%;
+     margin-top: -8px;
+   }
+   .mainEmpTabs.maxTop .leftNavigatorClass {
+     right: auto;
+     bottom: 60px;
+     transform-origin: center bottom 0;
+   }
+   .mainEmpTabs.maxTop .tabIconButton:BEFORE {
+     border-color: #f3f3f3 transparent transparent transparent;
+     left: 50%;
+     top: -11px; 
+     margin-left: -8px;
+     margin-top: auto;
+   }
+   .mainEmpTabs.minLeft .leftNavigatorClass {
+     right: auto; 
+     bottom: 0px; 
+     left: 60px; 
+     transform-origin: left center 0;
+   }
+   .mainEmpTabs.minLeft .tabIconButton:BEFORE {
+     border-color: transparent #f3f3f3 transparent transparent;
+     right: -11px; 
+     top: 50%;
+     margin-right: auto;
+     margin-top: -8px;
+   }
+   .mainEmpTabs.minTop .leftNavigatorClass { 
+     right: auto;
+     bottom: auto;
+     top: 60px;
+     transform-origin: center top 0;
+   }
+   .mainEmpTabs.minTop .tabIconButton:BEFORE {
+     border-color: transparent transparent #f3f3f3 transparent;
+     right: auto;
+     left: 50%;
+     bottom: -11px;
+     margin-right: auto;
+     margin-left: -8px;
+   }
+   .mainEmpTabs.open .tabIconButton:BEFORE{
+     display: block;
+   }
+   .mainEmpTabs.open .tabIconButton{
+     background-color: #ef9549 !important; 
+   }
+   .mainEmpTabs.open .leftNavigatorClass {
+     transform: scale(1);
+   }
+   /*Start Fix NavigatorTag */
+   #leftNavigator {
+     font-size: 12px;
+   }
+   .mainEmpTabs .nav-justified > li, .mainEmpTabs .nav-tabs.nav-justified > li {   display: block;
+     display: block;
+     width: 100px;
+     border: #e9e9e9 solid 1px;
+   }
+   .mainEmpTabs .nav-boxed {
+     background-color: transparent;
+   }
+   .mainEmpTabs .nav-boxed > li > a { 
+     text-align: left;
+     font-weight: bold;
+     vertical-align: middle;
+     display: table;
+     padding: 0 3px 0 8px; 
+     width: 100%;
+   }
+   .mainEmpTabs .nav-boxed > li > a > i.glyphicons-family, 
+   .mainEmpTabs .nav-boxed > li > a > i.glyphicons-group { 
+     font-size: 18px;
+   }
+   .mainEmpTabs .nav-boxed > li > a > i {
+     font-size: 22px; 
+     height: auto; 
+     line-height: inherit;
+     margin: auto; 
+     width: 25px; 
+     display: table-cell;
+     vertical-align: middle;
+   }
+   .mainEmpTabs .nav-boxed > li > a > span { 
+     display: table-cell;
+     vertical-align: middle;
+     padding-left: 5px;
+   }
+   .mainEmpTabs [data-shortcut-key]:BEFORE {
+     content: "";
+   }
+   .vt-navigator-inner {
+     width: 100%;
+     position: relative; 
+     overflow: hidden;
+   }
+   #leftNavigator .vt-absolute{ 
+     width: auto;
+     height: 100%;
+   }
+   #leftNavigator .vt-nav-button{ 
+     position: absolute;
+     top: 0px;
+     bottom: 0px; 
+     width: 20px; 
+     height: 110px; 
+     display: none;
+     /* background-color: eargba(0, 0, 0, 0.08); */
+   }
+   #leftNavigator:HOVER .vt-nav-button{
+     display: table;
+   }
+   #leftNavigator .vt-nav-button > a {
+     display: table-cell;
+     vertical-align: middle;
+     text-align: center;
+     font-size: 20px;
+     opacity: 0.5;
+   }
+   #leftNavigator .vt-nav-button > a:HOVER{
+     color: #66b5d7;
+     opacity: 1;
+   }
+   .vt-nav-button.previous { 
+     left: -14px
+   }
+   .vt-nav-button.next { 
+     right: -14px
+   }
+   #leftNavigator .nav-justified > li { 
+     width: 24%;
+     height: 58px;
+     vertical-align: top;
+     float: left;
+     background-color: #ffff;
+     /* border-radius: 50%; */
+     margin: 3px;
+   }
+   #leftNavigator .nav-justified > li a {
+     height: 100%;
+     min-width: 90px; 
+     overflow: hidden; 
+     border-left: none;
+   }
+   #leftNavigator .nav-justified > li.selectedTab a { 
+     border-bottom: 3px solid #66b5d7;
+   }
+   .dropdown dd ul{ 
+     background-color: #E8F8FC !important;
+   }
+   [data-shortcut-key]:after {
+     position: absolute;
+     content: attr(data-shortcut-key);
+     top:0px;
+     right: 4px;
+     font-size: 10px;
+     color:#60cd9b;
+     opacity: 0.8;
+   }
+   [data-shortcut-key]:before {
+     position: absolute;
+     content: "";
+     top:5px;
+     right: 9px;
+     font-size: 15px;
+     color:#60cd9b;
+     opacity: 0.8;
+     transform: rotate(163deg)
+   }
+   [data-shortcut-key]{
+     position: relative;
+   }
+   /*End Fix Nav*/
+
+   @media(max-width:767px){
+    #leftNavigator .nav-justified > li { 
+      width: 24%;
+      height: 58px;
+      vertical-align: top;
+      float: left;
+      background-color: #ffff;
+      /* border-radius: 50%; */
+      margin: 3px;
+      margin-left: 50%;
+    }
+   
+   }
+   
+   
+   
+   

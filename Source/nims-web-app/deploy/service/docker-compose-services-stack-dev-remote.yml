@@ -1,0 +1,11 @@
+version: '3.2'
+
+services:
+  nims-web:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9073", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/complex-station-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8073"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8073/actuator/health"]

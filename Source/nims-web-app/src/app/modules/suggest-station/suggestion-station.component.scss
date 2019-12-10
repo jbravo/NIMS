@@ -1,0 +1,16 @@
+.child {
+  margin-left: 20px;
+}
+
+.childLabel {
+  margin-left: 20px;
+}
+
+::ng-deep .ui-tree {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+::ng-deep .ui-tree-container {
+  padding: 0 !important;
+}

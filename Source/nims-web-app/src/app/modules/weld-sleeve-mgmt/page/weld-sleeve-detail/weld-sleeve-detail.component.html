@@ -1,0 +1,121 @@
+<div class="content_wrapper">
+    <div class="content-section implementation">
+        <label class="view-title-label">
+            {{'wedding.sleeve.detail'|translate}}
+        </label>
+        <!-- Line one start -->
+        <div class="line_form ui-g ui-fluid">
+            <!-- Cap den Start -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'odf.source'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.sourceCableCode}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Cap den End -->
+            <!-- Mang xong Start-->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'common.label.sleeve'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.sleeveCode}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Mang xong End -->
+            <!-- Cap di Start -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'odf.dest'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.destCableCode}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Cap di End -->
+        </div>
+        <!-- Line one End -->
+        <!-- Line two Start -->
+        <div class="line_form ui-g ui-fluid">
+            <!-- Nguoi han start -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'common.label.weld.person'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.createUser}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Nguoi han End -->
+            <!-- Suy hao  moi han start -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'common.label.weld.attenuation'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.attenuation}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Suy hao moi han End -->
+        </div>
+        <!-- Line two End -->
+        <!-- Line three Start -->
+        <div class="line_form ui-g ui-fluid">
+            <!-- Soi den Start -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'common.label.quad.yarnSource'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.sourceLineNo}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Soi den End -->
+            <!-- Soi di Start -->
+            <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-1 m-1">
+                        {{'common.label.quad.yarnDest'| translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-7 name_content py-1">
+                        <label class="view-detail mb-0"> {{data.destLineNo}}</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Soi di End -->
+        </div>
+        <!-- Line three End -->
+        <!-- Line four Start -->
+        <div class="line_btn_form mt-0">
+            <div class="d-flex justify-content-end">
+                <!-- Cap nhat Start -->
+                <button type="button" (click)="onClosed()" class="btn_form02">
+                    <i class="exit_ico"></i>
+                    <span [innerHTML]="'common.button.close' | translate"></span>
+                </button>
+                <!-- Cap nhat End -->
+                <!-- Dong Start -->
+                <button (click)="update()" type="button" class="btn_form">
+                    <i class="edit_ico"></i>
+                    <span [innerHTML]="'common.label.update' | translate"></span>
+                </button>
+                <!-- Dong End -->
+            </div>
+        </div>
+        <!-- Line four End -->
+    </div>
+</div>

@@ -1,0 +1,38 @@
+.tab-layout {
+  position: relative;
+}
+
+.tab-layout .tab-container {
+  position: relative;
+}
+
+.tab-layout .tab-container .tab-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /*max-width: 1690px;*/
+}
+
+.tab-layout .tab-container .tab-content.active {
+  visibility: visible;
+}
+
+.tab-layout .tab-container .tab-content.inactive {
+  visibility: hidden;
+}
+
+.tab-layout .tab-container .tab-content .tab-wrapper {
+  position: relative;
+  /* padding: 0 15px 15px 15px; */
+}
+
+.tab-layout .tab-container .tab-content .tab-wrapper .breadcrumb_link {
+  /* margin: 12px 0 0 0; */
+  padding: 0 15px;
+}
+
+.tab-layout .list_tab li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

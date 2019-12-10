@@ -1,0 +1,253 @@
+<div class="content_wrapper" (keydown)="onEnter($event)">
+  <form [formGroup]="formAdd">
+    <div *ngIf="action == 'view'">
+      <div class="ui-g">
+        <div class="ui-g-3 tree-list pl-0 pb-0">
+          <p-scrollPanel id="tree-list-data" [style]="{width: '100%', height: '100vh'}"
+                         styleClass="custom-sidebar clearfix">
+            <div>
+              <p-tree [value]="treeNodes" selectionMode="single" [(selection)]="selectedNode"
+                  (click)="onSelectTree($event)">
+              </p-tree>
+            </div>
+          </p-scrollPanel>
+        </div>
+        <div class="ui-g-9 search-content pl-3 pr-2">
+          <span *ngIf="checkSleeve">
+            <div class="content-section implementation">
+              <label class="view-title-label">
+                {{'infra.sleeves.info' | translate}}
+              </label>
+              <div class="ui-g ui-fluid">
+                <!-- cot chua mang xong start -->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'infra.sleeves.contain.pillar' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.pillarCode}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- cot chua mang xong end -->
+                <!-- be chua mang xong start -->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'infra.sleeves.contain.pool' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.poolCode}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- be chua mang xong end -->
+                <!-- tuyen start -->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'sleeve.lane.name' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.laneCode}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- tuyen end -->
+                <!--chi so mang xong start -->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'infra.sleeve.index' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.sleeveIndex}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- chi so mang xong start end-->
+                <!-- ma mang xong start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                      {{'infra.sleeves.code' | translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-8 name_content py-0">
+                      <label class="view-detail mb-0">
+                        {{item.sleeveCode}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- ma mang xong end-->
+                <!-- ma loai mang xong start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                      {{'infra.sleeves.type.code' | translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-8 name_content py-0">
+                      <label class="view-detail mb-0">
+                        {{item.sleeveTypeCode}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!--  ma loai mang xong end-->
+                <!-- don vi start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'common.label.unit' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.deptPath}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!--Don vi end-->
+                <!-- hang san xuat start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'common.label.manufacturer' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.vendorName}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- hang san xuat end-->
+                <!-- chu so huu start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'common.label.owner' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.ownerName}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- chu so huu end-->
+                <!-- muc dich start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'common.label.purpose' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.purposeName}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- Muc dich end-->
+                <!-- Trang thai start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                        {{'common.label.status' | translate}}<span>:</span>
+                      </label>
+                      <div class="ui-g-12 ui-md-8 name_content py-0">
+                        <label class="view-detail mb-0">
+                          {{item.statusName}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                <!-- Trang thai end-->
+                <!-- ngay lap dat start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                      {{'infra.sleeves.installation.date' | translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-8 name_content py-0">
+                      <label class="view-detail mb-0">
+                        {{item.installationDate | date:'dd/MM/yyyy'}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!--ngay lap dat end -->
+                <!-- ngay sua doi start -->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                      {{'infra.sleeves.modify.date' | translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-8 name_content py-0">
+                      <label class="view-detail mb-0">
+                        {{item.updateTime | date : environment.dateFormat}}
+                        <!-- {{item.updateTime}} -->
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- ngay sua doi end-->
+                <!-- so serial start -->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                      {{'common.label.serial' | translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-8 name_content py-0">
+                      <label class="view-detail mb-0">
+                        {{item.serial}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- so serial end -->
+                <!-- nguyen nhan su co start-->
+                <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                      {{'infra.sleeves.cause.error' | translate}}<span>:</span>
+                    </label>
+                    <div class="ui-g-12 ui-md-8 name_content py-0">
+                      <label class="view-detail mb-0">
+                        {{item.note}}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- nguyen nhan su co end-->
+              </div>
+              <div class="line_btn_form">
+                <button type="button" (click)="onClosed()" class="btn_form02">
+                  <i class="exit_ico"></i>
+                  <span [innerHTML]="'common.button.close' | translate"></span>
+                </button>
+                <button type="submit" (click)="saveOrEdit( item.sleeveId ,'edit')" class="btn_form">
+                  <i class="add_ico"></i>
+                  <span [innerHTML]="'common.label.update' | translate"></span>
+                </button>
+              </div>
+            </div>
+          </span>
+          <span *ngIf="checkWeldSleeve">
+            <weld-sleeve-list #weldSleeveComponent></weld-sleeve-list>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

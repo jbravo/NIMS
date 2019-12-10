@@ -1,0 +1,238 @@
+<div class="content_wrapper">
+  <div id="searchArea">
+    <form id="formSearch" [formGroup]="formSearch">
+
+      <div class="search_header" *ngIf="advanceSearch == false">
+        <div class="form_search">
+          <input type="text" class="input_search" placeholder="{{'sleeve.type.code' | translate}}"
+            formControlName="basicInfo">
+          <button (click)="basicSearchFunc()" class="btn_search" tooltipPosition="top">
+            <span class="icon_search">
+              <!-- {{'common.button.search' | translate}} -->
+            </span>
+          </button>
+        </div>
+        <a class="search_advanced" (click)="showAdvance()">{{'common.label.advanced.search' | translate}}</a>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="content-section implementation" *ngIf="advanceSearch">
+        <div class="ui-g ui-fluid line_form">
+          <!-- Row 1 -->
+
+          <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+            {{'sleeve.type.code' | translate}}
+          </label>
+          <div class="ui-g-12 ui-md-6 ui-lg-3 ui-inputgroup">
+            <input type="text" pInputText placeholder="{{'sleeve.type.code' | translate}}" class="input_form"
+              formControlName="sleeveTypeCode">
+          </div>
+          <!-- <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="input_more_form">
+                <p-autoComplete formControlName="pillarTypeCode" [suggestions]="filteredStationSingle"
+                  (completeMethod)="filterStationSingle($event)" [size]="30" [minLength]="1">
+                </p-autoComplete>
+                <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>
+                <a href="#" class="exit_popup_list"><i class="x_ico"></i></a>
+              </div>
+            </div> -->
+
+          <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+            {{'sleeve.type.type' | translate}}
+          </label>
+          <div class="ui-g-12 ui-md-6 ui-lg-3">
+            <div class="input_more_form">
+              <p-dropdown placeholder="{{'common.label.cboSelect' | translate}}" optionLabel="label"
+                formControlName="type" [options]="typeList" [showClear]="true"></p-dropdown>
+            </div>
+          </div>
+
+          <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+            {{'sleeve.type.note' | translate}}
+          </label>
+          <div class="ui-g-12 ui-md-6 ui-lg-3 ui-inputgroup">
+            <input type="text" pInputText placeholder="{{'sleeve.type.note' | translate}}" class="input_form"
+              formControlName="note">
+          </div>
+
+          <!-- <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+              {{'pillar.type.note' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <div class="input_more_form">
+                <p-autoComplete formControlName="deptName" [suggestions]="filteredDeptNameSingle"
+                  (completeMethod)="filterDeptNameSingle($event)" [size]="30" [minLength]="1">
+                </p-autoComplete>
+                <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>
+                <a href="#" class="exit_popup_list"><i class="x_ico"></i></a>
+              </div>
+            </div> -->
+        </div>
+
+        <div class="ui-g ui-fluid line_form">
+
+          <!-- -->
+          <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+            {{'sleeve.type.capacity' | translate}}
+          </label>
+          <div class="ui-g-12 ui-md-6 ui-lg-3 ui-inputgroup">
+            <input type="text" placeholder="{{'sleeve.type.capacity' | translate}}" pInputText class="input_form"
+              formControlName="capacity">
+          </div>
+
+        </div>
+
+        <div class="line_btn_form">
+          <button type="submit" (click)="basicSearchFunc()" class=" btn_form"><i
+              class="search_ico"></i><span>{{'common.button.search' | translate}}</span></button>
+          <a class="btn_collapse" (click)="showAdvance()">
+            {{'common.label.advanced.search.hide' | translate}}</a>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div id="listArea" class="list_btn_grid">
+    <!-- <div class="panel-heading vt-relative">
+          <div class="panel-heading">
+            <strong class="text-u-c">
+              <i class="fa fa-th"></i>
+              &nbsp;{{'station.manage.label' | translate}}
+            </strong>
+          </div>
+        </div> -->
+    <div class="panel panel-default">
+      <div class="panel-body panel-table">
+        <p-table #dt [columns]="cols" [value]="resultList.data" [rows]="10" [totalRecords]="resultList.totalRecords"
+          [responsive]="true" [paginator]="true" [(selection)]="selectedResult" [scrollable]="true"
+          [resizableColumns]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]" (onRowSelect)="onRowSelect($event)"
+          [lazy]="true" (onLazyLoad)="onLazyLoad($event)" (sortFunction)="customSort($event)" [customSort]="true">
+
+          <ng-template pTemplate="caption">
+            <button href="#" class="btn_grid" pTooltip="Xóa" tooltipPosition="top" (click)=deleteList()><i
+                class="delete_ico"></i></button>
+            <button href="#" class="btn_grid" pTooltip="Export" (click)="dt.exportCSV()" tooltipPosition="top"><i
+                class="export_excel_ico"></i></button>
+            <button href="#" class="btn_grid" pTooltip="Import" tooltipPosition="top"><i
+                class="import_ico"></i></button>
+            <button href="#" class="btn_grid" pTooltip="Thêm mới" tooltipPosition="top"><i class="add_ico"
+                (click)="saveOrEdit()"></i></button>
+            <div class="clearboth"></div>
+
+          </ng-template>
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <col style="width:3rem">
+              <col style="width:10rem">
+              <col style="width:3rem">
+              <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+
+              <th translate class="text-center size-2">common.table.index</th>
+              <th translate class="text-center size-6">odf.action</th>
+              <th class="text-center size-2">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader">
+                {{col.header | translate}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+
+            </tr>
+            <tr>
+              <th class="text-center size-2"></th>
+              <th class="text-center size-6"></th>
+              <th class="text-center size-2"></th>
+              <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                <input *ngSwitchCase="'capacity'" pInputText type="text" (input)="filterCapacity($event.target.value)">
+                <input *ngSwitchCase="'note'" pInputText type="text" (input)="filterNote($event.target.value)">
+                <input *ngSwitchCase="'sleeveTypeCode'" pInputText type="text"
+                  (input)="filterSleeveTypeCode($event.target.value)">
+                <p-dropdown *ngSwitchCase="'type'" [style]="{'width':'100%', 'line-height': 'normal'}"
+                  placeholder="{{'common.label.cboSelect' | translate}}" optionLabel="label" [options]="typeList"
+                  [showClear]="true" (onChange)="filterType($event.value.value)" styleClass="ui-column-filter"
+                  appendTo="body"></p-dropdown>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+            <tr>
+              <td class="text-center size-2">{{index}}</td>
+              <td class="text-center size-6">
+                <a class="btn_action" pTooltip="Chi tiết" tooltipPosition="top"
+                  (click)="saveOrEdit(rowData.sleeveTypeId, 'view')">
+                  <i class="more_ico"></i></a>
+                <a class="btn_action" pTooltip="Sửa" tooltipPosition="top"
+                  (click)="saveOrEdit(rowData.sleeveTypeId, 'edit')">
+                  <i class="repair_ico"></i></a>
+                <a class="btn_action" pTooltip="Xóa" tooltipPosition="top" (click)=delete(rowData)>
+                  <i class="remove_ico"></i></a>
+                <a class="btn_action" pTooltip="Thêm file" tooltipPosition="top">
+                  <i class="attact_ico"></i></a>
+              </td>
+              <td class="text-center size-2">
+                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+              </td>
+              <td *ngFor="let col of columns" [ngClass]="col.classField" [ngSwitch]="col.field">
+                <p *ngSwitchCase="'sleeveTypeCode'">{{rowData[col.field]}}</p>
+                <p *ngSwitchCase="'type'">
+                  <span *ngIf="rowData[col.field] === 1; then treo else chon"></span>
+                  <ng-template #treo>Treo</ng-template>
+                  <ng-template #chon>Chôn</ng-template>
+                </p>
+                <p *ngSwitchCase="'capacity'">{{rowData[col.field]}}</p>
+                <p *ngSwitchCase="'note'">{{rowData[col.field]}}</p>
+                <p *ngSwitchCase="'createTime'">{{rowData[col.field] | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+                <p *ngSwitchCase="'updateTime'">{{rowData[col.field] | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="summary">
+            <span *ngIf="last > 0">{{'pagination.record.from' | translate}}
+              {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}
+              {{'pagination.of' | translate}} {{dt?.totalRecords}}
+              {{'pagination.record' | translate}}
+            </span>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td [attr.colspan]="8">
+                {{'common.label.noData'|translate}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <p-dialog #cd [style]="{width: '300px'}" [transitionOptions]="'300ms'" [(visible)]="displayDel">
+      <div style="overflow: hidden">
+        <div style="text-align: center">
+          <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+          <h3>{{'pillar.type.action.delete' | translate}}</h3>
+          <p>{{'common.message.confirm.delete' | translate}}</p>
+          <p>Có {{deleteObj.length}} bản ghi</p>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-6">
+            <button type="button" pButton (click)="onConfirm()"
+              class=" btn_form"><span>{{'common.label.yes' | translate}}</span></button>
+          </div>
+          <div class="ui-g-6">
+            <button type="button" pButton (click)="onReject()"
+              class=" btn_form"><span>{{'common.label.no' | translate}}</span></button>
+          </div>
+        </div>
+      </div>
+    </p-dialog>
+
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+  </div>
+</div>

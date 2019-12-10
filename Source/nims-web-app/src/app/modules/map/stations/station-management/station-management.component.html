@@ -1,0 +1,361 @@
+<div class="content_wrapper">
+  <p-messages></p-messages>
+  <form [formGroup]="formAdd" (ngSubmit)="onSubmit()">
+    <div class="line_btn_form">
+      <button type="submit" (click)="onSubmit()" class="btn_form">
+        <i class="add_ico"></i>
+        <span [innerHTML]="'common.button.storage' | translate"></span>
+      </button>
+      <button type="button" class="btn_form02">
+        <i class="exit_ico"></i>
+        <span [innerHTML]="'common.label.cancel' | translate"></span>
+      </button>
+    </div>
+    <div class="content-section implementation">
+      <div class="ui-g ui-fluid">
+        <!-- ma nha tram start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.stationCode' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <input pInputText type="text" formControlName="stationCode" class="input_form"
+                     maxlength="30">
+            </div>
+          </div>
+        </div>
+        <!-- ma nha tram end-->
+
+        <!-- Don vi start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.dept' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <div class="input_more_form">
+                <p-autoComplete [suggestions]="deptList" field="label" (completeMethod)="getDept($event)" [size]="30"
+                                [minLength]="1" formControlName="deptId" [readonly]="action == 'view'">
+                </p-autoComplete>
+                <a class="btn_popup_list"><i class="icon_search"></i></a>
+                <a class="exit_popup_list"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Don vi end-->
+
+        <!-- Dia ban start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.location' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <div class="input_more_form">
+                <p-autoComplete [suggestions]="locationList" field="label" (completeMethod)="getLocation($event)"
+                                [size]="30" [minLength]="1" formControlName="locationId" [readonly]="action == 'view'">
+                </p-autoComplete>
+                <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>
+                <a href="#" class="exit_popup_list"><i class="x_ico"></i></a>
+              </div>
+            </div>
+            <!-- Dia ban end-->
+          </div>
+        </div>
+        <!-- form fields row 2-->
+
+        <!-- Chu nha tram start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.houseOwnerName' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="houseOwnerName" class="input_form"
+                     maxlength="200">
+            </div>
+          </div>
+        </div>
+        <!-- Chu nha tram end-->
+
+        <!-- So dien thoai chu nha start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.houseOwnerPhone' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="houseOwnerPhone" class="input_form" maxlength="20"
+                     [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+        <!-- So dien thoai chu nha end-->
+
+        <!-- Dia chi start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.address' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="address" class="input_form" maxlength="500"
+                     [readonly]="action == 'view'">
+            </div>
+            <!-- Dia chi end-->
+          </div>
+        </div>
+        <!-- form fields row 3-->
+
+        <!-- Chu so huu start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.owner' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['ownerId']" [options]="ownerList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+        <!-- Chu so huu end-->
+
+        <!-- ngay xay dung start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.constructionDate' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <p-calendar formControlName="constructionDate" dateFormat="dd/mm/yy"
+                          [disabled]="action == 'view'"></p-calendar>
+            </div>
+          </div>
+        </div>
+        <!-- ngay xay dung end-->
+
+        <!-- Trang thai start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.status' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['status']" [options]="statusList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+        <!-- form fields row 4-->
+
+        <!-- loai nha tram start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.houseStationType' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['houseStationTypeId']" [options]="houseStationTypeList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+        <!-- loai nha tram end-->
+
+        <!-- loai tram start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.stationType' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+
+              <select-filter [property]="f['stationTypeId']" [options]="stationTypeList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+        <!-- loai tram end-->
+
+        <!-- Tinh chat nha tram start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.stationFeature' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['stationFeatureId']" [options]="stationFeatureList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+            <!-- Tinh chat nha tram end-->
+          </div>
+        </div>
+        <!-- form fields row 5-->
+
+        <!-- Vu hoi start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.backupStatus' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['backupStatus']" [options]="backupStatusList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+        <!-- Vu hoi end-->
+
+        <!-- Vi tri start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.position' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['position']" [options]="positions" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+        <!-- Vi tri end-->
+
+        <!-- Chieu dai start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.length' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <input type="number" formControlName="length" [readonly]="action == 'view'" class="input_form"
+                     maxlength="10">
+            </div>
+          </div>
+        </div>
+        <!-- form fields row 6-->
+
+        <!-- Chieu rong start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.width' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="width" [readonly]="action == 'view'" class="input_form"
+                     maxlength="10">
+            </div>
+          </div>
+        </div>
+        <!-- Chieu rong end-->
+
+        <!-- Chieu cao start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.height' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="height" class="input_form" [readonly]="action == 'view'"
+                     maxlength="10">
+            </div>
+          </div>
+        </div>
+        <!-- Chieu cao end-->
+
+        <!-- Chiều cao công trình cao nhất start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.heightestBuilding' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="heightestBuilding" class="input_form" maxlength="10"
+                     [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+
+        <!-- form fields row 7-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <!-- kinh do start-->
+            <label class="ui-g-4 name_label">
+              {{'station.longitude' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <input type="text" class="input_form" formControlName="longitude" [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+        <!-- kinh do end-->
+
+        <!-- Vi do start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.latitude' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <input type="text" class="input_form" formControlName="latitude" [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+        <!-- Vi do end-->
+
+        <!-- Phân loại kiểm định start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.auditType' | translate}}
+            </label>
+            <div class="ui-g-8">
+              <select-filter [property]="f['auditType']" [options]="auditTypeList" optionLabel="label"
+                             [disabled]="action == 'view'"
+                             optionValue="value" #auditType></select-filter>
+            </div>
+            <!-- Phân loại kiểm định end-->
+          </div>
+        </div>
+
+        <!-- form fields row 8-->
+        <!-- Trạng thái kiểm định start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.auditStatus' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-8">
+              <input type="text" formControlName="auditStatus" class="input_form" readonly>
+            </div>
+          </div>
+        </div>
+        <!-- Trạng thái kiểm định end-->
+
+        <!-- Ghi chu start-->
+        <div class="ui-g-12">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-4 name_label">
+              {{'station.note' | translate}}
+            </label>
+            <div class="ui-g-8">
+                          <textarea rows="5" cols="50" pInputTextarea formControlName="note" maxlength="500"
+                                    [readonly]="action == 'view'"></textarea>
+            </div>
+          </div>
+          <!-- Ghi chu end-->
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

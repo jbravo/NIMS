@@ -1,0 +1,86 @@
+---
+- name: Check if build.sh file is exists
+  stat:
+    path: "{{WORKING_DIR}}/build.sh"
+  register: build_sh_file_details
+
+- name: Check if docker-compose .env file is exists
+  stat:
+    path: "{{WORKING_DIR}}/.env"
+  register: compose_env_file_details
+
+- name: Get manager stack container running list
+  shell:
+    cmd: "./build.sh manager-stack-show"
+    chdir: "{{WORKING_DIR}}"
+  register: stack_running_list
+  when:
+    - build_sh_file_details.stat.exists == True
+    - compose_env_file_details.stat.exists == True
+
+- set_fact:
+    manager_stack_exists: False
+
+- set_fact:
+    manager_stack_exists: True
+  when:
+    - compose_env_file_details.stat.exists == True
+    - build_sh_file_details.stat.exists == True
+    - ' "fluentd" in stack_running_list.stdout '
+
+
+- name: Copy bash file to staging server
+  copy:
+    mode: 0755
+    src: "{{CURRENT_JENKINS_LOCAL_DIR}}/../../../build.sh"
+    dest: "{{WORKING_DIR}}"
+  when:
+    - manager_stack_exists == False
+
+- name: Create env file for current docker-compose stack
+  copy:
+    mode: 0755
+    dest: "{{WORKING_DIR}}/.env"
+    content: |
+      IMAGE_REGISTRY_URL={{IMAGE_REGISTRY_URL}}
+      IMAGE_STAGING_REGISTRY_URL={{IMAGE_STAGING_REGISTRY_URL}}
+      IMAGE_TYPE={{IMAGE_TYPE}}
+      STACK_VERSION={{STACK_VERSION}}
+  when:
+    - manager_stack_exists == False
+
+- name: Create manager stack directory if not exists
+  file:
+    mode: 0755
+    owner: "{{ansible_ssh_user}}"
+    group: "{{ansible_ssh_user}}"
+    state: directory
+    path: "{{WORKING_DIR}}/deploy"
+
+- name: Copy manager deploy folder to staging server
+  copy:
+    src: "{{CURRENT_JENKINS_LOCAL_DIR}}/../../../deploy/manager"
+    dest: "{{WORKING_DIR}}/deploy"
+  when:
+    - manager_stack_exists == False
+
+
+- name: Pull manager stack image
+  shell:
+    cmd: ./build.sh manager-stack-pull
+    chdir: "{{WORKING_DIR}}"
+  when:
+    - manager_stack_exists == False
+
+- name: Start manager stack
+  shell:
+    cmd: ./build.sh manager-stack-up
+    chdir: "{{WORKING_DIR}}"
+  register: manager_up_output
+  when:
+    - manager_stack_exists == False
+
+- debug:
+    msg: "{{manager_up_output}}"
+  when:
+    - manager_stack_exists == False

@@ -1,0 +1,14 @@
+node('centos7-docker'){
+  checkout changelog: true, poll: true, scm: [
+    $class                           : 'GitSCM',
+    branches                         : [[name: "master"]],
+    doGenerateSubmoduleConfigurations: false,
+    extensions                       : [[$class: 'UserIdentity', email: 'vipc@viettel.com.vn', name: 'vipc']],
+    submoduleCfg                     : [],
+    userRemoteConfigs                : [[credentialsId: 'vipc_gitlab_credentials',
+                                         name         : 'origin',
+                                         url          : "${env.gitlabSourceRepoHomepage}"]]
+  ]
+  jenkinsfile_bootstrap = load 'Jenkinsfile_bootstrap'
+  jenkinsfile_bootstrap.bootstrap_build()
+}

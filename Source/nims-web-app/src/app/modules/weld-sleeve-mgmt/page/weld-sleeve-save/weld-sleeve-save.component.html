@@ -1,0 +1,487 @@
+<p-scrollPanel [style]="{width: '100%', height: '768px'}" styleClass="custom-sidebar clearfix">
+  <div class="content_wrapper">
+    <p-toast key="weldSleeveSave" position="bottom-right"></p-toast>
+    <p-messages key="weldSleeveMsg"></p-messages>
+    <form [formGroup]="formAdd" (ngSubmit)="onClickSubmit(formAdd.value)">
+      <div class="content-section implementation">
+        <!-- Thông tin chung Start -->
+        <p-panel header="{{'common.header.information'|translate}}" [toggleable]="true"
+                 [style]="{'margin-bottom':'8px'}">
+          <div class="row">
+            <!-- Cáp đến Start -->
+            <div class="ui-g-12 ui-md-4 py-0">
+              <label class="ui-g-12 ui-md-3 name_label mb-0">
+                {{'odf.source'| translate}} <span class="text-danger">*</span></label>
+              <div *ngIf="action != 'edit'; then cableSourceSave else cableSourceEdit"></div>
+              <ng-template #cableSourceSave>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <p-dropdown (onChange)="getYarnCableSourceList()" formControlName="cableSource"
+                              [options]="cablesSoureName" placeholder="{{'common.label.cboSelect'|translate}}"
+                              optionLabel="name"
+                              [showClear]="true">
+                  </p-dropdown>
+                </div>
+              </ng-template>
+              <ng-template #cableSourceEdit>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <p-dropdown formControlName="cableSource" [options]="cablesSoure" disabled="true" optionLabel="name"
+                              id="select-filter"
+                              [showClear]="true">
+                  </p-dropdown>
+                </div>
+              </ng-template>
+            </div>
+            <!-- Cáp đến End -->
+            <!-- Măng xông Start -->
+            <div class="ui-g-12 ui-md-4 py-0">
+              <label class="ui-g-12 ui-md-3 name_label mb-0">
+                {{'common.label.sleeve'| translate}}</label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <div class="input_more_form">
+                  <p-dropdown [options]="sleeves" disabled="true" formControlName="sleeveCode" id="select-filter"
+                              optionLabel="label" [showClear]="true">
+                  </p-dropdown>
+                </div>
+              </div>
+            </div>
+            <!-- Măng xông End -->
+            <!-- Cáp đi Start -->
+            <div class="ui-g-12 ui-md-4 py-0">
+              <label class="ui-g-12 ui-md-3 name_label mb-0">{{'odf.dest'| translate}}
+                <span class="text-danger">*</span></label>
+              <div *ngIf="action != 'edit'; then cableDestSave else cableDestEdit"></div>
+              <ng-template #cableDestSave>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <div class="input_more_form">
+                    <p-dropdown [options]="cablesSoureName" (onChange)="getYarnCableDestList()"
+                                formControlName="cableDest" placeholder="{{'common.label.cboSelect'|translate}}"
+                                optionLabel="name" [showClear]="true">
+                    </p-dropdown>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #cableDestEdit>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <div class="input_more_form">
+                    <p-dropdown [options]="cablesDest" formControlName="cableDest" disabled="true" id="select-filter"
+                                optionLabel="name" [showClear]="true">
+                    </p-dropdown>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+            <!-- Cáp đi End -->
+          </div>
+          <div class="row px-1">
+            <div *ngIf="action != 'edit'; then typeWeldSave else typeWeldEdit"></div>
+            <!-- Save -->
+            <ng-template #typeWeldSave>
+              <!-- Hàn trực tiếp Start -->
+              <div class="ui-g-12 ui-md-4">
+                <p-radioButton name="typeWeld" checked="true" (click)="checkTypeAmout()" formControlName="typeWeld"
+                               value="direct"
+                               label="{{'common.label.weld.type.direct' | translate}}"
+                               inputId="typeWeldDirect"></p-radioButton>
+              </div>
+              <!-- Hàn trực tiếp End -->
+              <!-- Hàn thông thường Start -->
+              <div class="ui-g-12 ui-md-4 pl-2">
+                <p-radioButton name="typeWeld" (click)="checkTypeAmout()" formControlName="typeWeld" value="normal"
+                               label="{{'common.label.weld.type.normal' | translate}}"
+                               inputId="typeWeldNormal"></p-radioButton>
+              </div>
+              <!-- Hàn thông thường End -->
+            </ng-template>
+            <!-- Edit -->
+            <ng-template #typeWeldEdit>
+              <!-- Hàn trực tiếp Start -->
+              <div class="ui-g-12 ui-md-4">
+                <p-radioButton name="typeWeld" disabled="true" formControlName="typeWeld"
+                               value="direct"
+                               label="{{'common.label.weld.type.direct' | translate}}"
+                               inputId="typeWeldDirect"></p-radioButton>
+              </div>
+              <!-- Hàn trực tiếp End -->
+              <!-- Hàn thông thường Start -->
+              <div class="ui-g-12 ui-md-4 pl-2">
+                <p-radioButton name="typeWeld" checked="true" formControlName="typeWeld"
+                               value="normal" label="{{'common.label.weld.type.normal' | translate}}"
+                               inputId="typeWeldNormal">
+                </p-radioButton>
+              </div>
+              <!-- Hàn thông thường End -->
+            </ng-template>
+          </div>
+          <div class="row px-1">
+            <div *ngIf="action != 'edit'; then weldAmountSave else weldAmountEdit"></div>
+            <!-- Save -->
+            <ng-template #weldAmountSave>
+              <!-- Hàn một cặp Start -->
+              <div class="ui-g-12 ui-md-4">
+                <p-radioButton name="weldAmount" checked="true" (click)="checkTypeAmout()" formControlName="weldAmount"
+                               value="weldOne"
+                               label="{{'common.label.weld.one' | translate}}" inputId="weldAmountOne"></p-radioButton>
+              </div>
+              <!-- Hàn một cặp End -->
+              <!-- Hàn nhiều cặp Start -->
+              <div class="ui-g-12 ui-md-4 pl-2">
+                <p-radioButton name="weldAmount" (click)="checkTypeAmout()" formControlName="weldAmount"
+                               value="weldMany" label="{{'common.label.weld.many' | translate}}"
+                               inputId="weldAmountMany">
+                </p-radioButton>
+              </div>
+              <!-- Hàn nhiều cặp End -->
+            </ng-template>
+            <!-- Edit -->
+            <ng-template #weldAmountEdit>
+              <!-- Hàn một cặp Start -->
+              <div class="ui-g-12 ui-md-4 pl-2">
+                <p-radioButton name="weldAmount" checked="true" formControlName="weldAmount" value="weldOne"
+                               label="{{'common.label.weld.one' | translate}}" inputId="weldAmountOne"></p-radioButton>
+              </div>
+              <!-- Hàn một cặp End -->
+              <!-- Hàn nhiều cặp Start -->
+              <div class="ui-g-12 ui-md-4 pl-2">
+                <p-radioButton name="weldAmount" disabled="true" formControlName="weldAmount"
+                               value="weldMany" label="{{'common.label.weld.many' | translate}}"
+                               inputId="weldAmountMany">
+                </p-radioButton>
+              </div>
+              <!-- Hàn nhiều cặp End -->
+            </ng-template>
+          </div>
+          <div class="row">
+            <!-- Người hàn Start -->
+            <div class="ui-g-12 ui-md-4">
+              <label class="ui-g-12 ui-md-3 name_label mb-0">{{'common.label.weld.person'| translate}}</label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <input type="text" formControlName="welddingBy" maxlength="99" class="input_form w-100">
+              </div>
+            </div>
+            <!-- Người hàn End -->
+            <!-- Suy hao mối hàn Start -->
+            <div class="ui-g-12 ui-md-4">
+              <label class="ui-g-12 ui-md-3 name_label mb-0">{{'common.label.weld.attenuation'| translate}} </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <input type="text" decimalThreeTenths maxlength="14" formControlName="attenuation"
+                       class="input_form w-100">
+              </div>
+            </div>
+            <!-- Suy hao mối hàn End -->
+          </div>
+        </p-panel>
+      </div>
+      <!-- Thông tin chung End -->
+      <!-- Hiển thị nhập quad đến quad đi hàn 1 cặp và trực tiếp Start -->
+      <div *ngIf="check1Direct; then oneDirect "></div>
+      <ng-template #oneDirect>
+        <div class="content-section implementation">
+          <p-panel header="{{'common.weld.information'| translate}}" [toggleable]="true"
+                   [style]="{'margin-bottom':'8px'}">
+            <div class="row">
+              <div class="ui-g-12 ui-md-4">
+                <label class="ui-g-12 ui-md-3 name_label mb-0">{{'common.label.quad.source'| translate}} <span
+                  class="text-danger">*</span></label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <input type="text" positiveInteger maxlength="5" formControlName="quadSource" pInputText
+                         class="input_form w-100">
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-4">
+                <label class="ui-g-12 ui-md-3 name_label mb-0">{{'common.label.quad.dest'| translate}} <span
+                  class="text-danger">*</span></label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <input type="text" positiveInteger maxlength="5" formControlName="quadDest" pInputText
+                         class="input_form w-100">
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
+      <!-- Hàn Một cặp và trực tiếp End -->
+      <!-- Hiển thị nhập quad đến(từ, đến) quad đi(từ, đến) hàn nhiều cặp và trực tiếp Start -->
+      <div *ngIf="checkManyDirect; then ManyDirect "></div>
+      <ng-template #ManyDirect>
+        <div class="content-section implementation">
+          <p-panel header="{{'common.weld.information'| translate}}" [toggleable]="true"
+                   [style]="{'margin-bottom':'8px'}">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12 ui-md-6 pt-0">
+                <label>{{'common.label.quad.source'| translate}} <span class="text-danger">*</span></label>
+                <div class="ui-g ui-fluid">
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'source'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="quadSourceStart" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'dest'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="quadSourceEnd" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6 pt-0">
+                <label>{{'common.label.quad.dest'| translate}} <span class="text-danger">*</span></label>
+                <div class="ui-g ui-fluid">
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'source'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="quadDestStart" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'dest'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="quadDestEnd" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
+      <!-- Hàn nhiều cặp và trực tiếp End -->
+      <!-- Hiển thị 1 cặp và Thông thường Start -->
+      <div *ngIf="check1Normal; then oneNormal "></div>
+      <ng-template #oneNormal>
+        <div class="content-section implementation">
+          <p-panel header="{{'common.weld.information'| translate}}" [toggleable]="true"
+                   [style]="{'margin-bottom':'8px'}">
+            <div class="row">
+              <div class="ui-g-12 ui-md-4">
+                <label class="ui-g-12 ui-md-3 name_label mb-0">{{'common.label.quad.yarnSource'| translate}} <span
+                  class="text-danger">*</span></label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <input type="text" [readOnly]="action=='edit'
+
+" maxlength="5" positiveInteger formControlName="yarnSource"
+                         pInputText class="input_form w-100">
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-4">
+                <label class="ui-g-12 ui-md-3 name_label mb-0">{{'common.label.quad.yarnDest'| translate}} <span
+                  class="text-danger">*</span></label>
+                <div class="ui-g-12 ui-md-9 name_content py-0">
+                  <input type="text" [readOnly]="action=='edit'" maxlength="5" positiveInteger
+                         formControlName="yarnDest"
+                         pInputText class="input_form w-100">
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
+      <!-- Hàn 1 cặp và thông thường End -->
+      <!-- Hiển thị nhiều cặp và thông thường Start-->
+      <div *ngIf="checkManyNormal; then ManyNormal "></div>
+      <ng-template #ManyNormal>
+        <div class="content-section implementation">
+          <p-panel header="{{'common.weld.information'| translate}}" [toggleable]="true"
+                   [style]="{'margin-bottom':'8px'}">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-12 ui-md-6 pt-0">
+                <label>{{'odf.source'| translate}} <span class="text-danger">*</span></label>
+                <div class="ui-g ui-fluid">
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'weldding.cable.yarnstart'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="cableSourceYarnStart" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'weldding.cable.yarnend'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="cableSourceYarnEnd" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-6 pt-0">
+                <label>{{'odf.dest'| translate}} <span class="text-danger">*</span></label>
+                <div class="ui-g ui-fluid">
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'weldding.cable.yarnstart'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="cableDestYarnStart" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <label class="ui-g-12 ui-md-3 name_label mb-0">{{'weldding.cable.yarnend'| translate}}</label>
+                    <div class="ui-g-12 ui-md-9 name_content pt-0">
+                      <input type="text" positiveInteger maxlength="5" formControlName="cableDestYarnEnd" pInputText
+                             class="input_form">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+      </ng-template>
+      <!-- Hàn nhiều cặp và thông thường End -->
+      <div class="content-section implementation">
+        <div class="ui-g-12 ui-md-12 ui-lg-6 py-0 pl-0">
+          <p-panel header="{{'weldding.table.headder.cablesource.data'| translate}}" [toggleable]="true"
+                   [style]="{'margin-bottom':'8px'}">
+            <!-- Data cáp đến Start-->
+            <p-table #dt [columns]="cols" [value]="listDataSource" [rows]="10" [totalRecords]="cableSourceTotal"
+                     [responsive]="true" [paginator]="true" [scrollable]="false"
+                     [resizableColumns]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]"
+                     [lazy]="true" (onLazyLoad)="onLazyLoadSource($event)"
+                     [ngClass]="{'cell-text-pre-wrap': isCollapse1}">
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:3rem">
+                  <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:10rem">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                      class="text-center" (contextmenu)="onLinkRightClickedHeader(col.field, $event,1)">
+                    {{col.header | translate}}
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns">
+                    <div *ngIf="col.field =='cableCode'; then cableCodeS else cableCodeS1"></div>
+                    <ng-template #cableCodeS><input pInputText (keyup)="onInputSearch($event, col.field)" type="text">
+                    </ng-template>
+                    <ng-template #cableCodeS1><input pInputText [pKeyFilter]="blockAZ"
+                                                     (keyup)="onInputSearch($event, col.field)" type="text">
+                    </ng-template>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                <tr [pContextMenuRow]="rowData">
+                  <td class="text-center size-2">{{index}}</td>
+                  <td *ngFor="let col of columns" [ngClass]="col.classField"
+                      (contextmenu)="onLinkRightClickedRow(rowData[col.field], $event,1)"
+                      [rightClickCopy]="rowData[col.field]">
+                    {{rowData[col.field]}}
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="summary">
+<!--                <span *ngIf="dt?.totalRecords > 0">{{'pagination.record.from' | translate}}-->
+<!--                  {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}-->
+<!--                  {{'pagination.of' | translate}} {{dt?.totalRecords}} {{'pagination.record' | translate}}</span>-->
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="4">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <!-- Data cáp đến End -->
+          </p-panel>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-6 py-0 pr-0">
+          <p-panel header="{{'weldding.table.headder.cabledest.data'| translate}}" [toggleable]="true"
+                   [style]="{'margin-bottom':'8px'}">
+            <!-- Data cáp đi Start-->
+            <p-table #dtt [columns]="cols" [value]="listDataDest" [rows]="10" [totalRecords]="cableDestTotal"
+                     [responsive]="true" [paginator]="true" [scrollable]="true"
+                     [resizableColumns]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]"
+                     [lazy]="true" (onLazyLoad)="onLazyLoadDest($event)"
+                     [ngClass]="{'cell-text-pre-wrap': isCollapse2}">
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:3rem">
+                  <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:10rem">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                      class="text-center" (contextmenu)="onLinkRightClickedHeader(col.field, $event,2)">
+                    {{col.header | translate}}
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns">
+                    <div *ngIf="col.field =='cableCode'; then cableCodeD else cableCodeD1"></div>
+                    <ng-template #cableCodeD><input pInputText (keyup)="onInputSearchDest($event, col.field)"
+                                                    type="text">
+                    </ng-template>
+                    <ng-template #cableCodeD1><input pInputText [pKeyFilter]="blockAZ"
+                                                     (keyup)="onInputSearchDest($event, col.field)" type="text">
+                    </ng-template>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                <tr>
+                  <td class="text-center size-2">{{index}}</td>
+                  <td *ngFor="let col of columns" [ngClass]="col.classField"
+                      (contextmenu)="onLinkRightClickedRow(rowData[col.field], $event,2)"
+                      [rightClickCopy]="rowData[col.field]">
+                    {{rowData[col.field]}}
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="summary">
+<!--                <span *ngIf="dtt?.totalRecords > 0">{{'pagination.record.from' | translate}}-->
+<!--                  {{(dtt?.first + 1) + '-' + ((dtt?.first + dtt?.rows) < dtt?.totalRecords ? (dtt?.first + dtt?.rows) : dtt?.totalRecords)}}-->
+<!--                  {{'pagination.of' | translate}} {{dtt?.totalRecords}} {{'pagination.record' | translate}}-->
+<!--                </span>-->
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="4">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <!-- Data cáp đi End -->
+          </p-panel>
+        </div>
+      </div>
+      <!-- Button ghi lại và hủy bỏ Start -->
+      <div class="line_btn_form mt-0">
+        <button (click)="onClosedTab()" type="button" class="btn_form02">
+          <i class="exit_ico"></i><span [innerHTML]="'common.label.cancel' | translate"></span>
+        </button>
+        <button type="submit" class="btn_form">
+          <i class="add_ico"></i><span [innerHTML]="'common.button.storage' | translate"></span>
+        </button>
+      </div>
+      <!-- Button ghi là và hủy bỏ End -->
+    </form>
+  </div>
+</p-scrollPanel>
+
+<p-toast position="center" key="cws" (onClose)="onReject()" [modal]="true" styleClass="ui-toast-confirm"
+         [autoZIndex]="true">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="btn_modal_footer" style="text-align: center">
+      <a (click)="onConfirm()" class="btn_modal_action" style="color: white">{{'common.label.yes' | translate}}</a>
+      <a (click)="onReject()" class="btn_modal_cancel" style="color: #007CBB">{{'common.label.no' | translate}}</a>
+    </div>
+  </ng-template>
+</p-toast>
+<p-contextMenu #contextMenu [model]="items" appendTo="body"></p-contextMenu>
+
+<p-toast key="copySuccess" position="bottom-right"></p-toast>

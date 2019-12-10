@@ -1,0 +1,122 @@
+<ng-container *ngIf="type === 'station'">
+  <p-autoComplete [suggestions]="filteredStation"
+                  field="stationCode"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="280px"
+                  [size]="30"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  [inputStyleClass]="inputStyleStation"
+                  (completeMethod)="onSearchData($event, 'station')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled"
+                  appendTo="body"
+                  [style]="styleStation">
+  </p-autoComplete>
+</ng-container>
+<ng-container *ngIf="type === 'dept'">
+  <p-autoComplete [suggestions]="filteredDept"
+                  field="pathName"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="270px"
+                  [size]="30"
+                  [inputStyleClass]="inputStyleDept"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  (completeMethod)="onSearchData($event, 'dept')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled"
+                  appendTo="body"
+                  [style]="styleDept">
+  </p-autoComplete>
+</ng-container>
+<ng-container *ngIf="type === 'location'">
+  <p-autoComplete [suggestions]="filteredLocation"
+                  field="pathLocalName"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="280px"
+                  [size]="30"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  (completeMethod)="onSearchData($event, 'location')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled">
+  </p-autoComplete>
+</ng-container>
+<ng-container *ngIf="type === 'laneCode'">
+  <p-autoComplete [suggestions]="filteredLaneCode"
+                  field="laneCode"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="280px"
+                  [size]="30"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  (completeMethod)="onSearchData($event, 'laneCode')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled">
+  </p-autoComplete>
+</ng-container>
+<ng-container *ngIf="type === 'laneSleeve'">
+  <p-autoComplete [suggestions]="filteredLaneSleeve"
+                  field="laneCode"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="270px"
+                  [size]="30"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  (completeMethod)="onSearchData($event, 'laneSleeve')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled">
+  </p-autoComplete>
+</ng-container>
+<ng-container *ngIf="type === 'pillar'">
+  <p-autoComplete [suggestions]="filteredPillar"
+                  field="pillarCode"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="270px"
+                  [size]="30"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  (completeMethod)="onSearchData($event, 'pillar')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled">
+  </p-autoComplete>
+</ng-container>
+<ng-container *ngIf="type === 'pool'">
+  <p-autoComplete [suggestions]="filteredPool"
+                  field="poolCode"
+                  pTooltip="{{displayFieldTooltip}}"
+                  tooltipPosition="top"
+                  scrollHeight="270px"
+                  [size]="30"
+                  [minLength]="1"
+                  [ngModel]="displayField"
+                  (completeMethod)="onSearchData($event, 'pool')"
+                  (onSelect)="onRowSelect($event)"
+                  (onKeyUp)="onKeyUp($event)"
+                  (onBlur)="onBlur($event)"
+                  [readonly]="disabled">
+  </p-autoComplete>
+</ng-container>
+<span *ngIf="showButton">
+    <a class="btn_popup_list" (click)="onShow()" appendTo="body" [class.disabled]="disabled ? true : null"><i  class="icon_search" ></i></a>
+    <a class="exit_popup_list" (click)="onClear()" appendTo="body" [class.disabled]="disabled ? true : null"><i class="x_ico" ></i></a>
+</span>

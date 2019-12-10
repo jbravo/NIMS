@@ -1,0 +1,14 @@
+<div class="mb-2">
+  <label for="{{field.key}}"
+         [ngClass]="{'text-danger':field.formControl.touched &&  field.formControl.invalid}">{{to.label}}</label>
+  <input id="{{field.key}}" type="text" pInputText [(ngModel)]="to.inputModel" (focus)="op1.toggle($event)"
+         readonly="true"
+  >
+  <input [formControl]="formControl"
+         [formlyAttributes]="field" [hidden]="true">
+  <p-overlayPanel #op1 id="zt">
+    <p-tree [value]="tree" [loading]="loading" (onNodeExpand)="loadNode($event)"
+            selectionMode="single"
+            [(selection)]="selectedNode" (onNodeSelect)="selectNode($event)" [emptyMessage]="'Không có kết quả'"></p-tree>
+  </p-overlayPanel>
+</div>

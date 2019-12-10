@@ -1,0 +1,369 @@
+<app-spinner></app-spinner>
+<p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 100px)'}" styleClass="custom-sidebar clearfix">
+  <div class="content_wrapper">
+    <p-messages key="stationSave"></p-messages>
+    <p-toast key="notification" position="bottom-right"></p-toast>
+    <!--  {{formAdd.value | json}}-->
+    <form class="form" [formGroup]="formAdd">
+      <!--    <p-panel header="Thông tin chi tiết" [toggleable]="true">-->
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+          <!-- form fields row 1 -->
+          <!-- ma nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 py-0">
+            <div class="line_form ui-g ui-fluid" hasError="stationCode">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.stationCode' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input class="input_form form-control" type="text" formControlName="stationCode" maxlength="30"
+                       [readonly]="action === 'edit'" autoFocusField>
+                <label class="ui-g-12 ui-md-4 name_label pt-0"> </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Don vi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="deptId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.dept' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <!--                  <p-autoComplete [suggestions]="deptList" field="label" (completeMethod)="getDept($event)" [size]="30"-->
+                  <!--                                  [minLength]="1" formControlName="deptId" >-->
+                  <!--                  </p-autoComplete>-->
+                  <!--                  <a class="btn_popup_list"><i class="icon_search"></i></a>-->
+                  <!--                  <a class="exit_popup_list"><i class="x_ico"></i></a>-->
+                  <autocomplete-search-control
+                      #autoCompleteDept
+                      [header]="headerDept"
+                      [control]="formControls['deptId']"
+                      [contentType]="dept"
+                      [displayFieldType]="'dept'"
+                      [type]="'dept'" (onChange)="onChangeRowSelectDept($event)"
+                      (onClean)="onClearRowSelect()">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dia ban -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="locationId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.location' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <!--                    <p-autoComplete [suggestions]="locationList" field="label" (completeMethod)="getLocation($event)"-->
+                  <!--                                    [size]="30" [minLength]="1" formControlName="locationId"-->
+                  <!--                                    >-->
+                  <!--                    </p-autoComplete>-->
+                  <!--                    <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>-->
+                  <!--                    <a href="#" class="exit_popup_list"><i class="x_ico"></i></a>-->
+                  <autocomplete-search-control
+                      #autoCompleteLocation
+                      [header]="headerLocation"
+                      [control]="formControls['locationId']"
+                      [contentType]="location"
+                      [displayFieldType]="'location'" [type]="'location'">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+              <!-- Dia ban end-->
+            </div>
+          </div>
+
+          <!-- form fields row 2 -->
+          <!-- Chu nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.houseOwnerName' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" formControlName="houseOwnerName" class="form-control input_form" maxlength="100">
+              </div>
+            </div>
+          </div>
+
+          <!-- So dien thoai chu nha -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="houseOwnerPhone">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.houseOwnerPhone' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" formControlName="houseOwnerPhone" class="form-control input_form" maxlength="20"
+                       positiveInteger>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dia chi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.address' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" formControlName="address" class="input_form" maxlength="500"
+                >
+              </div>
+              <!-- Dia chi end-->
+            </div>
+          </div>
+
+          <!-- form fields row 3 -->
+          <!-- Chu so huu -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="ownerId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.owner' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['ownerId']" [options]="ownerList" optionLabel="label"
+                               optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- ngay xay dung -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.constructionDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar formControlName="constructionDate" dateFormat="dd/mm/yy" showIcon="true"
+                            (onInput)="onInput($event)"></p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker()"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trang thai -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.status' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['status']" [options]="statusList" optionLabel="label"
+                               optionValue="value" [filter]="false"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 4 -->
+          <!-- loai nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.houseStationType' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['houseStationTypeId']" [options]="houseStationTypeList"
+                               optionLabel="label"
+                               optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- loai tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="stationTypeId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.stationType' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['stationTypeId']" [options]="stationTypeList" optionLabel="label"
+                               optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tinh chat nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="stationFeatureId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0" style="padding-left: 12px;">
+                {{'station.stationFeature' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['stationFeatureId']" [options]="stationFeatureList" optionLabel="label"
+                               optionValue="value"></select-filter>
+              </div>
+              <!-- Tinh chat nha tram end-->
+            </div>
+          </div>
+
+          <!-- form fields row 5 -->
+          <!-- Vu hoi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.backupStatus' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['backupStatus']" [options]="backupStatusList" optionLabel="label"
+                               optionValue="value" [filter]="false"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vi tri dat tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.position' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['position']" [options]="positions" optionLabel="label"
+                               optionValue="value" [filter]="false"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu dai -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.length' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input decimalFiveTenths formControlName="length" class="input_form" (blur)="validateNumber('length')">
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 6 -->
+          <!-- Chieu rong -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.width' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input decimalFiveTenths formControlName="width" class="input_form" (blur)="validateNumber('width')">
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu cao -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.height' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input decimalFiveTenths formControlName="height" class="input_form"
+                       (blur)="validateNumber('height')">
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu cao cong trinh cao nhat start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.heightestBuilding' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input decimalFiveTenths formControlName="heightestBuilding" class="input_form"
+                       (blur)="validateNumber('heightestBuilding')">
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 7 -->
+          <!-- kinh do -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="longitude">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.longitude' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="form-control input_form" formControlName="longitude"
+                       [ngClass]="errorLongitude ? 'invalid-control-longLat' : ''" geometryDirective
+                       oninput="this.value = this.value.replace(/[^-.0-9]/g, '')">
+              </div>
+            </div>
+          </div>
+
+          <!-- Vi do -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="latitude">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.latitude' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="form-control input_form" formControlName="latitude"
+                       [ngClass]="errorLatitude ? 'invalid-control-longLat' : ''" geometryDirective
+                       oninput="this.value = this.value.replace(/[^-.0-9]/g, '')">
+              </div>
+            </div>
+          </div>
+
+          <!-- Phan loai kiem dinh -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.auditType' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['auditType']" [options]="auditTypeList" optionLabel="label"
+                               optionValue="value" [filter]="false"
+                               (onChange)="changeAuditStatus(f['auditType'].value)"></select-filter>
+              </div>
+              <!-- Phan loai kiem dinh end-->
+            </div>
+          </div>
+
+          <!-- form fields row 8 -->
+          <!-- Trang thai kiem dinh -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.auditStatus' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <!--                <select-filter [property]="f['auditStatus']" [options]="auditStatusList" optionLabel="label"-->
+                <!--                               [disabled]="true" optionValue="value"></select-filter>-->
+                <input pInputText type="text" formControlName="auditStatusName" class="input_form" readonly>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chu -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.note' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <textarea rows="5" cols="50" pInputTextarea formControlName="note" maxlength="500"></textarea>
+              </div>
+            </div>
+            <!-- Ghi chu end-->
+          </div>
+        </div>
+      </div>
+      <div class="line_btn_form mt-0">
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn_form" tabindex="0" (click)="onSubmit()">
+            <i class="add_ico"></i>
+            <span [innerHTML]="'common.button.storage' | translate"></span>
+          </button>
+          <button type="button" (click)="onClosedTab()" class="btn_form02" tabindex="1">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.label.cancel' | translate"></span>
+          </button>
+        </div>
+      </div>
+      <!--    </p-panel>-->
+    </form>
+  </div>
+</p-scrollPanel>

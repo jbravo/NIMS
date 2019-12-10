@@ -1,0 +1,12 @@
+<div class="">
+  <h6>Loại phê duyệt: {{data.title}}</h6>
+  <div>
+    <form [formGroup]="form">
+      <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+    </form>
+  </div>
+  <div>
+    <button class="btn btn-primary btn-sm" (click)="onPheDuyet()" [disabled]="form.invalid">Phê duyệt</button>
+    <button class="btn btn-warning btn-sm" >Hủy</button>
+  </div>
+</div>

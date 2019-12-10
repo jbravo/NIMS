@@ -1,0 +1,345 @@
+<p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 140px)'}" styleClass="custom-sidebar clearfix">
+  <div class="content_wrapper">
+    <p-messages key="iv"></p-messages>
+    <p-toast position="bottom-right" key="cp"></p-toast>
+    <p-toast position="bottom-right" key="suc"></p-toast>
+    <form [formGroup]="formUpdate" (ngSubmit)="onSubmit(formUpdate.value)" (keydown)="enterToSubmit($event)">
+      <div class="content-section implementation">
+        <div class="ui-g uiFluid">
+          <div class="ui-g-12" py-0>
+            <p-panel
+              header="{{'welding.odf.option' | translate}} {{'welding.odf.weld' | translate}}/{{'welding.odf.joint' | translate}}"
+              [toggleable]="true" [style]="{'margin-bottom':'8px'}">
+              <div class="row">
+                <div class="col-2"></div>
+                <div class="col-6 pl-0">
+                  <p-radioButton class="ui-g-3" name="odfConnectType" formControlName="odfConnectType" [value]="1"
+                                 disabled="true" label="{{'welding.odf.weld' | translate}}"></p-radioButton>
+                  <p-radioButton class="ui-g-3" name="odfConnectType" formControlName="odfConnectType" [value]="2"
+                                 disabled="true" label="{{'welding.odf.joint' | translate}}"></p-radioButton>
+                </div>
+              </div>
+            </p-panel>
+          </div>
+          <!--Thong tin chung Han noi-->
+          <div class="ui-g-12 py-0" *ngIf="selectedWelding; then welding"></div>
+          <ng-template #welding>
+            <div class="ui-g-12 py-0">
+              <p-panel header="{{'welding.odf.info' | translate}} {{'welding.odf.weld' | translate}}"
+                       [toggleable]="true" [style]="{'margin-bottom':'8px'}">
+                <div class="row px-1">
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.sourceCode'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="odfId" class="input_form form-control" disabled value="{{item.odfCode}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.cableCode'| translate}} <span
+                        class="text-danger">*</span></label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="cableId" class="input_form form-control" disabled value="{{item.cableCode}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.employee'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" maxlength="100" formControlName="createUser" #focusInput pInputText class="input_form">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.attenuation'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="attenuation" pInputText class="input_form" negativeDecimalFiveTenths>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.date'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                        <p-calendar formControlName="createDate" dateFormat="dd/mm/yy" showIcon="true"
+                                    (onInput)="onInput($event)"></p-calendar>
+                        <a class="icon-clear-date" (click)="onClearDatePicker()"><i class="x_ico"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.note'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="note" maxlength="500" pInputText class="input_form">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0 pl-0 pb-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'welding.odf.option'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <p-radioButton class="ui-g-4" name="pairNumberOption" formControlName="pairNumberOption" [value]="1"
+                                       disabled="true" label="{{'welding.odf.weld.one' | translate}}"></p-radioButton>
+                        <p-radioButton class="ui-g-5" name="pairNumberOption" formControlName="pairNumberOption" [value]="2"
+                                       disabled="true" label="{{'welding.odf.weld.many' | translate}}"></p-radioButton>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 ui-lg-6 py-0"></div>
+                </div>
+              </p-panel>
+            </div>
+            <!--Thong tin Han noi-->
+            <div class="ui-g-12 py-0">
+              <p-panel header="{{'welding.odf.detail' | translate}} {{'welding.odf.weld' | translate}}"
+                       [toggleable]="true" [style]="{'margin-bottom':'8px'}">
+                <div class="row px-1">
+                  <div class="ui-g-12 ui-md-6 py-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.sourceCoupler'| translate}}<span
+                        class="text-danger">*</span></label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="number" formControlName="couplerNo" value="{{item.couplerNo}}" class="input_form form-control" disabled>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 py-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.lineNo'| translate}} <span
+                        class="text-danger">*</span></label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="number" formControlName="lineNo" value="{{item.lineNo}}" class="input_form form-control" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-panel>
+            </div>
+
+            <!--Thong tin ODF-->
+            <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+              <p-panel header="{{'welding.odf.couplers' | translate}}" [toggleable]="true"
+                       [style]="{'margin-bottom':'8px', height:'30px'}">
+                <div class="row px-2">
+                  <p-table [rows]="10" [paginator]="true" [resizableColumns]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" translate>common.table.index</th>
+                        <th class="text-center" translate>weldingOdf.sourceCode</th>
+                        <th class="text-center" translate>weldingOdf.sourceCoupler</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td [attr.colspan]="3">
+                          {{'common.label.noData'|translate}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </p-panel>
+            </div>
+            <!--Thong tin Cap den-->
+            <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+              <p-panel header="{{'welding.odf.lines' | translate}}" [toggleable]="true"
+                       [style]="{'margin-bottom':'8px', height:'30px'}">
+                <div class="row px-2">
+                  <p-table [rows]="10" [paginator]="true" [resizableColumns]="true"
+                           [rowsPerPageOptions]="[5,10,15,20,25,30]">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" translate>common.table.index</th>
+                        <th class="text-center" translate>weldingOdf.cableCode</th>
+                        <th class="text-center" translate>quad</th>
+                        <th class="text-center" translate>weldingOdf.lineNo</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                      <tr>
+                        <td [attr.colspan]="4">
+                          {{'common.label.noData'|translate}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </p-panel>
+            </div>
+          </ng-template>
+
+          <div class="ui-g-12" *ngIf="selectedJointing; then jointing"></div>
+          <ng-template #jointing>
+            <div class="ui-g-12 py-0">
+              <p-panel header="{{'welding.odf.info' | translate}} {{'welding.odf.joint' | translate}}"
+                       [toggleable]="true" [style]="{'margin-bottom':'8px'}">
+                <div class="row px-1">
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.sourceCode'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="odfId" disabled class="input_form form-control" value="{{item.odfCode}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.destCode'| translate}} <span
+                        class="text-danger">*</span></label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="destOdfId" disabled class="input_form form-control" value="{{item.destOdfCode}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.employee'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" maxlength="100" formControlName="createUser" pInputText autofocus="true" class="input_form" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.attenuation'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="attenuation" pInputText class="input_form" negativeDecimalFiveTenths>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.date'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                        <p-calendar formControlName="createDate" dateFormat="dd/mm/yy" showIcon="true"
+                                    (onInput)="onInput($event)"></p-calendar>
+                        <a class="icon-clear-date" (click)="onClearDatePicker()"><i class="x_ico"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.note'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="text" formControlName="note" maxlength="500" pInputText class="input_form">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 pt-0 pl-0 pb-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'welding.odf.option'| translate}}</label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <p-radioButton class="ui-g-4" name="pairNumberOption" formControlName="pairNumberOption"
+                                       [value]="1"
+                                       disabled="true" label="{{'welding.odf.joint.one' | translate}}"></p-radioButton>
+                        <p-radioButton class="ui-g-5" name="pairNumberOption" formControlName="pairNumberOption"
+                                       [value]="2"
+                                       disabled="true" label="{{'welding.odf.joint.many' | translate}}"></p-radioButton>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 ui-lg-6 py-0"></div>
+                </div>
+              </p-panel>
+            </div>
+            <!--Thong tin Dau noi -->
+            <div class="ui-g-12 py-0">
+              <p-panel header="{{'welding.odf.detail' | translate}} {{'welding.odf.joint' | translate}}"
+                       [toggleable]="true" [style]="{'margin-bottom':'8px'}">
+                <div class="row px-1">
+                  <div class="ui-g-12 ui-md-6 py-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.sourceCoupler'| translate}}<span
+                        class="text-danger">*</span></label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="number" formControlName="couplerNo" value="{{item.couplerNo}}" class="input_form form-control" disabled>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ui-g-12 ui-md-6 py-0">
+                    <div class="line_form ui-g ui-fluid">
+                      <label class="ui-g-12 ui-md-4 name_label pt-0">{{'weldingOdf.destCoupler'| translate}} <span
+                        class="text-danger">*</span></label>
+                      <div class="ui-g-12 ui-md-8 name_content pt-0">
+                        <input type="number" formControlName="destCouplerNo" value="{{item.destCouplerNo}}" class="input_form form-control" disabled>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-panel>
+            </div>
+            <!--Thong tin ODF -->
+            <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+              <p-panel header="{{'welding.odf.couplers' | translate}}" [toggleable]="true"
+                       [style]="{'margin-bottom':'8px', height:'300px'}">
+                <div class="row px-2">
+                  <p-table [rows]="10" [paginator]="true" [resizableColumns]="true"
+                           [rowsPerPageOptions]="[5,10,15,20,25,30]">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" translate>common.table.index</th>
+                        <th class="text-center" translate>weldingOdf.sourceCoupler</th>
+                        <th class="text-center" translate>weldingOdf.cableCode</th>
+                        <th class="text-center" translate>weldingOdf.lineNo</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                      <tr>
+                        <td [attr.colspan]="4">
+                          {{'common.label.noData'|translate}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </p-panel>
+            </div>
+            <!--Thong tin ODF dau nhay-->
+            <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+              <p-panel header="{{'welding.odf.lines' | translate}}" [toggleable]="true"
+                       [style]="{'margin-bottom':'8px', height:'300px'}">
+                <div class="row px-2">
+                  <p-table [rows]="10" [paginator]="true" [resizableColumns]="true"
+                           [rowsPerPageOptions]="[5,10,15,20,25,30]">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" translate>common.table.index</th>
+                        <th class="text-center" translate>weldingOdf.sourceCoupler</th>
+                        <th class="text-center" translate>weldingOdf.cableCode</th>
+                        <th class="text-center" translate>weldingOdf.lineNo</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td [attr.colspan]="4">
+                          {{'common.label.noData'|translate}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </p-panel>
+            </div>
+          </ng-template>
+        </div>
+        <div class="line_btn_form ">
+          <div class="d-flex justify-content-end">
+            <button type="submit" autofocus class="btn_form">
+              <i class="add_ico"></i>
+              <span [innerHTML]="'common.button.storage' | translate"></span>
+            </button>
+            <button type="button" (click)="closeTabSave()" class="btn_form02">
+              <i class="exit_ico"></i>
+              <span [innerHTML]="'common.label.cancel' | translate"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</p-scrollPanel>

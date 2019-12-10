@@ -1,0 +1,16 @@
+<div class="">
+  <p-fieldset legend="Thông tin chung">
+    <form [formGroup]="form">
+      <div class="">
+        <formly-form [form]="form" [fields]="fieldsInformation" [model]="inforModel"></formly-form>
+      </div>
+    </form>
+  </p-fieldset>
+  <p-fieldset legend="Thông tin vị trí">
+    <form [formGroup]="form">
+      <formly-form [form]="form" [fields]="fields" [model]="radioInforModel">
+      </formly-form>
+    </form>
+    <!-- <p-button icon="pi pi-search"(click)="saveData()">Lưu</p-button> -->
+  </p-fieldset>
+</div>

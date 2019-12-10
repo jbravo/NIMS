@@ -1,0 +1,15 @@
+<div class="mb-2">
+  <label for="{{field.key}}"
+         [ngClass]="{'text-danger':field.formControl.touched &&  field.formControl.invalid}">{{to.label}}<span
+    *ngIf="to.required" style="color: red"> (*)</span></label>
+  <p-dropdown id="{{field.key}}" [options]="to.options" [formControl]="formControl" [formlyAttributes]="field"
+              [readonly]="to.readonly"
+              [placeholder]="to.placeholder" [showClear]="to.showClear" [required]="to.required"></p-dropdown>
+</div>
+<formly-validation-message #validationMessage
+                           [field]="field"
+                           [style.display]="'none'">
+</formly-validation-message>
+<!--<span *ngIf="field.formControl && field.formControl.touched &&  field.formControl.invalid && validationMessage.errorMessage" class="text-danger">-->
+<!--        <strong>{{ to.label }}</strong>: {{ validationMessage.errorMessage }}-->
+<!--</span>-->

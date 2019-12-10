@@ -1,0 +1,10 @@
+---
+- name: Create working directory if not exists
+  file:
+    mode: 0755
+    owner: "{{ansible_ssh_user}}"
+    group: "{{ansible_ssh_user}}"
+    state: "{{ item }}"
+    path: "{{WORKING_DIR}}"
+  with_items:
+    - directory

@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+  <form [formGroup]="formUpdate">
+    <div class="panel-heading">
+      <!-- <strong class="text-u-c" *ngIf="transferActivityId>0">
+          <i class="fa fa-th"></i>
+          &nbsp;{{'appparam.label.title.add' | translate}}
+      </strong>
+      <strong class="text-u-c" *ngIf="transferActivityId==0">
+          <i class="fa fa-th"></i>
+          &nbsp;{{'appparam.label.title.add' | translate}}
+      </strong> -->
+    </div>
+    <div class="panel-body padding-xl">
+      <!-- form fields row 1-->
+      <div class="ui-g">
+        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">
+          {{'appparam.label.mp' | translate}} <span class="text-danger">*</span>
+        </label>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+          <input type="text" formControlName="parCode" class="form-control"
+                 maxlength="100" #parCode>
+        </div>
+        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">
+          {{'appparam.label.tp' | translate}} <span class="text-danger">*</span>
+        </label>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+          <input type="text" formControlName="parName" class="form-control"
+                 maxlength="500" #parName>
+        </div>
+      </div>
+      <!-- form fields row 2-->
+      <div class="ui-g">
+        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">
+          {{'appparam.label.gtp' | translate}} <span class="text-danger">*</span>
+        </label>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+          <input type="text" formControlName="parValue" class="form-control"
+                 maxlength="100" #parValue>
+        </div>
+        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">
+          {{'appparam.label.lp' | translate}} <span class="text-danger">*</span>
+        </label>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+          <input type="text" formControlName="parType" class="form-control"
+                 maxlength="500" #parType>
+        </div>
+      </div>
+      <!-- form fields row 3-->
+
+      <div class="ui-g">
+        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">
+          {{'appparam.label.gc' | translate}} <span class="text-danger">*</span>
+        </label>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+          <input type="text" formControlName="description" class="form-control"
+                 maxlength="100" #description>
+        </div>
+        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">
+          {{'appparam.label.tcsx' | translate}} <span class="text-danger">*</span>
+        </label>
+        <div class="ui-g-12 ui-md-6 ui-lg-3">
+          <input type="text" formControlName="parOrder" class="form-control"
+                 maxlength="500" #parOrder>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer vt-area-button">
+      <button type="submit" (click)="save()" class="btn btn-sm btn-info">
+        <span [innerHTML]="'common.button.storage' | translate"></span>
+      </button>
+      <button type="submit" (click)="cancel()" class="btn btn-sm btn-info">
+        <span [innerHTML]="'common.label.cancel' | translate"></span>
+      </button>
+    </div>
+  </form>
+</div>

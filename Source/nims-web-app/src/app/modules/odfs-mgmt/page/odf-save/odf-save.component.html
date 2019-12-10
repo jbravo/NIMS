@@ -1,0 +1,210 @@
+<div class="content_wrapper">
+  <p-messages key="odfSave"></p-messages>
+  <p-messages key="odfSaveMessageSuccess"></p-messages>
+  <!-- {{formAdd.value | json}} <br> -->
+  <form [formGroup]="formAdd">
+    <p-toast key="br" position="bottom-right"></p-toast>
+    <div *ngIf="action != 'view'">
+      <!-- {{formAdd.value | json}} -->
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+          <!-- ma nha tram start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0" style="color: black">
+                {{'odf.stationCode' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control style="color: black" #autoCompleteStation [header]="headerStation"
+                    [control]="formControls['stationId']" [contentType]="station" [displayFieldType]="'station'"
+                    [type]="'station'" (onChange)="onChangeRowSelectStation($event)"
+                    (onClean)="onClearRowSelect('stationId')" (onSelect)="onSelectStation($event)"
+                    [inputStyleStation]="styleStation" [disabled]="action == 'edit'" (onBlurx)="onBlurStation()">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ma nha tram end-->
+
+          <!-- chi so odf start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0" style="color: black">
+                {{'odf.odfIndex' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <p-inputMask [styleClass]="styleOdfIndex" [(ngModel)]="odfCodeLast" pInputMask mask="99"
+                  formControlName="odfIndex" slotChar="" (onBlur)="onBlurOdfIndex($event)" [style]="styleEdit"
+                  [readonly]="action == 'edit'">
+                </p-inputMask>
+                <!-- <input [(ngModel)]="odfCodeLast" mask="99" class="input_form" formControlName="odfIndex"
+    (onBlur)="onBlurOdfIndex($event)" [readonly]="action == 'edit'"> -->
+              </div>
+            </div>
+          </div>
+          <!-- chi so odf end-->
+
+          <!-- ma odf start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'odf.Code' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input formControlName="odfCode" class="input_form" maxlength="200" readonly>
+              </div>
+            </div>
+          </div>
+          <!-- ma odf end-->
+
+          <!-- Don vi start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0"> {{'odf.deptName' | translate}} <span
+                  class="text-danger">*</span></label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteDept [header]="headerDept"
+                    [control]="formControls['deptId']" [contentType]="dept" [displayFieldType]="'dept'" [type]="'dept'"
+                    (onChange)="onChangeRowSelectDept($event)" (onClean)="onClearRowSelect('deptId')"
+                    [inputStyleDept]="styleDept">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Don vi end-->
+
+          <!-- Don vi start-->
+          <!-- <div class="ui-g-12 ui-md-12 ui-lg-8">
+    <div class="line_form ui-g ui-fluid">
+        <label class="ui-g-12 ui-md-2 name_label"> {{'odf.deptName' | translate}} <span
+                class="text-danger">*</span></label>
+        <div class="ui-g-12 ui-md-6">
+            <div class="input_more_form">
+                <autocomplete-search-control #autoCompleteDept [control]="formControls['deptId']"
+                    [contentType]="dept" [displayFieldType]="'dept'" [type]="'dept'"
+                    (onChange)="onChangeRowSelectDept($event)"
+                    (onClean)="onClearRowSelect('deptId')" [disabled]="action == 'edit'">
+                </autocomplete-search-control>
+            </div>
+        </div>
+    </div>
+</div> -->
+          <!-- Don vi end-->
+
+          <!-- loai ODF start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'odf.odfTypeCode' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [styleClass]="styleOdfType" [property]="f['odfTypeId']" [options]="odfTypeList"
+                  optionLabel="label" optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- loai ODF end-->
+
+          <!-- chu so huu start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'odf.ownerCode' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [styleClass]="styleOwner" [property]="f['ownerId']" [options]="ownerList"
+                  optionLabel="label" optionValue="value">
+                </select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- chu so huu end-->
+
+          <!-- hang san xuat start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'odf.vendor' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['vendorId']" [options]="vendorList" optionLabel="label"
+                  optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- hang san xuat end-->
+
+          <!-- ngay lap dat start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'odf.installationDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <!-- <p-calendar formControlName="installationDate" showIcon="true" (onInput)="onInput($event)"
+                  dateFormat="dd/mm/yy">
+                </p-calendar> -->
+                <p-calendar  formControlName="installationDate" dateFormat="dd/mm/yy"
+                  showIcon="true" showButtonBar="true" (onInput)="onInput($event)"
+                  (onBlur)="onBlurDateFilter($event)" (onClearClick)="onClearDatePicker($event)">
+                </p-calendar>
+                <!-- <a class="icon-clear-date" (click)="onClearDatePicker()"><i class="x_ico"></i></a> -->
+              </div>
+            </div>
+          </div>
+          <!-- ngay lap dat end-->
+
+          <!-- <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0"></div> -->
+          <!-- Ghi chu start-->
+          <div class="ui-g-12 ui-md-12 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-2 ui-lg-4 name_label pt-0">
+                {{'odf.note' | translate}}
+              </label>
+
+              <div class="ui-g-12 ui-md-10 ui-lg-8 name_content pt-0">
+                <textarea rows="5" (focus)="onNoteFocus()" (blur)="onNoteBlur()" cols="50" pInputTextarea
+                  formControlName="note" maxlength="500" [readonly]="action == 'view'"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ghi chu end-->
+      </div>
+      <div class="line_btn_form mt-0">
+        <div class="d-flex justify-content-end">
+          <button type="submit" (click)="onSubmit()" class="btn_form">
+            <i class="add_ico"></i>
+            <span [innerHTML]="'common.button.storage' | translate"></span>
+          </button>
+          <button type="button" (click)="onClosedTab()" class="btn_form02">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.label.cancel' | translate"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" styleClass="ui-toast-confirm"
+    [autoZIndex]="true" modal="true">
+    <ng-template let-message pTemplate="message">
+      <div style="text-align: center">
+        <h3>{{message.summary}}</h3>
+        <p>{{message.detail}}</p>
+      </div>
+      <div class="btn_modal_footer" style="text-align: center">
+        <a (click)="onConfirm(message.data)" class="btn_modal_action"
+          style="color: white">{{'common.label.yes' | translate}}</a>
+        <button (click)="onReject()" tabindex="0" class="btn_modal_cancel" style="color: #007CBB">
+          <span>{{'common.label.no' | translate}}</span>
+        </button>
+      </div>
+    </ng-template>
+  </p-toast>
+</div>
+
+<!-- <p-toast key="deleteOdfSuccess" position="bottom-right"></p-toast> -->

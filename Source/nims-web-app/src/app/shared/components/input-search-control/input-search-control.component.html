@@ -1,0 +1,16 @@
+<div class="position-relative">
+  <div [class.input-dv]="showBtn">
+    <input type="text" [ngClass]="isRequired ? 'required form-control': 'form-control'" #input
+           [readonly]="isReadonly"
+           [value]="value" (input)="changeValue($event)"
+           [attr.maxlength]="maxLength ? maxLength : 999"
+           [disabled]="isDisabled ? true: null"
+           [attr.placeholder]="placeholder"
+           (focus)="onFocusInputSearch($event)"
+           (blur)="onBlurInputSearch($event)"
+           style = "padding-right: 8%;">
+  </div>
+  <!--  <span class="search-btn" *ngIf="showBtn" (click)="blurInput()"></span>-->
+  <button class="btn_search" pTooltip="{{'search.lable' | translate}}" tooltipPosition="top" *ngIf="showBtn" (click)="blurInput()">
+    <span class="icon_search"></span></button>
+</div>

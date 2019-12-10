@@ -1,0 +1,166 @@
+<div class="p-3">
+  <h4>Quản lý đề xuất trạm</h4>
+  <p-panel>
+    <p-header>
+      <form [formGroup]="form">
+        <formly-form *ngIf="mSearch" [form]="form" [fields]="fields" [model]="suggestionSearchDTO"></formly-form>
+      </form>
+      <div *ngIf="!mSearch">
+        <div class="input-group col-12 col-md-4 col-sm-6" style="padding-left: 0;">
+          <input type="text" class="form-control" placeholder="Mã đề xuất" [(ngModel)]="suggestionSearchDTO.suggestCode"
+            style="height: unset;">
+          <div class="input-group-append">
+            <button style="background-color: #007CBB;" class="btn btn-secondary btn-sm" type="button"
+              (click)="searchEvent()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+          <!--<div class="input-group col-12 col-md-4 col-sm-6" style="padding-left: 0;">-->
+            <!--<input type="text"  class="" placeholder="Tìm kiếm theo mã đề xuất" [(ngModel)]="suggestionSearchDTO.suggestCode">-->
+            <!--<button (click)="searchEvent()" class="" tooltipPosition="top">-->
+            <!--<span class="icon_search">-->
+            <!--</span>-->
+            <!--</button>-->
+          <!--<div class="clearfix"></div>-->
+        <!--</div>-->
+        <p style="text-decoration: underline; font-style: italic; padding-top: 15px">
+          <a (click)="changeSearch()" style="color: #0d8ced">Tìm kiếm nâng cao</a>
+        </p>
+
+      </div>
+      <div class="row" *ngIf="mSearch">
+        <div class="col-md-12">
+          <div class="content-section implementation">
+            <div class="d-flex justify-content-end">
+              <div style="text-decoration: underline; font-style: italic">
+                <a class="p-2" style="text-decoration: underline; margin-right: 30px" (click)="changeSearch()"
+                  style="color: #0d8ced">Thu gọn tìm kiếm</a>
+                <!-- <p-button style="    background-color: #007CBB !important; color: #ffffff;" styleClass="btn-sm"
+                  icon="pi pi-search" label="Tìm kiếm" (click)="saveData()" type="button"></p-button> -->
+                <button style="background-color: #007CBB !important; color: #ffffff;border-radius: 5px;"
+                  class="btn btn-sm btn-primary " (click)="searchEvent()"><span>Tìm kiếm</span></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-header>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-section implementation">
+          <div class="d-flex justify-content-end">
+            <button class="btn_grid ml-2" pTooltip="Thêm mới" tooltipPosition="top" (click)="onAdd()"><i
+                class="add_ico"></i></button>
+            <button class="btn_grid ml-2" pTooltip="Xóa"  pButton (click)="showConfirm2()" tooltipPosition="top"><i
+                class="delete_ico"></i></button>
+            <button class="btn_grid ml-2" pTooltip="Import" tooltipPosition="top"><i
+                class="import_ico"></i></button>
+            <button class="btn_grid ml-2" pTooltip="Thêm mới" tooltipPosition="top"><i
+                class="add_file_ico"></i></button>
+            <div class="clearboth"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+    </div>
+    <div>
+
+      <p-table [columns]="columns" [value]="listData" [paginator]="true" [rows]="10" [(selection)]="selectedRow"
+        [autoLayout]="true" class="icon-sort">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th>STT</th>
+            <th>
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th>
+              Hành động
+            </th>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" style="color: #797979 !important;"
+                          ariaLabelDesc="Activate to sort in descending order"
+                          ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+              <!-- <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+              ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
+            </p-sortIcon>
+            <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"> -->
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-list let-columns="columns">
+          <tr>
+            <td></td>
+            <td>
+              <p-tableCheckbox [value]="list"></p-tableCheckbox>
+            </td>
+            <td>
+              <div class="">
+                <div ngbDropdown class="d-inline-block" container="body" placement="bottom-left">
+                  <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                    <i class="fa fa-list"></i>
+                  </button>
+                  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem class="btn btn-sm" (click)="onAdd()"><i class="fa fa-plus"></i> Thêm
+                      mới</button>
+                    <button ngbDropdownItem class="btn btn-sm" (click)="goToDetail(list)"><i class="fa fa-eye"></i>
+                      Xem</button>
+                    <button ngbDropdownItem class="btn btn-sm" (click)="goToEdit(list)"><i class="fa fa-edit" ></i> Sửa</button>
+                    <!-- <button *ngIf="list.suggestStatus===0" ngbDropdownItem class="btn btn-sm" (click)="onAccept(list)"><i class="fas fa-check-square"></i>
+                      BGĐ tỉnh phê duyệt thiết kế đề xuất</button> -->
+                  </div>
+                </div>
+                <!-- <p-menu appendTo="body" #i [popup]="true" [model]="tableBtns"></p-menu>
+                <button type="button" pButton icon="fa fa-fw fa-list" (click)="i.toggle($event)"></button> -->
+                <!-- <button href="#" class="btn_grid ml-2" pTooltip="Thêm mới" tooltipPosition="top" (click)="onAdd()"><i
+                    class="add_ico"></i></button>
+                <button href="#" class="btn_grid ml-2" pTooltip="Xem" tooltipPosition="top" (click)="onAdd()"><i
+                    class="_ico"></i></button>
+                <button href="#" class="btn_grid ml-2" pTooltip="Sửa" tooltipPosition="top" (click)="onAdd()"><i
+                    class="add_ico"></i></button> -->
+              </div>
+            </td>
+            <td *ngFor="let col of columns">
+              {{list[col.field]}}
+            </td>
+          </tr>
+          <!-- <tr></tr> -->
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr>
+            <td [attr.colspan]="columns.length + 3">
+              No records found
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-panel>
+
+</div>
+
+<!-- <p-dialog header="Phê duyệt đề xuất" [(visible)]="display" [modal]="true" [style]="{width: '350px', minWidth: '200px'}" [minY]="70"
+  [baseZIndex]="10000">
+  <p-header>
+  </p-header>
+  <h6 class="first">Mã nhà trạm</h6>
+  <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="width:100%; margin-bottom:10px">
+  <h6 class="first">Ghi chú</h6>
+  <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="property" style="width:100%;"></textarea>
+
+  <p-footer>
+    <button type="button" pButton (click)="onSet()" label="Phê duyệt"></button>
+    <button type="button" class="ui-button-danger" pButton (click)="onUnSet()" label="Từ chối" ></button>
+  </p-footer>
+<<<<<<< HEAD
+</p-dialog>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-messages [value]="msgs"></p-messages>
+=======
+</p-dialog> -->
+

@@ -1,0 +1,31 @@
+#map {
+  width: 100%;
+  min-width: 85vw;
+  min-height: 91vh;
+}
+
+.btn-save {
+  position: fixed;
+  top: 6.5vh;
+  right: 5px;
+  z-index: 999;
+  background-color: #fff !important;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0 !important;
+  width: 350px;
+  height: 91vh;
+  z-index: 999;
+  overflow-y: scroll;
+  padding: 12px;
+}
+
+p-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+

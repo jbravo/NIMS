@@ -1,0 +1,65 @@
+a, a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.upload-control {
+  display: block;
+}
+
+/*.upload-control:hover .upload-input,*/
+/*.upload-control:hover .upload-btn,*/
+/*.upload-control:focus .upload-input,*/
+/*.upload-control:focus .upload-btn {*/
+/*  border: 1px solid #ff2f00;*/
+/*}*/
+
+/*.upload-control:hover .upload-input,*/
+/*.upload-control:hover .upload-btn {*/
+/*  border: 1px solid #ff2f00;*/
+/*}*/
+
+.upload-control .upload-input,
+.upload-control .upload-btn {
+  /*border: 1px solid #258bf3;*/
+  /*border-radius: 4px;*/
+  padding: 5px;
+  min-width: 65px;
+}
+
+.upload-control input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.upload-control label {
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #b5b5b5;
+}
+
+.upload-control:hover .upload-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.upload-control .upload-input {
+  width: 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-control .upload-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #F2F2F2;
+}

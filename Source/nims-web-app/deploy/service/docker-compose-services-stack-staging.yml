@@ -1,0 +1,5 @@
+version: '3.2'
+
+services:
+  nims-web:
+    image: "${DOCKER_STAGING_PUSH_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/nims-web:${TAG}"

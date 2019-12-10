@@ -1,0 +1,16 @@
+---
+- name: Create staging heat-stack
+  hosts: local
+  gather_facts: false
+  roles:
+    - { role: heat-stack,
+        tags: create-staging-stack,
+        heat_stack_action: create-staging-stack }
+
+- name: Destroy staging heat-stack
+  hosts: local
+  gather_facts: false
+  roles:
+    - { role: heat-stack,
+        tags: destroy-staging-stack,
+        heat_stack_action: destroy-staging-stack }

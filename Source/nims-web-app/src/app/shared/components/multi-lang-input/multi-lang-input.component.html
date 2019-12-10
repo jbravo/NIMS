@@ -1,0 +1,15 @@
+<div class="ui-g">
+  <form id="langForm" [formGroup]="langForm">
+    <div class=ui-g *ngFor="let lang of langs">
+        <label class="ui-g-12 ui-md-4 control-label vt-align-left">{{lang.name}}</label>
+        <div class="ui-g-12 ui-md-8">
+            <input type="text" [formControlName]="lang.languageCode" class="form-control vt-form-control" />
+        </div>
+    </div>
+    <hr>
+    <div class="vt-area-button">
+      <button type="submit" (click)="save()" class="btn btn-sm btn-info" [innerHTML]="'common.button.save' | translate"></button>
+      <button type="button" (click)="close()" class="btn btn-sm btn-danger" [innerHTML]="'common.button.cancel' | translate"></button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,98 @@
+<div id="laneCodeModal" class="autocomplete-search-modal">
+  <div class="ui-g">
+    <div class="ui-g-12 search-content pt-0">
+      <form [formGroup]="form" *ngIf="form" autocomplete="off" novalidate>
+        <div class="content-section implementation">
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-7 py-0">
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-9 py-0">
+                  <div class="line_form ui-g ui-fluid">
+                    <label class="ui-g-3 name_label">
+                      {{'pillar.laneCode' | translate}}
+                    </label>
+                    <div class="ui-g-9 name_content">
+                      <input-search-control formControlName="laneCode" [focus]="firstFocus"
+                                            [isKeepFocus]="true"></input-search-control>
+                    </div>
+                  </div>
+                </div>
+                <div class="ui-g-3 ui-fluid py-0">
+                  <button type="button" (click)="onSearchData()" class=" btn_form"><i
+                    class="search_ico"></i><span>{{'common.button.search' | translate}}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div id="listArea" class="list_btn_grid">
+          <div class="panel panel-default">
+            <div class="panel-body panel-table">
+              <p-table #dataTable [columns]="selectedColumns"
+                       [value]="resultList.listData"
+                       [rows]="10"
+                       [totalRecords]="resultList.totalRecords"
+                       [responsive]="true"
+                       [paginator]="true"
+                       [scrollable]="true"
+                       scrollHeight="380px"
+                       [resizableColumns]="true"
+                       [rowsPerPageOptions]="[5,10,15,20,25,30]"
+                       selectionMode="single"
+                       [(selection)]="selectedData"
+                       (onRowSelect)="onRowSelect($event)"
+                       [lazy]="true"
+                       (onLazyLoad)="onLazyLoad($event)"
+                       [ngClass]="{'cell-text-pre-wrap': isCollapse}">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                        class="text-center" (contextmenu)="onLinkRightClickedHeader(col.field, $event)">
+                      {{col.header | translate}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th *ngFor="let col of columns" [ngSwitch]="col.typeFilter">
+                      <input *ngSwitchCase="'input'" pInputText type="text"
+                             (input)="onFilterDataTable($event.target.value, col.field)">
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                  <tr [pSelectableRow]="rowData" (dblclick)="onRowDblClick($event, rowData)">
+                    <td class="text-center size-2">{{index}}</td>
+                    <td *ngFor="let col of columns" [ngClass]="col.classField"
+                        (contextmenu)="onLinkRightClickedRow(rowData[col.field], $event)"
+                        [rightClickCopy]="rowData[col.field]">
+                      {{rowData[col.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                  <span
+                    *ngIf="dataTable?.totalRecords > 0">{{'pagination.record.from' | translate}} {{(dataTable?.first + 1) + '-' +
+                  ((dataTable?.first + dataTable?.rows) < dataTable?.totalRecords ? (dataTable?.first + dataTable?.rows) : dataTable?.totalRecords)}}
+                    {{'pagination.of' | translate}} {{dataTable?.totalRecords}} {{'pagination.record' | translate}}
+                  </span>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td [attr.colspan]="columns.length">
+                      {{'common.label.noData'|translate}}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<p-contextMenu #contextMenu [model]="items" appendTo="body"></p-contextMenu>

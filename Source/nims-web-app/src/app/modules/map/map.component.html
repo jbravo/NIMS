@@ -1,0 +1,71 @@
+<div class="sidebar" [@changeSide]="isChange?'default':'colspan'" [@hiddenSide]="isHidden?'hidden':'show' ">
+  <p-button icon="pi pi-times" iconPos="left" styleClass=" btn-close-side"
+            (onClick)="handleClickCloseSide()"></p-button>
+  <ng-template mapSidebar [componentName]="mapItem" [config]="mapItemConfig"></ng-template>
+</div>
+<div id="map" class="map" (contextmenu)="modifyContexMenuMap($event)">
+
+</div>
+
+<div *ngIf="isShowContextMenu">
+  <p-contextMenu [global]="true" [model]="mapContextMenuItem" styleClass="map-contextmenu"></p-contextMenu>
+</div>
+
+<button *ngIf="isShowBtnSave" (click)="stopEditing($event)" class="btn_grid" pTooltip="Save" tooltipPosition="top"
+        style="position: fixed;top: 45px;right: 5px;background-color: #ffffff"><i class="copy_ico"></i></button>
+<div class="tool_bar" [@toggle]="isShowHideToolBar?'show-tool-bar':'hide-tool-bar'">
+  <div>
+    <p-menu #menu [popup]="true" [model]="items" appendTo="body"></p-menu>
+    <p-menu #set [popup]="true" [model]="setting" appendTo="body"></p-menu>
+  </div>
+  <button class="btn_action" style="margin-left: 20px" pTooltip="Chi tiết" tooltipPosition="top"
+          (click)="menu.toggle($event)"><i class="add_map"></i></button>
+  <button class="btn_action" style="margin-left: 20px" pTooltip="Chi tiết" tooltipPosition="top"
+          (click)="set.toggle($event)"><i class="setting_map"></i></button>
+</div>
+<button *ngIf="isShowHideToolBar" (click)="isShowHideToolBar=false" title="Ẩn toolbar công cụ"
+        class="btn-play-arrow d-flex justify-content-center"><i class="play-arrow"></i></button>
+<button *ngIf="!isShowHideToolBar" (click)="isShowHideToolBar=true" tile="Hiện toolbar công cụ"
+        class="btn-play-arrow btn-hide-tool-bar d-flex justify-content-center"><i class="play-arrow rotate-180"></i>
+</button>
+
+<div class="gmap-box-left" [@toggle]="isShowHideSearchBar?'hide':'show'">
+  <div class="box_search_gmap">
+    <input class="input_search_gmap" pinputtext="" placeholder="Nhập nội dung" (input)="valueChange($event)" type="text"
+           ng-reflect-type="text" (focus)="onFocusInputSearch($event)" (blur)="onBlurInputSearch($event)">
+    <a class="btn_search_gmap"><i class="icon_search"></i></a>
+    <a class="ghim_gmap"><i class="ghim_ico"></i></a>
+    <button *ngIf="!isShowHideSearchBar" pTooltip="Thu hẹp bảng điều khiển" class="collapse_search"
+            (click)="isShowHideSearchBar=true"><i class="arr_gmap"></i></button>
+    <button *ngIf="isShowHideSearchBar" pTooltip="Mở rộng bảng điều khiển" class="collapse_search"
+            (click)="isShowHideSearchBar=false"><i class="show_search_gmap"></i></button>
+  </div>
+  <list-view-map [items]="resultData"></list-view-map>
+
+  <div class="search_gmap_icon" *ngIf="isShowSearchGmapIcon">
+    <h3>Tìm kiếm khu vực lân cận</h3>
+    <div class="list_icon_gmap">
+      <div class="header_icon_map">
+        <a class="btn_icon_map" (click)="searchStation()">
+          <div class="box_icon_map" style="background-color: chocolate"><i class="tram_ico"></i></div>
+          <p>Nhà trạm</p>
+        </a>
+        <a class="btn_icon_map" (click)="searchCables()">
+          <div class="box_icon_map" style="background-color: crimson"><i class="tram_ico"></i></div>
+          <p>Cáp</p>
+        </a>
+        <!--<a href="#" class="btn_icon_map">-->
+        <!--<div class="box_icon_map" style="background-color: darkgreen"><i class="tram_ico"></i></div>-->
+        <!--<p>Nhà trạm</p>-->
+        <!--</a>-->
+      </div>
+      <div class="collapse_icon">
+        <a href="#">Mở rộng tìm kiếm</a>
+      </div>
+    </div>
+    <!--<div class="exit_gmap_icon"><i class="exit_tab"></i></div>-->
+  </div>
+</div>
+
+
+

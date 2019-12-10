@@ -1,0 +1,162 @@
+<div class="content_wrapper">
+  <p-messages></p-messages>
+  <form [formGroup]="formConfig">
+    <div class="line_btn_form">
+      <button type="submit" class="btn_form" (click)="save()">
+        <i class="add_ico"></i>
+        <span [innerHTML]="'common.button.storage' | translate"></span>
+      </button>
+      <button type="button" class="btn_form02" (click)="closePopup()">
+        <i class="exit_ico"></i>
+        <span [innerHTML]="'common.label.cancel' | translate"></span>
+      </button>
+    </div>
+    <div class="content-section implementation">
+      <div class="ui-g ui-fluid">
+        <!-- Vi do start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'map.config.latitude' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+              <input pInputText type="text" formControlName="lat" class="input_form">
+            </div>
+          </div>
+        </div>
+
+        <!-- kinh do start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'map.config.longitude' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+              <input pInputText type="text" formControlName="lng" class="input_form">
+            </div>
+          </div>
+        </div>
+
+        <!-- Loai cau hinh start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'map.configType' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+              <p-dropdown [options]="configTypes" optionLabel="label" (onChange)="changeSelected($event)"></p-dropdown>
+              <!--<select-filter [property]="f['configType']" [options]="configTypes" optionLabel="label"-->
+              <!--optionValue="value"></select-filter>-->
+            </div>
+          </div>
+        </div>
+
+        <!-- Muc start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'map.config.zoomType' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+              <select-filter [property]="f['zoom']" [options]="zoomTypes" optionLabel="label"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kieu ban do start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'map.type' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+              <select-filter [property]="f['mapType']" [options]="mapTypes" optionLabel="label"
+                             optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="commonConfig == 'common'">
+          <!-- Danh sách đối tượng hiển thị-->
+          <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-12">
+              <b>{{'map.show.listObject' | translate}}</b>
+            </div>
+            <div class="ui-g-6" *ngFor="let checkBox of listObjectCheckBoxes">
+              <p-checkbox  [value]="checkBox.name" [(ngModel)]="selectedNames"  [ngModelOptions]="{standalone: true}" label="{{ checkBox.label | translate }}"></p-checkbox>
+            </div>
+          </div>
+
+          <!-- Danh sách lớp hiển thị-->
+          <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-12">
+              <b>{{'map.show.class' | translate}}</b>
+            </div>
+            <div class="ui-g-6" *ngFor="let checkBox of listClassCheckBoxes">
+              <p-checkbox [value]="checkBox.name" [(ngModel)]="selectedNames"  [ngModelOptions]="{standalone: true}" label="{{ checkBox.label | translate }}"></p-checkbox>
+            </div>
+          </div>
+
+          <!-- Danh sách đối tượng quang ngoại vi-->
+          <div class="ui-g-12 ui-g-nopad">
+            <div class="ui-g-12">
+              <b>{{'map.show.objOutdoor' | translate}}</b>
+            </div>
+            <div class="ui-g-6" *ngFor="let checkBox of listObjOutdoorCheckBoxes">
+              <p-checkbox [value]="checkBox.name" [(ngModel)]="selectedNames"  [ngModelOptions]="{standalone: true}" label="{{ checkBox.label | translate }}"></p-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="commonConfig == 'object'">
+          <p-panel header="{{'map.config.object' | translate}}" [toggleable]="true">
+            <div id="listArea" class="list_btn_grid">
+              <div class="panel-body panel-table">
+                <p-table [value]="groupObjects" [(selection)]="selectedRecord">
+                  <ng-template pTemplate="caption">
+                    <button type="button" class="btn_form" (click)="showDiaLog()">
+                      <i class="add_ico"></i>
+                      <span [innerHTML]="'common.label.add' | translate"></span>
+                    </button>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th class="text-center size-12">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                      </th>
+                      <th class="text-center size-12">{{'map.config.index' | translate}}</th>
+                      <th class="text-center size-12">{{'map.config.action' | translate}}</th>
+                      <th class="text-center size-12">{{'map.config.groupObj' | translate}}</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-index="rowIndex+1">
+                    <tr [pSelectableRow]="rowData">
+                      <td class="text-center size-12">
+                        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                      </td>
+                      <td>{{index}}</td>
+                      <td class="text-center size-12">
+                        <a class="btn_action" pTooltip="{{'common.label.edit' | translate}}" tooltipPosition="top">
+                          <i class="repair_ico"></i>
+                        </a>
+                        <a class="btn_action" pTooltip="{{'common.button.delete' | translate}}" tooltipPosition="top"
+                           (click)="delete(rowData)">
+                          <i class="remove_ico"></i>
+                        </a>
+                      </td>
+                      <td class="text-center size-12"></td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </p-panel>
+
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+</div>

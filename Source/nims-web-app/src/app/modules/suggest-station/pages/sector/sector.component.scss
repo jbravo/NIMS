@@ -1,0 +1,22 @@
+::ng-deep {
+  .ui-fieldset-legend-text {
+    font-size: 20px;
+  }
+
+  .ui-fieldset-legend {
+    width: auto;
+  }
+
+  .ui-fieldset.ui-widget {
+    background: transparent;
+  }
+
+  //.ui-widget{
+  //  background-color: transparent !important;
+  //}
+
+  .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}

@@ -1,0 +1,45 @@
+<div class="content_wrapper">
+  <p-messages></p-messages>
+  <form [formGroup]="formLocate" (ngSubmit)="locateFunction()">
+    <div class="content-section implementation">
+      <div class="ui-g ui-fluid">
+        <!-- Kinh do start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'locate.longitude' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+              <input pInputText type="text" formControlName="longitude" class="input_form">
+            </div>
+          </div>
+        </div>
+        <!-- Kinh do end-->
+
+        <!-- Vi do start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'locate.latitude' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8 name_content">
+                <input pInputText type="text" formControlName="latitude" class="input_form">
+            </div>
+          </div>
+        </div>
+        <!-- Vi do end-->
+      </div>
+
+      <div class="line_btn_form">
+        <button type="submit" (click)="locateFunction()" class="btn_form">
+          <i class="add_ico"></i>
+          <span [innerHTML]="'locate.title' | translate"></span>
+        </button>
+        <button type="button" class="btn_form02" (click)="closePopupLeft()">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'locate.cancel' | translate"></span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

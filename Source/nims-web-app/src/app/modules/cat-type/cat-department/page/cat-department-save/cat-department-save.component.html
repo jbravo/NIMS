@@ -1,0 +1,97 @@
+<div class="content_wrapper">
+  <p-messages></p-messages>
+  <form [formGroup]="formAdd">
+    <div class="content-section implementation">
+      <div class="ui-g ui-fluid">
+
+        <!-- Department Code -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'cat.department.code' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <input type="text" pInputText placeholder="{{'cat.department.code' | translate}}" class="input_form"
+                formControlName="deptCode" [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Quoc gia -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'common.label.country' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <select-filter [property]="f['tenantId']" [options]="tenantList" optionLabel="label"
+                [disabled]="action == 'view'" optionValue="value"></select-filter>
+            </div>
+          </div>
+        </div>
+
+        <!-- Don vi Cha start-->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'cat.department.parentName' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <div class="input_more_form">
+                <p-autoComplete [suggestions]="parentDepts" field="label" (completeMethod)="getDept($event)" [size]="30"
+                  [minLength]="1" formControlName="parentId" [readonly]="action == 'view'" placeholder="{{'cat.department.parentName' | translate}}">
+                </p-autoComplete>
+                <a class="btn_popup_list"><i class="icon_search"></i></a>
+                <a class="exit_popup_list"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Don vi end-->
+
+
+
+        <!-- Department Name -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'cat.department.name' | translate}} <span class="text-danger">*</span>
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <input type="text" pInputText placeholder="{{'cat.department.name' | translate}}" class="input_form"
+                formControlName="deptName" [readonly]="action == 'view'">
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Note -->
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label">
+              {{'sleeve.type.note' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-8">
+              <!-- <input type="text" pInputText placeholder="{{'sleeve.type.note' | translate}}" class="input_form"
+                formControlName="note" [readonly]="action == 'view'"> -->
+              <textarea rows="5" cols="50" pInputTextarea formControlName="note" maxlength="500"
+                placeholder="{{'sleeve.type.note' | translate}}" [readonly]="action == 'view'"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="line_btn_form">
+      <button type="submit" (click)="onSubmit()" class="btn_form" *ngIf = "hide">
+        <i class="add_ico"></i>
+        <span [innerHTML]="'common.button.storage' | translate"></span>
+      </button>
+      <button type="button" (click)="onClose()" class="btn_form02">
+        <i class="exit_ico"></i>
+        <span [innerHTML]="'common.label.cancel' | translate"></span>
+      </button>
+    </div>
+  </form>
+</div>

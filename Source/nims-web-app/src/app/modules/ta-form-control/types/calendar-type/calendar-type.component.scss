@@ -1,0 +1,19 @@
+::ng-deep{
+  .ui-datepicker-trigger.ui-calendar-button{
+  }
+  p-calendar{
+    input{
+      width: 100%;
+    }
+  }
+  p-calendar.ng-invalid.ng-touched {
+    input {
+      border: 1px solid #a80000;
+    }
+    .ui-datepicker-trigger.ui-calendar-button{
+      border-top: 1px solid #a80000;
+      border-right: 1px solid #a80000;
+      border-bottom: 1px solid #a80000;
+    }
+  }
+}

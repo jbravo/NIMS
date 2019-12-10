@@ -1,0 +1,186 @@
+<div class="content_wrapper">
+  <div style="width: 300px; float: left;">
+      <div id="tree">
+          <p-tree [value]="root" (onNodeExpand)="onNodeExpand($event)" selectionMode="single" [(selection)]="selectedNodes"
+            (onNodeSelect)="onNodeSelect($event)" [style]="{'min-width':'300px','overflow':'auto'}">
+            <ng-template let-node pTemplate="default">
+              {{node.data.deptName}}
+            </ng-template>
+          </p-tree>
+        </div>
+  </div>
+  <div style="float: left; width: calc(100% - 308px); margin-left: 5px; border: 1px solid #c7c7c7">
+      <div id="searchArea" style="margin: 5px">
+          <form id="formSearch" [formGroup]="formSearch">
+      
+            <div class="content-section implementation" *ngIf="advanceSearch">
+              <div class="ui-g ui-fluid line_form">
+      
+                <!-- don vi -->
+                <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+                  {{'cat.department.code' | translate}}
+                </label>
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                  <div class="input_more_form">
+                    <p-autoComplete [suggestions]="filteredDept" field="label" (completeMethod)="filteredDeptFunc($event)"
+                      formControlName="deptCode" [size]="30" [size]="30" [minLength]="1">
+                    </p-autoComplete>
+                    <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>
+                    <a href="#" class="exit_popup_list"><i class="x_ico"></i></a>
+                  </div>
+                </div>
+      
+                <label class="ui-g-12 ui-md-6 ui-lg-1 name_label">
+                  {{'cat.department.name' | translate}}
+                </label>
+                <div class="ui-g-12 ui-md-6 ui-lg-3">
+                  <div class="input_more_form">
+                    <p-autoComplete [suggestions]="filteredDeptName" field="label"
+                      (completeMethod)="filteredDeptNameFunc($event)" formControlName="deptName" [size]="30" [size]="30"
+                      [minLength]="1">
+                    </p-autoComplete>
+                    <a href="#" class="btn_popup_list"><i class="icon_search"></i></a>
+                    <a href="#" class="exit_popup_list"><i class="x_ico"></i></a>
+                  </div>
+                </div>
+      
+      
+              </div>
+              <div class="line_btn_form">
+                <button type="submit" (click)="searchFunc()" class=" btn_form"><i
+                    class="search_ico"></i><span>{{'common.button.search' | translate}}</span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      
+        <div id="listArea" style="margin: 5px" class="list_btn_grid">
+          <div class="panel panel-default">
+            <div class="panel-body panel-table">
+              <p-table #dt [columns]="cols" [value]="resultList.data" [rows]="10" [totalRecords]="resultList.totalRecords"
+                [responsive]="true" [paginator]="true" [(selection)]="selectedResult" [scrollable]="true"
+                [resizableColumns]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]" (onRowSelect)="onRowSelect($event)"
+                [lazy]="true" (onLazyLoad)="onLazyLoad($event)" (sortFunction)="customSort($event)" [customSort]="true">
+      
+                <ng-template pTemplate="caption">
+                  <button href="#" class="btn_grid" pTooltip="Xóa" tooltipPosition="top" (click)=deleteList()><i
+                      class="delete_ico"></i></button>
+                  <button href="#" class="btn_grid" pTooltip="Export" (click)="dt.exportCSV()" tooltipPosition="top"><i
+                      class="export_excel_ico"></i></button>
+                  <button href="#" class="btn_grid" pTooltip="Import" tooltipPosition="top"><i
+                      class="import_ico"></i></button>
+                  <button href="#" class="btn_grid" pTooltip="Thêm mới" tooltipPosition="top"><i class="add_ico"
+                      (click)="saveOrEdit()"></i></button>
+                  <div class="clearboth"></div>
+      
+                </ng-template>
+                <ng-template pTemplate="colgroup" let-columns>
+                  <colgroup>
+                    <col style="width:3rem">
+                    <col style="width:10rem">
+                    <col style="width:3rem">
+                    <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+                  </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+      
+                    <th translate class="text-center size-2">common.table.index</th>
+                    <th translate class="text-center size-6">odf.action</th>
+                    <th class="text-center size-2">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader">
+                      {{col.header | translate}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+      
+                  </tr>
+                  <tr>
+                    <th class="text-center size-2"></th>
+                    <th class="text-center size-6"></th>
+                    <th class="text-center size-2"></th>
+                    <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                      <input *ngSwitchCase="'deptCode'" pInputText type="text" (input)="filterDeptCode($event.target.value)">
+                      <input *ngSwitchCase="'deptName'" pInputText type="text" (input)="filterDeptCode($event.target.value)">
+      
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                  <tr>
+                    <td class="text-center size-2">{{index}}</td>
+                    <td class="text-center size-6">
+                      <a class="btn_action" pTooltip="Chi tiết" tooltipPosition="top"
+                        (click)="saveOrEdit(rowData.deptId, 'view')">
+                        <i class="more_ico"></i></a>
+                      <a class="btn_action" pTooltip="Sửa" tooltipPosition="top" (click)="saveOrEdit(rowData.deptId, 'edit')">
+                        <i class="repair_ico"></i></a>
+                      <a class="btn_action" pTooltip="Xóa" tooltipPosition="top" (click)=delete(rowData)>
+                        <i class="remove_ico"></i></a>
+                      <a class="btn_action" pTooltip="Thêm file" tooltipPosition="top">
+                        <i class="attact_ico"></i></a>
+                    </td>
+                    <td class="text-center size-2">
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns" [ngClass]="col.classField" [ngSwitch]="col.field">
+                      <!-- <p *ngSwitchCase="'deptCode'">{{rowData[col.field]}}</p>
+                              <p *ngSwitchCase="'deptName'">{{rowData[col.field]}}</p> -->
+                      <p *ngSwitchCase="'parentId'">{{rowData[col.field]}}</p>
+                      <p *ngSwitchCase="'catTenants'">{{rowData[col.field].tenantName}}</p>
+                      <p *ngSwitchCase="'createTime'">{{rowData[col.field] | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+                      <p *ngSwitchCase="'updateTime'">{{rowData[col.field] | date: 'dd/MM/yyyy hh:mm:ss'}}</p>
+                      <p *ngSwitchDefault>{{rowData[col.field]}}</p>
+      
+                    </td>
+                  </tr>
+                </ng-template>
+      
+                <ng-template pTemplate="summary">
+                  <span *ngIf="last > 0">{{'pagination.record.from' | translate}}
+                    {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}
+                    {{'pagination.of' | translate}} {{dt?.totalRecords}}
+                    {{'pagination.record' | translate}}
+                  </span>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+                  <tr>
+                    <td [attr.colspan]="8">
+                      {{'common.label.noData'|translate}}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+      
+          <p-dialog #cd [style]="{width: '300px'}" [transitionOptions]="'300ms'" [(visible)]="displayDel">
+            <div style="overflow: hidden">
+              <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{'cat.department.action.delete' | translate}}</h3>
+                <p>{{'common.message.confirm.delete' | translate}}</p>
+                <p>Có {{deleteObj.length}} bản ghi</p>
+              </div>
+              <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                  <button type="button" pButton (click)="onConfirm()"
+                    class=" btn_form"><span>{{'common.label.yes' | translate}}</span></button>
+                </div>
+                <div class="ui-g-6">
+                  <button type="button" pButton (click)="onReject()"
+                    class=" btn_form"><span>{{'common.label.no' | translate}}</span></button>
+                </div>
+              </div>
+            </div>
+          </p-dialog>
+      
+          <p-toast [style]="{marginTop: '80px'}"></p-toast>
+        </div>
+  </div>
+
+  
+  
+
+</div>

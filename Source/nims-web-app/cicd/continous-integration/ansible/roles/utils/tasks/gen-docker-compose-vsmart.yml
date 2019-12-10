@@ -1,0 +1,6 @@
+---
+- name: Generate docker-compose file for staging
+  template:
+    src: "docker-compose-vsmart.yml.j2"
+    dest: "{{CURRENT_JENKINS_LOCAL_DIR}}/../../../deploy/docker-compose-vsmart.yml"
+    mode: 0644

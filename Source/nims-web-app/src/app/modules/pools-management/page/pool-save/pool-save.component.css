@@ -1,0 +1,7 @@
+.invalid-control-longLat {
+  border-color: #dc3545 !important;
+}
+
+.invalid-control-longLat:focus {
+  outline: none;
+}

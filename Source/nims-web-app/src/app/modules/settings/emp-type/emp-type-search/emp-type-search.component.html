@@ -1,0 +1,190 @@
+<div id="searchPage">
+    <div id="searchArea">
+        <div class="panel panel-default">
+            <form id="formSearch" [formGroup]="formSearch">
+                <div class="panel-heading">
+                    <strong class="text-u-c">
+                        <i class="fa fa-th"></i>&nbsp;{{'common.label.search_form' | translate}}
+                    </strong>
+                </div>
+                <div class="panel-body padding-xl">
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">{{'app.empType.code' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" name="code" class="form-control" formControlName="code" />
+                            <app-control-messages [control]="f['code']"></app-control-messages>
+                        </div>
+                        <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right">{{'app.empType.name' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" name="name" class="form-control" formControlName="name" />
+                            <app-control-messages [control]="f['name']"></app-control-messages>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">{{'app.empType.isUsed' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <label class="i-switch bg-info m-t-xs m-r">
+                            <input type="checkbox" name="isUsed" [value]="1" formControlName="isUsed" />
+                            <i></i>
+                        </label>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">{{'app.empType.hasSoldierInfo' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <label class="i-switch bg-info m-t-xs m-r">
+                            <input type="checkbox" name="hasSoldierInfo" [value]="1" formControlName="hasSoldierInfo" />
+                            <i></i>
+                        </label>
+                        </div>
+                        <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right">{{'app.empType.hasLabourContractInfo' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <label class="i-switch bg-info m-t-xs m-r">
+                            <input type="checkbox" name="hasLabourContractInfo" [value]="1" formControlName="hasLabourContractInfo" />
+                            <i></i>
+                        </label>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                      <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">Chọn đơn vị</label>
+                      <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <org-selector
+                          [property]="f['organizationId']"
+                          operationKey="action.view"
+                          adResourceKey="resource.empType"
+                        ></org-selector>
+                      </div>
+                      <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right">Chọn nhân viên</label>
+                      <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <data-picker
+                          [property]="f['employeeId']"
+                          systemCode="emp"
+                          operationKey="action.view"
+                          adResourceKey="resource.employee"
+                          objectBO="EmployeeBO"
+                          codeField="employeeCode"
+                          nameField="fullName"
+                          selectField="employeeId"
+                        ></data-picker>
+                      </div>
+                    </div>
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">Từ ngày</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <date-picker
+                              [property]="f['startDate']"
+                              [onChange]="onChangeDate"
+                            >
+                            </date-picker>
+                        </div>
+                        <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right">Đến ngày</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                          <p-dropdown
+                            [options]="resultList.data"
+                            formControlName="empTypeId"
+                            optionLabel="name"
+                            dataKey="empTypeId"
+                            (onChange)="onChange($event)"
+                            >
+                          </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer vt-area-button">
+                    <button type="submit" (click)="processSearch($event); table.reset();" class="btn btn-sm btn-info">
+                      <span [innerHTML]="'common.button.search' | translate"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="listArea">
+        <div class="panel panel-default">
+            <div class="panel-heading vt-relative">
+                <strong class="text-u-c">
+                    <i class="fa fa-th"></i>&nbsp;{{'app.empType.listTitle' | translate}}
+                </strong>
+                <div class="vt-absolute vt-shotcut-button-in-heading">
+                  <have-permission actionCode="action.insert" resourceCode="resource.empType">
+                    <!-- <button type="button" (click)="prepareSaveOrUpdate()" class="btn btn-sm btn-info"><i class="fa fa-plus"></i> Thêm mới</button> -->
+                  </have-permission>
+                </div>
+            </div>
+            <div class="panel-body panel-table">
+                <p-table #table [value]="resultList.data" [paginator]="true" (onLazyLoad)="processSearch($event)"
+                    [scrollable]="true"
+                    [lazy]="true" [rows]="10" [totalRecords]="resultList.recordsTotal"
+                    tableStyleClass="table table-wrapper table-hover table-striped b-t b-b">
+                    <ng-template pTemplate="colgroup" let-columns>
+                      <colgroup>
+                          <col class="size-1">
+                          <col class="size-10">
+                          <col class="size-12">
+                          <col class="size-8">
+                          <col class="size-8">
+                          <col class="size-11">
+                          <col class="size-1">
+                          <col class="size-1">
+                      </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>STT</th>
+                            <th [pSortableColumn]="'code'">
+                              {{'app.empType.code' | translate}}
+                              <p-sortIcon [field]="'code'"></p-sortIcon>
+                            </th>
+                            <th [pSortableColumn]="'name'">
+                              {{'app.empType.name' | translate}}
+                              <p-sortIcon [field]="'name'"></p-sortIcon>
+                            </th>
+                            <th [pSortableColumn]="'isUsed'">
+                              {{'app.empType.isUsed' | translate}}
+                              <p-sortIcon [field]="'isUsed'"></p-sortIcon>
+                            </th>
+                            <th [pSortableColumn]="'hasSoldierInfo'">
+                              {{'app.empType.hasSoldierInfo' | translate}}
+                              <p-sortIcon [field]="'hasSoldierInfo'"></p-sortIcon>
+                            </th>
+                            <th [pSortableColumn]="'hasLabourContractInfo'">
+                              {{'app.empType.hasLabourContractInfo' | translate}}
+                              <p-sortIcon [field]="'hasLabourContractInfo'"></p-sortIcon>
+                            </th>
+                            <th>
+                              {{'common.button.table.hEdit' | translate}}
+                            </th>
+                            <th class="size-1">
+                              {{'common.button.table.hDelete' | translate}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item let-index="rowIndex+1">
+                        <tr>
+                            <td class="vt-align-center">{{index}}</td>
+                            <td class="vt-align-center">{{item.code}}</td>
+                            <td>{{item.name}}</td>
+                            <td class="vt-align-center">
+                              <i *ngIf="item.isUsed==1" class="fas fa-check table-icon color-info"></i>
+                              <i *ngIf="item.isUsed==0" class="fa fa-times table-icon color-warning"></i>
+                            </td>
+                            <td class="vt-align-center">
+                              <i *ngIf="item.hasSoldierInfo==1" class="fas fa-check table-icon color-info"></i>
+                              <i *ngIf="item.hasSoldierInfo==0" class="fa fa-times table-icon color-warning"></i>
+                            </td>
+                            <td class="vt-align-center">
+                              <i *ngIf="item.hasLabourContractInfo==1" class="fas fa-check table-icon color-info"></i>
+                              <i *ngIf="item.hasLabourContractInfo==0" class="fa fa-times table-icon color-warning"></i>
+                            </td>
+                            <td class="vt-align-center">
+                              <a class="btn-table edit" (click)="prepareSaveOrUpdate(item)" title="{{'common.button.table.hEdit' | translate}}" [innerHTML]="'common.icon.update' | translate"></a>
+                            </td>
+                            <td class="vt-align-center">
+                              <a class="btn-table delete" (click)="processDelete(item)" title="{{'common.button.table.hDelete' | translate}}" [innerHTML]="'common.icon.delete' | translate"></a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

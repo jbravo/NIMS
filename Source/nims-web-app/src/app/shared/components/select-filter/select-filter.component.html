@@ -1,0 +1,14 @@
+<p-dropdown
+  #dd
+  [options]="listData"
+  [(ngModel)]="selectedValue"
+  [filter]="filter ? true : false"
+  [placeholder]="placeHolder | translate"
+  (ngModelChange)="selectedChange()"
+  [showClear]="checkShowClear"
+  [disabled]="disabled ? true : false"
+  [emptyFilterMessage] ="'common.label.noData' | translate"
+  resetFilterOnHide="true"
+  [styleClass]="styleClass"
+  >
+</p-dropdown>

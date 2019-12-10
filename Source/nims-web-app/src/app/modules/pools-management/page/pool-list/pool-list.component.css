@@ -1,0 +1,9 @@
+.selectedDropFilter {
+    vertical-align:middle; margin-left: .5em
+}
+.listItemDropFilter{
+    position: relative;height: 25px;
+}
+.listItemDropFilter .item{
+    font-size:14px;margin-top:4px
+}

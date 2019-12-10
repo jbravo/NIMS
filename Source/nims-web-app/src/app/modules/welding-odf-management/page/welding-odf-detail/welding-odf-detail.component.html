@@ -1,0 +1,99 @@
+<div class="content_wrapper" (keydown)="enterToOpenUpdateTab($event)" (keyup)="handleTab($event)">
+    <div class="content-section implementation">
+      <label class="viewTitle-label">
+        <h3>{{'welding.odf.info.label' | translate}}</h3>
+      </label>
+      <div class="ui-g uiFluid">
+        <!-- ma ODF -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.sourceCode'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.odfCode }}</label>
+          </div>
+        </div>
+
+        <!-- Coupler -->
+        <div class="ui-g-12 ui-md-6">
+          <div class="line_form ui-g uiFluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.sourceCoupler' | translate}} : </label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.couplerNo}}</label>
+          </div>
+        </div>
+
+        <!-- Cable -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.cableCode'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.cableCode }}</label>
+          </div>
+        </div>
+        <!-- Line -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.lineNo'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.lineNo }}</label>
+          </div>
+        </div>
+        <!-- Ma ODF dau nhay -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.destCode'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.destOdfCode }}</label>
+          </div>
+        </div>
+        <!-- Coupler dau nhay -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.destCoupler'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.destCouplerNo }}</label>
+          </div>
+        </div>
+        <!-- nguoi han -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.employee'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.createUser }}</label>
+          </div>
+        </div>
+        <!-- ngay han -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.date'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.createDate }}</label>
+          </div>
+        </div>
+        <!-- suy hao -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.attenuation'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.attenuation }}</label>
+          </div>
+        </div>
+        <!-- loai han/dau noi -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.type'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.odfConnectType }}</label>
+          </div>
+        </div>
+        <!-- ghi chu -->
+        <div class="ui-g-12 ui-md-6 pt-0">
+          <div class="line_form ui-g ui-fluid">
+            <label class="ui-g-12 ui-md-4 name_label text-right pt-0">{{'weldingOdf.note'| translate}}:</label>
+            <label class="ui-g-12 ui-md-8 name_label pt-0 text-left">{{item.note }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="line-inForm-btn"></div>
+    <div class="line_btn_form">
+      <button type="button" (click)="onClosed()" class="btn_form02" Tabstop="true">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'common.button.close' | translate"></span>
+      </button>
+      <button type="button" (click)="updateTab(item)" tabindex="0" autofocus class="btn_form">
+          <i class="edit_ico"></i>
+          <span [innerHTML]="'common.label.update' | translate"></span>
+      </button>
+    </div>
+  </div>

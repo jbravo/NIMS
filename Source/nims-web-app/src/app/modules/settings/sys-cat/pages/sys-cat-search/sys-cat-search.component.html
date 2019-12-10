@@ -1,0 +1,82 @@
+<div class="panel panel-default">
+    <form id="formSearch" [formGroup]="formSearch">
+        <div class="panel-heading">
+            <strong class="text-u-c">
+                <i class="fa fa-th"></i>
+                <span translate> common.label.search_form</span>
+            </strong>
+        </div>
+        <div class="panel-body padding-xl">
+          <div class="ui-g">
+            <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right" translate> app.sys_cat.code</label>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <input type="text" name="code" class="form-control" formControlName="code" maxlength="50"/>
+              <app-control-messages [control]="f['code']"></app-control-messages>
+            </div>
+            <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right" translate> app.sys_cat.name</label>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+              <input type="text" name="name" class="form-control" formControlName="name" maxlength="500"/>
+              <app-control-messages [control]="f['name']"></app-control-messages>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer vt-area-button">
+          <input type="hidden" name="sysCatTypeId" />
+          <button type="submit" (click)="processSearch($event)" class="btn btn-sm btn-info" [innerHTML]="'common.button.search' | translate"></button>
+        </div>
+    </form>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading vt-relative">
+    <strong class="text-u-c">
+      <i class="fa fa-th"></i>
+      <span translate> app.sys_cat.sys_cat_list_title</span>
+    </strong>
+    <div class="vt-absolute vt-shotcut-button-in-heading">
+      <!-- <have-permission [actionCode]="'action.insert'" [resourceCode]="'resource.sysCat'"> -->
+      <!-- <button type="button" (click)="prepareSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.addNew' | translate"></button> -->
+      <!-- </have-permission> -->
+    </div>
+  </div>
+  <div class="panel-body panel-table">
+    <p-table [value]="resultList.data" [paginator]="true" (onLazyLoad)="processSearch($event)"
+      [lazy]="true" [rows]="10" [totalRecords]="resultList.recordsTotal" [responsive]="true"
+      tableStyleClass="table table-wrapper table-hover table-striped b-t b-b" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="size-1" translate>common.table.index</th>
+          <th class="size-4" pSortableColumn="code" translate>app.sys_cat.code <p-sortIcon field="code"></p-sortIcon></th>
+          <th class="size-6" pSortableColumn="name" translate>app.sys_cat.name <p-sortIcon [field]="'name'"></p-sortIcon></th>
+          <th class="size-2" translate>app.sys_cat.is_default</th>
+          <th class="size-3" translate>app.sys_cat.sort_order</th>
+          <th class="size-6" translate>app.sys_cat.description</th>
+          <!-- <have-permission [actionCode]="'action.update'" [resourceCode]="'resource.sysCat'"> -->
+            <th class="size-1" translate>common.label.edit</th>
+          <!-- </have-permission> -->
+          <!-- <have-permission [actionCode]="'action.delete'" [resourceCode]="'resource.sysCat'"> -->
+            <th class="size-1" translate>common.label.delete</th>
+          <!-- </have-permission> -->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item let-index="rowIndex">
+        <tr>
+          <td class="vt-align-center">{{index+1}}</td>
+          <td class="vt-align-center">{{item.code}}</td>
+          <td>{{item.name}}</td>
+          <td class="vt-align-center">
+            <i *ngIf="item.status==1" class="fas fa-check table-icon color-info"></i>
+          </td>
+          <td class="vt-align-center">{{item.sortOrder}}</td>
+          <td>{{item.description}}</td>
+          <!-- <have-permission [actionCode]="'action.update'" [resourceCode]="'resource.sysCat'"> -->
+            <td class="vt-align-center"><a class="btn-table edit" (click)="prepareSaveOrUpdate(item)" [title]="'common.label.edit' | translate" ><i class="fa fa-edit"></i></a></td>
+          <!-- </have-permission> -->
+          <!-- <have-permission [actionCode]="'action.delete'" [resourceCode]="'resource.sysCat'"> -->
+            <td class="vt-align-center"><a class="btn-table delete" (click)="processDelete(item)" [title]="'common.label.delete' | translate" ><i class="fa fa-trash-alt"></i></a></td>
+          <!-- </have-permission> -->
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

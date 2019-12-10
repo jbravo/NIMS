@@ -1,0 +1,84 @@
+<div id="searchPage">
+    <div id="searchArea">
+        <div class="panel panel-default">
+            <form id="formSearch" [formGroup]="formSearch">
+                <div class="panel-heading" translate>
+                    <strong class="text-u-c">
+                        <i class="fa fa-th"></i>
+                        common.label.search_form
+                    </strong>
+                </div>
+                <div class="panel-body padding-xl">
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right" translate>app.allowanceType.code</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" id="codeSearch" name="code" class="form-control" formControlName="code" />
+                            <app-control-messages [control]="f['code']"></app-control-messages>
+                        </div>
+                        <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right" translate>app.allowanceType.name</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" id="nameSearch" name="name" class="form-control" formControlName="name" />
+                            <app-control-messages [control]="f['name']"></app-control-messages>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right" translate>app.allowanceType.description</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" id="descriptionSearch" name="description" class="form-control" formControlName="description" />
+                            <app-control-messages [control]="f['description']"></app-control-messages>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer vt-area-button">
+                    <button type="submit" (click)="processSearch($event)" class="btn btn-sm btn-info" [innerHTML]="'common.button.search' | translate" > </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="listArea">
+        <div class="panel panel-default">
+            <div class="panel-heading vt-relative">
+                <strong class="text-u-c" translate>
+                    <i class="fa fa-th"></i>
+                    app.allowanceType.listTitle
+                </strong>
+                <div class="vt-absolute vt-shotcut-button-in-heading">
+                    <have-permission [actionCode]="'action.insert'" [resourceCode]="'resource.allowanceType'">
+                      <!-- <button type="button" (click)="prepareSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.addNew' | translate" ></button> -->
+                    </have-permission>
+                </div>
+            </div>
+            <div class="panel-body panel-table">
+                <p-table [value]="resultList.data" [paginator]="true" (onLazyLoad)="processSearch($event)"
+                    [lazy]="true" [rows]="10" [totalRecords]="resultList.recordsTotal" [responsive]="true"
+                    tableStyleClass="table table-wrapper table-hover table-striped b-t b-b">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>STT</th>
+                            <th class="size-8" [pSortableColumn]="'code'" translate>app.allowanceType.code
+                            </th>
+                            <th class="size-10" [pSortableColumn]="'name'" translate>app.allowanceType.name
+                                <p-sortIcon [field]="'name'"></p-sortIcon>
+                            </th>
+                            <th class="size-12" [pSortableColumn]="'description'" translate>app.allowanceType.description
+                                <p-sortIcon [field]="'description'"></p-sortIcon>
+                            </th>
+                            <th class="size-1" translate>common.button.table.hEdit</th>
+                            <th class="size-1" translate>common.button.table.hDelete</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item let-index="rowIndex+1">
+                        <tr>
+                            <td class="vt-align-center">{{index}}</td>
+                            <td class="vt-align-center">{{item.code}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.description}}</td>
+                            <td class="vt-align-center"><a class="btn-table edit" (click)="prepareSaveOrUpdate(item)" title="{{'common.button.table.hEdit' | translate}}" ><i class="fa fa-edit"></i></a></td>
+                            <td class="vt-align-center"><a class="btn-table delete" (click)="processDelete(item)" title="{{'common.button.table.hDelete' | translate}}" ><i class="fa fa-trash-alt"></i></a></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

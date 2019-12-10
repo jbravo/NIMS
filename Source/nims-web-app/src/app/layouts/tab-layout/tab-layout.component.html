@@ -1,0 +1,62 @@
+<div class="tab-layout">
+
+  <div class="list_tab">
+    <ul>
+      <ng-template [ngForOf]="tabs" let-tab ngFor>
+        <li (click)="open(tab); $event.button == 1 ? befClose(tab) : null" [ngClass]="{'active': tab.active}"
+            pTooltip="{{tab.header}}" tooltipPosition="bottom">
+          <span>{{tab.header}}</span>
+          <i (click)="befClose(tab)" class="exit_tab"></i>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+
+  <div [ngClass]="{'tab-container': tabs && tabs.length >= 0}">
+    <ng-template [ngForOf]="tabs" let-tab ngFor>
+      <div [ngClass]="{'active': tab.active, 'inactive': !tab.active}" class="tab-content">
+        <div class="tab-wrapper">
+          <!--          <app-breadcrumb></app-breadcrumb>-->
+          <!--          <ng-template appTabLayoutContent [componentName]="tab.component"></ng-template>-->
+          <div class="breadcrumb_link">
+            <ul>
+              <ng-template [ngForOf]="tab.breadcrumb" let-item let-last="last" ngFor>
+                <li>
+                  <ng-container *ngIf="!last">{{item.label}}</ng-container>
+                  <span *ngIf="last">{{item.label}}</span>
+                  <ng-container *ngIf="!last">/</ng-container>
+                </li>
+              </ng-template>
+            </ul>
+          </div>
+          <ng-container *ngComponentOutlet="tab.selector"></ng-container>
+        </div>
+      </div>
+    </ng-template>
+
+    <!--<p-toast (onClose)="cancel($event)" [autoZIndex]="true" [modal]="true" key="tab-confirm"-->
+             <!--position="center" styleClass="ui-toast-confirm">-->
+      <!--<ng-template let-message pTemplate="message">-->
+        <!--<h2 style="text-align: center">{{message.summary}}</h2>-->
+        <!--<p style="text-align: center">{{message.detail}}</p>-->
+        <!--<div class="btn_modal_footer" style="text-align: center">-->
+          <!--<a (click)="close($event)" class="btn_modal_action">{{'common.button.ok' | translate}}</a>-->
+          <!--<a (click)="cancel($event)" class="btn_modal_cancel">{{'common.button.close1' | translate}}</a>-->
+        <!--</div>-->
+      <!--</ng-template>-->
+    <!--</p-toast>-->
+
+    <p-dialog id="confirm-dialog" [(visible)]="displayConfirmCloseTab" [modal]="true"
+              [responsive]="true" [style]="{width: '450px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000"
+              [focusOnShow]="false" [draggable]="false">
+      <h4>{{'common.button.confirm' | translate}}</h4>
+      <p><i class="fa fa-exclamation-triangle"
+            aria-hidden="true"></i> {{'common.message.confirm.closeTab.detail' | translate}}</p>
+      <p-footer>
+        <button type="button" pButton (click)="close($event)" label="{{'common.label.yes' | translate}}"></button>
+        <button #focus type="button" pButton (click)="cancel($event)" label="{{'common.label.no' | translate}}"
+                class="ui-button-secondary"></button>
+      </p-footer>
+    </p-dialog>
+  </div>
+</div>

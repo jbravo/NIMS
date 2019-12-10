@@ -1,0 +1,87 @@
+<div class="p-3">
+  <p-panel>
+    <p-header>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <formly-form *ngIf="mSearch" [form]="form" [fields]="fields" [model]="model"></formly-form>
+        <div *ngIf="!mSearch">
+          <formly-form [form]="form" [fields]="fieldsSearch" [model]="model"></formly-form>
+          <p style="text-decoration: underline; font-style: italic">
+            <a (click)="changeSearch()" style="color: #0d8ced">Tìm kiếm nhiều</a>
+          </p>
+
+        </div>
+        <div class="row" *ngIf="mSearch">
+          <div class="col-md-12">
+            <div class="content-section implementation">
+              <div class="d-flex justify-content-end">
+                <div style="text-decoration: underline; font-style: italic">
+                  <a class="p-2" style="text-decoration: underline; margin-right: 30px" (click)="changeSearch()"
+                     style="color: #0d8ced">Thu gọn tìm kiếm</a>
+                  <button type="button" pButton label="Tìm kiếm" icon="pi pi-search"></button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </p-header>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content-section implementation">
+          <div class="d-flex justify-content-end">
+            <button href="#" class="btn_grid ml-2" pTooltip="Thêm mới" tooltipPosition="top"><i class="add_ico"></i></button>
+            <button href="#" class="btn_grid ml-2" pTooltip="Xóa" tooltipPosition="top"><i class="delete_ico"></i></button>
+            <button href="#" class="btn_grid ml-2" pTooltip="Import" tooltipPosition="top"><i class="import_ico"></i></button>
+            <button href="#" class="btn_grid ml-2" pTooltip="Thêm mới" tooltipPosition="top"><i class="add_file_ico"></i></button>
+            <div class="clearboth"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <br>
+    </div>
+    <div>
+      <p-table [value]="listData" [lazy]="true" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header" let-i="rowIndex">
+          <tr>
+            <th>STT</th>
+            <th>#</th>
+            <th>Hành động</th>
+            <th>Mã đề xuất</th>
+            <th>Loại đề xuất</th>
+            <th>Trạng thái đề xuất</th>
+            <th>Đơn vị đề xuất</th>
+            <th>Người đề xuất</th>
+            <th>Ngày tạo</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-list>
+          <tr>
+            <td></td>
+            <td>
+              <p-checkbox name="groupname" value="val1"></p-checkbox>
+            </td>
+            <td>
+              <div class="position-relative">
+                <p-menu appendTo="body" #i [popup]="true" [model]="items"></p-menu>
+                <button type="button" pButton icon="fa fa-fw fa-list" (click)="i.toggle($event)"></button>
+
+              </div>
+            </td>
+            <td>{{list.code}}</td>
+            <td>{{list.type}}</td>
+            <td>{{list.status}}</td>
+            <td>{{list.unit}}</td>
+            <td>{{list.auth}}</td>
+            <td>{{list.createdDate}}</td>
+          </tr>
+          <tr></tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+  </p-panel>
+</div>

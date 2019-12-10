@@ -1,0 +1,57 @@
+<div class="content_wrapper">
+  <form id="formSearch" [formGroup]="formSearch">
+    <!--<p-panel header="Thông tin tìm kiếm" [toggleable]="true" [style]="{'margin-bottom':'15px'}">-->
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'locate.title' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" pInputText class="input_form" formControlName="address">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="line_btn_form">
+        <button type="submit" (click)="search()" class=" btn_form"><i
+          class="search_ico"></i><span>{{'common.button.search' | translate}}</span></button>
+
+        <button type="button" (click)="onClosed()" class="btn_form02">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'common.label.cancel' | translate"></span>
+        </button>
+      </div>
+    <!--</p-panel>-->
+    <p-panel header="Kết quả tìm kiếm" [toggleable]="true">
+      <div id="listArea" class="list_btn_grid">
+        <div class="panel-body panel-table">
+          <p-table [value]="result">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>{{'common.table.index' | translate}}</th>
+                <th class="text-center size-12">{{'common.label.result' | translate}}</th>
+                <th>{{'locate.title' | translate}}</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-data let-index="rowIndex+1">
+              <tr>
+                <td>{{index}}</td>
+                <td class="text-center size-12">{{data.label}}</td>
+                <td>
+                  <a class="btn_action" pTooltip="{{'locate.title' | translate}}" tooltipPosition="top" (click)="locate(data.x,data.y)">
+                    <i class="icon_search"></i>
+                  </a>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </p-panel>
+  </form>
+</div>

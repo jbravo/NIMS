@@ -1,0 +1,108 @@
+<div class="list_tab">
+  <ul>
+    <li class="active">
+      <span>Danh mục</span>
+    </li>
+    <li>
+      <span>Thêm mới</span>
+      <i class="exit_tab"></i>
+    </li>
+  </ul>
+</div>
+
+<div class="tab_content" id="tab_menu">
+  <div class="breadcrumb_link">
+    <ul>
+      <li><a href="#">Quản lý hạ tầng</a></li>
+      <li>/</li>
+      <li><a href="#">Quản lý hạ tầng</a></li>
+      <li>/</li>
+      <li><span>Quản lý thiết bị</span></li>
+    </ul>
+  </div>
+
+  <div class="search_content">
+    <div class="search_header">
+      <div class="form_search">
+        <input type="text" class="input_search" placeholder="Nhập mã thiết bị">
+        <a href="#" class="btn_search"><span class="icon_search"></span></a>
+      </div>
+      <a href="#" class="search_advanced">Tìm kiếm nâng cao</a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="advanced_content" style="display:block">
+      <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g">
+            <label class="ui-g-12 ui-md-4 name_label">Mã thiết bị</label>
+            <div class="ui-g-12 ui-md-8">
+              <input class="input_form" pinputtext="" placeholder="Nhập nội dung" type="text" ng-reflect-type="text">
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g">
+            <label class="ui-g-12 ui-md-4 name_label">Tên thiết bị</label>
+            <div class="ui-g-12 ui-md-8">
+              <input class="input_form" pinputtext="" placeholder="Nhập nội dung" type="text" ng-reflect-type="text">
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g">
+            <label class="ui-g-12 ui-md-4 name_label">Số serial</label>
+            <div class="ui-g-12 ui-md-8">
+              <input class="input_form" pinputtext="" placeholder="Nhập nội dung" type="text" ng-reflect-type="text">
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g">
+            <label class="ui-g-12 ui-md-4 name_label">Verison Handware</label>
+            <div class="ui-g-12 ui-md-8">
+              <p-dropdown [options]="selsect" [(ngModel)]="dropdown"></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g">
+            <label class="ui-g-12 ui-md-4 name_label">Verison Software</label>
+            <div class="ui-g-12 ui-md-8">
+              <p-dropdown [options]="selsect" [(ngModel)]="dropdown"></p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+          <div class="line_form ui-g">
+            <label class="ui-g-12 ui-md-4 name_label">Loại mạng</label>
+            <div class="ui-g-12 ui-md-8">
+              <p-dropdown [options]="selsect" [(ngModel)]="dropdown"></p-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="line_btn_form">
+        <a href="#" class="btn_form"><i class="search_ico"></i> <span>Tìm kiếm</span></a>
+        <a href="#" class="btn_collapse">Thu gọn tìm kiếm</a>
+        <div class="clearboth"></div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $(".search_advanced").click(function () {
+              $(".search_content").addClass("active");
+          });
+          $(".btn_collapse").click(function () {
+              $(".search_content").addClass("active");
+          });
+      });
+  </script>
+  <div class="list_btn_grid">
+    <button href="#" class="btn_grid" pTooltip="Xóa" tooltipPosition="top"><i class="delete_ico"></i></button>
+    <button href="#" class="btn_grid" pTooltip="Excel" tooltipPosition="top"><i class="export_excel_ico"></i></button>
+    <button href="#" class="btn_grid" pTooltip="Import" tooltipPosition="top"><i class="import_ico"></i></button>
+    <button href="#" class="btn_grid" pTooltip="Thêm mới" tooltipPosition="top"><i class="add_ico"></i></button>
+  </div>
+</div>
+

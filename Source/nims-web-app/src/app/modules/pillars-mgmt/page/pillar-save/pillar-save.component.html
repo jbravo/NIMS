@@ -1,0 +1,468 @@
+<div class="content_wrapper" id="pillar-save">
+  <p-messages key="msgsPillar"></p-messages>
+  <form [formGroup]="formAdd" (ngSubmit)="onSubmit()">
+    <div *ngIf="action != 'view'">
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+          <!-- ma tuyen start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'laneCode'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.laneCode' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control [disabled]="action == 'edit'" #autoCompleteLaneCode
+                    [header]="headerLaneCode" [control]="formControls['laneCode']" [contentType]="laneCode"
+                    [displayFieldType]="'laneCode'" [type]="'laneCode'" (onChange)="onchangeLaneCode($event)"
+                    (onClean)="onClearLaneCode()"></autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ma tuyen end-->
+
+          <!-- Chi so cot start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'pillarIndex'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.index' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input [readonly]="action == 'edit'" type="text" pInputText pKeyFilter="num"
+                  formControlName="pillarIndex" (change)="fillPillarCode($event)"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="input_form"
+                  [(ngModel)]='formAdd.value.pillarIndex' maxlength="4">
+              </div>
+            </div>
+          </div>
+          <!-- Chi so cot end-->
+          <!-- Mã cột start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.pillarCode' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" pInputText formControlName="pillarCode" class="input_form"
+                  [(ngModel)]='formAdd.value.pillarCode' [readonly] = 'true'>
+              </div>
+              <!--[readonly]="action == 'edit'"-->
+              <!-- Ma cot end-->
+            </div>
+          </div>
+          <!-- form fields row 2-->
+
+          <!-- Ma loai cot start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'pillarTypeId'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.type.code' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter id="select-filter" [property]="f['pillarTypeId']"
+                  [options]="pillarTypeCode" optionLabel="label" [disabled]="action == 'edit'" optionValue="value">
+                </select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- ma loai cot end-->
+
+          <!-- Don vi start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'deptId'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.unit' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteDept [header]="headerDept" [control]="f['deptId']"
+                    [contentType]="dept" [displayFieldType]="'dept'" field="label" [type]="'dept'"
+                    (onChange)="onChangeRowSelectDept($event)" (onClean)="onClearRowSelect()">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Don vi end-->
+
+          <!-- Dia ban start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'locationId'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.locationName' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteLocation [header]="headerLocation"
+                    [control]="f['locationId']" [contentType]="location" [displayFieldType]="'location'"
+                    [type]="'location'">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+              <!-- Dia ban end-->
+            </div>
+          </div>
+          <!-- form fields row 3-->
+
+          <!-- Chu so huu start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'ownerId'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.ownerName' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['ownerId']" [options]="ownerList" optionLabel="label"
+                  [disabled]="action == 'view'" optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- Chu so huu end-->
+
+          <!-- Dia chi start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.address' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" (input) = 'getValue($event,"address")' formControlName="address" class="input_form" maxlength="200"
+                  [readonly]="action == 'view'">
+              </div>
+            </div>
+          </div>
+          <!-- Dia chi end-->
+
+          <!-- ngay xay dung start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'pillar.constructionDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar formControlName="constructionDate" dateFormat="dd/mm/yy" showIcon="true"
+                  (onInput)="onInput($event)" [disabled]="action == 'view'">
+                </p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker()"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- ngay xay dung end-->
+
+          <!-- form fields row 4-->
+
+          <!-- Trang thai start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.status' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['status']" [filter] = 'false' [options]="statusList" optionLabel="label"
+                  [disabled]="action == 'view'" optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- Trang thai end-->
+
+          <!-- Kinh do start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'longitude'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.longitude' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="input_form" formControlName="longitude" [readonly]="action == 'view'" geometryDirective
+                [ngClass]="errorLongitude ? 'invalid-control-longLat' : ''"
+                oninput="this.value = this.value.replace(/[^-.0-9]/g, '')">
+              </div>
+            </div>
+          </div>
+          <!-- Kinh do end-->
+
+          <!-- Vi do start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError = 'latitude'>
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.latitude' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="input_form" formControlName="latitude" [readonly]="action == 'view'" geometryDirective
+                [ngClass]="errorLatitude ? 'invalid-control-longLat' : ''"
+                oninput="this.value = this.value.replace(/[^-.0-9]/g, '')">
+              </div>
+            </div>
+          </div>
+          <!-- Vi do end-->
+
+          <!-- form fields row 5-->
+
+          <!-- Ghi chu start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.note' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <textarea rows="5" cols="50" pInputTextarea (input) = 'getValue($event,"note")' formControlName="note" maxlength="500"
+                  [readonly]="action == 'view'"></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Ghi chu end-->
+        </div>
+      </div>
+      <div class="line_btn_form mt-0">
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn_form">
+            <i class="add_ico"></i>
+            <span [innerHTML]="'common.button.storage' | translate"></span>
+          </button>
+          <button type="button" (click)="onClosedTab()" class="btn_form02">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.label.cancel' | translate"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="action == 'view'">
+      <div class="content-section implementation">
+        <label class="view-title-label">
+          {{'pillar.manage.info' | translate}}
+        </label>
+        <div class="ui-g ui-fluid px-1">
+          <!-- ma tuyen cap-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.laneCode' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['laneCode'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ma cot -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.pillarCode' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['pillarCode'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chi so cot -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.index' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['pillarIndex'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- form fields row 2-->
+
+          <!-- Ma loai cot -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.type.code' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['pillarTypeId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Don vi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'common.label.unit' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['deptId'].value.deptName}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chu so huu -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.ownerName' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['ownerId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- form fields row 3-->
+
+          <!-- Tinh trang treo cap -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.status.cable' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['pillarStatusCable'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ngay xay dung -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.constructionDate' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['constructionDate'].value | date:'dd/MM/yyyy'}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trang thai -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'common.label.status' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['status'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- form fields row 4-->
+
+          <!-- Dia ban -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'pillar.locationName' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['locationId'].value.locationName}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dia chi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'common.label.address' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['address'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chu -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'common.label.note' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['note'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- form fields row 5-->
+
+          <!-- Vi do -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'common.latitude' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['latitude'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kinh do -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                {{'common.longitude' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-9 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['longitude'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <!-- <div class="line_btn_form mt-0">
+        <button type="button" (click)="onClosed()" class="btn_form02">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'common.label.cancel' | translate"></span>
+        </button>
+      </div> -->
+    </div>
+  </form>
+</div>
+
+<p-toast styleClass="ui-toast-confirm ui-toast-message ui-toast-message-error" key="align" position="center"
+  [modal]="true" [autoZIndex]="true" (onClose)="onReject()">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: left">
+      <h4>{{message.summary}}</h4>
+      <p>{{message.detail}}</p>
+    </div>
+  </ng-template>
+</p-toast>
+
+<p-dialog header="{{'common.label.NOTIFICATIONS' | translate}}" [(visible)]="displayWarningMess" [modal]="true"
+  [responsive]="true" [style]="{width: '600px'}" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false"
+  [draggable]="false">
+  <div class="row">
+    <div class="col-12">
+      <p class="mb-2">
+        {{warningMessPillarSave}}”
+      </p>
+    </div>
+  </div>
+</p-dialog>
+<p-toast key="rightDownErr" position="bottom-right"></p-toast>

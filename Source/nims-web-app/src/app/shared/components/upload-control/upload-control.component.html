@@ -1,0 +1,14 @@
+<a href="javascript:;" class="upload-control v-from file-process" [ngClass]="{hasFile: file}">
+  <input type="file"
+         class="form-control"
+         [accept]="accept"
+         [multiple]="false"
+         (change)="onChange($event)"
+         #inputFile
+         id="{{fileId}}">
+  <label for="{{fileId}}">
+    <div class="upload-input">{{file ? file.name : ''}}</div>
+    <span class="upload-btn">{{ 'controls.choseFile' | translate}}</span>
+  </label>
+</a>
+<p-toast key="errorFile" position="bottom-right"></p-toast>

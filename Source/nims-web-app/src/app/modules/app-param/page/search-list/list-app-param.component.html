@@ -1,0 +1,85 @@
+<div id="searchPage">
+    <div id="searchArea">
+      <div class="panel panel-default">
+        <form id="formSearch" [formGroup]="formSearch">
+          <div class="panel-heading">
+            <strong class="text-u-c">
+              <i class="fa fa-th"></i>
+              &nbsp;{{'profile.title' | translate}}
+            </strong>
+          </div>
+          <div class="panel-body padding-xl">
+            <div class="ui-g"><!-- Row 1 -->
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right label">{{'appparam.label.mp' | translate}} </label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input type="text" formControlName="parCode" class="input_form" pInputText  maxlength="200">
+              </div>
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">{{'appparam.label.tp' | translate}} </label>
+              <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <input type="text" formControlName="parName" class="form-control" maxlength="200">
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer vt-area-button"><!-- Row 8 -->
+            <button type="submit" (click)="processSearch()" class="btn btn-sm btn-info">
+              <span [innerHTML]="'common.button.icon.search' | translate"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="listArea">
+      <div class="panel panel-default">
+        <div class="panel-heading vt-relative">
+          <strong class="text-u-c">
+            <i class="fa fa-th"></i>
+            &nbsp;{{ 'profile.table.title' | translate }}
+          </strong>
+        </div>
+        <div class="panel-body panel-table">
+          <p-table [rows]="10" [value]="resultList.data" (onLazyLoad)="onLazyLoad($event)"
+          [lazy]="true" [totalRecords]="resultList.recordsTotal"
+          [paginator]="true" tableStyleClass="table table-wrapper table-hover table-striped b-t b-b">
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col class="size-1">
+                <col class="size-3">
+                <col class="size-4">
+                <col class="size-3">
+                <col class="size-5">
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th translate>common.table.index</th>
+                <th translate>appparam.label.mp</th>
+                <th translate>appparam.label.tp</th>
+                <th translate>appparam.label.lp</th>
+                <th translate>appparam.label.gc</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex+1">
+              <tr>
+                <td class="vt-align-center">{{index}}</td>
+                <td class="vt-align-center">{{item.parCode}}</td>
+                <td class="vt-align-left">{{item.parName}}</td>
+                <td class="vt-align-center">{{item.parType}}</td>
+                <td class="vt-align-center">{{item.description}}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              {{'common.table.totalRecord'| translate}} {{resultList.recordsTotal || 0}}
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <!-- <td [attr.colspan]="columns.length"> -->
+                <td [attr.colspan]="8">
+                  {{'common.label.noData'|translate}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>

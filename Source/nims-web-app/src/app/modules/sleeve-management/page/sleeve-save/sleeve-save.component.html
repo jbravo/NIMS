@@ -1,0 +1,328 @@
+<app-spinner></app-spinner>
+<div class="content_wrapper pt-1">
+  <p-messages key="addSleeve"></p-messages>
+  <p-toast key="success" position="bottom-right"></p-toast>
+  <form [formGroup]="formAdd">
+    <div >
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+          <!-- cot chua mang xong start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="holderId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.contain.pillar' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompletePillar
+                    [header]="headerPillar"
+                    [control]="f['pillarId']"
+                    [contentType]="pillar"
+                    (onChange)="onSelectedData($event,'pillarId')"
+                    [disabled]="f['poolId'].value || is_Pillar || action == 'edit'"
+                    [displayFieldType]="'pillar'"
+                    [type]="'pillar'"
+                    (onClean)="onCleanAutoComplete()">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- cot chua mang xong end -->
+          <!-- be chua mang xong start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="holderId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.contain.pool' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control
+                    #autoCompletePool
+                    [header]="headerPool"
+                    [control]="f['poolId']"
+                    [contentType]="pool"
+                    (onChange)="onSelectedData($event,'poolId')"
+                    [disabled]="f['pillarId'].value || is_Pool || action == 'edit'"
+                    [displayFieldType]="'pool'"
+                    [type]="'pool'"
+                    (onClean)="onCleanAutoComplete()">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- be chua mang xong end -->
+          <!-- tuyen start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="laneName">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'sleeve.lane.name' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteLane
+                    [header]="headerLaneSleeve"
+                    [control]="f['laneName']"
+                    [contentType]="laneSleeve"
+                    (onChange)="onSelectedData($event,'laneCode')"
+                    [disabled]="!f['pillarId'].value && !f['poolId'].value || action == 'edit'"
+                    [displayFieldType]="'laneCode'"
+                    [type]="'laneSleeve'">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- tuyen end -->
+          <!-- Chi so mang xong start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="sleeveIndex">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeve.index' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input pInputText type="text"
+                  class="input_form"
+                  formControlName="sleeveIndex"
+                  maxlength="3"
+                  (blur)="autoCompleteIndex()"
+                  [readonly]="action == 'edit'"
+                  positiveInteger>
+              </div>
+            </div>
+          </div>
+          <!-- Chi so mang xong start end-->
+          <!-- ma mang xong start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="sleeveCode">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.code' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input pInputText type="text"
+                  class="input_form"
+                  formControlName="sleeveCode"
+                  maxlength="100"
+                  readonly>
+                <label class="ui-g-12 ui-md-4 name_label pt-0"></label>
+              </div>
+            </div>
+          </div>
+          <!-- ma mang xong end-->
+          <!-- ma loai mang xong start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="sleeveTypeId">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.type.code' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <select-filter
+                    [property]="f['sleeveTypeId']"
+                    [options]="sleeveTypeList"
+                    optionLabel="label"
+                    optionValue="value">
+                  </select-filter>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ma loai mang xong end-->
+          <!-- Don vi start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="deptPath">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.unit' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteDept
+                    [header]="headerDept"
+                    [control]="f['deptPath']"
+                    [contentType]="dept"
+                    [displayFieldType]="'dept'"
+                    [type]="'dept'">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Don vi end-->
+          <!-- hang san xuat start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.manufacturer' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <select-filter
+                    [property]="f['vendorId']"
+                    [options]="vendorNameList"
+                    optionLabel="label"
+                    optionValue="value">
+                  </select-filter>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- hang san xuat end-->
+          <!-- chu so huu start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.owner' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <select-filter
+                    [property]="f['ownerId']"
+                    [options]="ownerNameList"
+                    optionLabel="label"
+                    optionValue="value">
+                  </select-filter>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- chu so huu end-->
+          <!-- muc dich start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="purpose">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.purpose' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <select-filter
+                    [property]="f['purpose']"
+                    [filter]="false"
+                    [options]="purposeName"
+                    optionLabel="label"
+                    optionValue="value">
+                  </select-filter>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Muc dich end-->
+          <!-- Trang thai start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="status">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.status' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <select-filter
+                    [property]="f['status']"
+                    [filter]="false"
+                    [options]="statusName"
+                    optionLabel="label"
+                    optionValue="value">
+                  </select-filter>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Trang thai end-->
+          <!-- ngay lap dat start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="installationDate">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.installation.date' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar
+                  formControlName="installationDate"
+                  dateFormat="dd/mm/yy"
+                  showIcon="true"
+                  (onInput)="onInput($event)">
+                </p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker('installationDate')"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- ngay lap dat end -->
+          <!-- Ngay sua doi start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="updateTime">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.modify.date' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar
+                  formControlName="updateTime"
+                  dateFormat="dd/mm/yy"
+                  showIcon="true">
+                </p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker('updateTime')"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Ngay sua doi end-->
+          <!-- so serial start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="serial">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'common.label.serial' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text"
+                  pInputText class="input_form"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                  formControlName="serial"
+                  maxlength="100">
+              </div>
+            </div>
+          </div>
+          <!-- so serial end -->
+          <!-- nguyen nhan su co start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'infra.sleeves.cause.error' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <textarea type="text"
+                  pInputText class="input_form"
+                  (focus)="onFocus()"
+                  (blur)="onBlur()"
+                  formControlName="note"
+                  maxlength="500">
+                </textarea>
+              </div>
+            </div>
+          </div>
+          <!-- nguyen nhan su co end-->
+        </div>
+      </div>
+      <div class="line_btn_form mt-0">
+        <div class="d-flex justify-content-end">
+          <button #focus (click)="onSubmit()" class="btn_form">
+            <i class="add_ico"></i>
+            <span [innerHTML]="'common.button.storage' | translate"></span>
+          </button>
+          <button type="button" (click)="onClosed()" class="btn_form02">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.label.cancel' | translate"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<p-dialog id="confirm-dialog" [(visible)]="displayConfirmClose" [modal]="true" [responsive]="true"
+  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false"
+  [draggable]="false">
+  <h4>{{'common.button.confirm' | translate}}</h4>
+  <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{'common.message.confirm.closeTab.detail' | translate}}</p>
+  <p-footer>
+    <button type="button" pButton (click)="onConfirm()" label="{{'common.message.confirm.closeTab' | translate}}"></button>
+    <button #focus type="button" pButton (click)="onReject('k')" label="{{'common.label.no' | translate}}"
+      class="ui-button-secondary"></button>
+  </p-footer>
+</p-dialog>

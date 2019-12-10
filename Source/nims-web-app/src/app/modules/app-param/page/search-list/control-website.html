@@ -1,0 +1,121 @@
+<div class="content_wrapper">
+  <h2 class="title_component">From</h2>
+  <div  class="ui-g">
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+        <p-checkbox name="group1" value="Checkbox label" label="Checkbox label" [(ngModel)]="selectedCities" inputId="ny"></p-checkbox>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+        <p-radioButton name="group1" value="Option 1" label="Option 1" [(ngModel)]="val1" inputId="opt1"></p-radioButton>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+          <p-radioButton name="group1" value="Option 2" label="Option 2" [(ngModel)]="val1" inputId="opt2"></p-radioButton>
+        </div>
+  </div>
+  <h2 class="title_component">Input</h2>
+  <div  class="ui-g">
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+          <div class="ui-inputgroup">
+            <input type="text" pInputText placeholder="Nhập nội dung" class="input_form">
+          </div>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+          <div class="ui-inputgroup error">
+            <input type="text" pInputText  value="Địa chỉ" class="input_form">
+          </div>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+          <div class="ui-inputgroup">
+              <p-calendar [(ngModel)]="date1" [showIcon]="true" [showTime]="true" [stepSecond]="1" class="date_input"></p-calendar>
+          </div>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+          <div class="ui-inputgroup">
+              <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [showIcon]="true"  class="date_input" [numberOfMonths]="2"></p-calendar>
+          </div>
+      </div>
+      <div class="ui-g-12 ui-md-6 ui-lg-2">
+          <div class="ui-inputgroup">
+              <textarea autoResize="autoResize" rows="5" cols="30" pInputTextarea class="" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</textarea>
+          </div>
+      </div>
+  </div>
+  <h2 class="title_component">Selectbox</h2>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-lg-2">
+        <p-dropdown [options]="selsect" [(ngModel)]="dropdown"></p-dropdown>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-2">
+        <p-multiSelect [options]="multiSelect" [(ngModel)]="multidropdown" [panelStyle]="{minWidth:'12em'}"></p-multiSelect>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-4">
+        <p-pickList [source]="sourceCars" [target]="targetCars" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="brand" 
+        dragdrop="true" sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+            <ng-template let-car pTemplate="item">
+                <div class="ui-helper-clearfix">
+                    <img src="assets/showcase/images/demo/car/{{car.brand}}.png" style="display:inline-block;margin:2px 0 2px 2px" width="48">
+                    <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{car.brand}} - {{car.year}} - {{car.color}}</div>
+                </div>
+            </ng-template>
+        </p-pickList>
+    </div>
+  </div>
+  <h2 class="title_component">Table</h2>
+  
+  <div id="searchPage">
+    
+    <div id="listArea">
+      <div class="panel panel-default">
+        <div class="panel-body panel-table">
+          <p-table [rows]="10" [value]="resultList.data" (onLazyLoad)="onLazyLoad($event)"
+          [lazy]="true" [totalRecords]="resultList.recordsTotal"
+          [paginator]="true" tableStyleClass="table table-wrapper table-hover table-striped b-t b-b">
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col class="size-1">
+                <col class="size-3">
+                <col class="size-4">
+                <col class="size-3">
+                <col class="size-5">
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th translate>common.table.index</th>
+                <th translate>appparam.label.mp</th>
+                <th translate>appparam.label.tp</th>
+                <th translate>appparam.label.lp</th>
+                <th translate>appparam.label.gc</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-index="rowIndex+1">
+              <tr>
+                <td class="vt-align-center">{{index}}</td>
+                <td class="vt-align-center">{{item.parCode}}</td>
+                <td class="vt-align-left">{{item.parName}}</td>
+                <td class="vt-align-center">{{item.parType}}</td>
+                <td class="vt-align-center">{{item.description}}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+              {{'common.table.totalRecord'| translate}} {{resultList.recordsTotal || 0}}
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <!-- <td [attr.colspan]="columns.length"> -->
+                <td [attr.colspan]="8">
+                  {{'common.label.noData'|translate}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 class="title_component">Popup confirm</h2>
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-6 ui-lg-4">
+        <button type="button" (click)="confirm1()" pButton icon="pi pi-check" label="Confirm"></button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="mb-2">
+  <label *ngIf="to.label" for="{{field.key}}"
+         [ngClass]="{'text-danger':field.formControl.touched &&  field.formControl.invalid}">{{to.label}}  <span
+    *ngIf="to.required" style="color: red"> (*)</span></label>
+  <textarea style="width: 100%;margin-top: 5px;" id="{{field.key}}" [formControl]="formControl"
+            [formlyAttributes]="field" pInputTextarea autoResize="autoResize" [rows]="to.rowsT"
+            [cols]="to.colsT"></textarea>
+</div>

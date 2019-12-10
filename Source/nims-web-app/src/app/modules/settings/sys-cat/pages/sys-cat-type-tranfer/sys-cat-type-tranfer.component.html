@@ -1,0 +1,28 @@
+<div class="modal-body">
+  <form id="frmSaveSysCatTypeTranfer" [formGroup]="formSave">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <strong class="text-u-c">
+                <i class="fa fa-th"></i>
+                <span translate> app.sys_cat.tranfer</span>
+              </strong>
+          </div>
+          <div class="panel-body padding-xl">
+            <div class="ui-g">
+              <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right required" translate> app.sys_cat.list_nation</label>
+              <div class="ui-g-12 ui-md-9 ui-lg-9">
+                <div *ngFor="let item of listNation; index as i" class="checkbox ui-g-4 ui-md-3 ui-lg-3">
+                  <label class="i-checks" for="chkCustomer_{{i}}">
+                      <input id="chkCustomer_{{i}}" type="checkbox" (change)="onChoosenNation(item, $event.target.checked)"/><i></i>{{item.nationName}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer vt-area-button">
+              <button type="submit" (click)="processSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.save' | translate"></button>
+              <button type="button" (click)="activeModal.close()" class="btn btn-sm btn-danger" [innerHTML]="'common.button.cancel' | translate"></button>
+          </div>
+      </div>
+  </form>
+</div>

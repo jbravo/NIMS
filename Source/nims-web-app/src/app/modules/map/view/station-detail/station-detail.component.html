@@ -1,0 +1,219 @@
+<div class="detail_search_gmap">
+  <form [formGroup]="formGroup">
+  <div class="header_search_map">
+    <!--<div class="status_search_map">-->
+    <!--</div>-->
+    <div class="tool_detail_map">
+      <a ><i class="delete_tool"></i></a>
+      <a (click)="clickItem()"><i class="repair_ico"></i></a>
+    </div>
+    <div class="content_detail_map">
+      <!-- ma nha tram -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.stationCode' | translate}}:
+          </label>
+            <p class="ui-g-8 ui-md-8 view-name-label">
+              {{f['stationCode'].value}}
+            </p>
+        </div>
+      </div>
+      <!--don vi-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.dept' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['deptName'].value}}
+          </p>
+        </div>
+      </div>
+      <!--dia ban-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.location' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['locationName'].value}}
+          </p>
+        </div>
+      </div>
+
+      <!--chu nha tram-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.houseOwnerName' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['houseOwnerName'].value}}
+          </p>
+        </div>
+      </div>
+      <!--sdt chu nha-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.houseOwnerPhone' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['houseOwnerPhone'].value}}
+          </p>
+        </div>
+      </div>
+      <!--dia chi-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.address' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['address'].value}}
+          </p>
+        </div>
+      </div>
+      <!--chu so huu-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.owner' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['ownerName'].value}}
+          </p>
+        </div>
+      </div>
+      <!--ngay xay dung-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.constructionDate' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['constructionDate'].value}}
+          </p>
+        </div>
+      </div>
+      <!--trang thai -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.status' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['status'].value}}
+          </p>
+        </div>
+      </div>
+      <!--loai nha tram -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.houseStationType' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['houseStationType'].value}}
+          </p>
+        </div>
+      </div>
+      <!--loai tram -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.stationType' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['stationType'].value}}
+          </p>
+        </div>
+      </div>
+      <!--tinh chat nha tram -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.stationFeature' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['stationFeature'].value}}
+          </p>
+        </div>
+      </div>
+      <!--vu hoi -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.backupStatus' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['backupStatus'].value}}
+          </p>
+        </div>
+      </div>
+      <!-- vi tri-->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.position' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['position'].value}}
+          </p>
+        </div>
+      </div>
+      <!-- chieu dai -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.length' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['length'].value}}
+          </p>
+        </div>
+      </div>
+      <!--chieu rong -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.width' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['width'].value}}
+          </p>
+        </div>
+      </div>
+      <!--chieu cao -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.height' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['height'].value}}
+          </p>
+        </div>
+      </div>
+      <!-- Chieu cao cong trinh cao nhat -->
+      <div class="ui-g-12 ui-md-12 ui-lg-12 pt-0">
+        <div class="line_form ui-g ui-fluid">
+          <label class="ui-g-4 ui-md-4 view-name-label view-detail">
+            {{'station.heightestBuilding' | translate}}:
+          </label>
+          <p class="ui-g-8 ui-md-8 view-name-label">
+            {{f['heightestBuilding'].value}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="slider_image">
+      <h4>Hình ảnh</h4>
+      <div class="list_slider">
+        <img src="assets/img/nims/img_slider.png" alt="">
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

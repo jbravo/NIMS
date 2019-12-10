@@ -1,0 +1,277 @@
+<div class="content_wrapper">
+  <form [formGroup]="formAdd">
+    <p-toast key="br" position="bottom-right"></p-toast>
+    <!-- {{viewContent | json}} -->
+    <!-- {{formAdd.value | json}} -->
+    <div class="ui-g-3 tree-list pl-0 pb-0">
+      <p-scrollPanel id="tree-list-data" [style]="{width: '100%', height: '100vh'}"
+        styleClass="custom-sidebar clearfix">
+        <div>
+          <p-tree #treeN [value]="treeNodes" selectionMode="single" [(selection)]="selectedNode"
+            (onNodeSelect)="onNodeSelect($event)">
+            <ng-template let-node pTemplate="default">
+              <span pTooltip="{{node.label}}" tooltipPosition="top">{{node.label}}</span>
+            </ng-template>
+          </p-tree>
+        </div>
+      </p-scrollPanel>
+    </div>
+    <!-- ODF Detail  -->
+    <span *ngIf="odfDetail">
+      <div class="ui-g-9 search-content pl-3 pr-2">
+        <label class="view-title-label">
+          {{'odf.info' | translate}}
+        </label>
+        <div class="ui-g ui-fluid px-1">
+          <!-- ma nha tram start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.stationCode' | translate}}
+                <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['stationId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ma nha tram end-->
+
+          <!-- chi so odf start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.odfIndex' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['odfIndex'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- chi so odf end-->
+
+          <!-- ma odf start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.Code' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['odfCode'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ma odf end-->
+
+
+          <!-- form fields row 2-->
+
+          <!-- Don vi start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.deptName' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['deptId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Don vi end-->
+
+          <!-- loai ODF start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.odfTypeCode' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['odfTypeId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- loai ODF end-->
+
+          <!-- chu so huu start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.ownerCode' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['ownerId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- chu so huu end-->
+
+          <!-- nha san xuat start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.vendor' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['vendorId'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- nha san xuat end-->
+
+          <!-- ngay lap dat start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.installationDate' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['installationDate'].value | date:'dd/MM/yyyy'}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ngay lap dat end-->
+          <!-- form fields row 3-->
+          <!-- So soi da su dung start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.usedCoupler' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['usedCoupler'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- So soi da su dung end-->
+          <!-- So soi chua su dung start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.unusedCoupler' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['unusedCoupler'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- So soi chua su dung end-->
+
+
+          <!-- Ghi chu start-->
+          <div class="ui-g-12 ui-md-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'odf.note' | translate}} <span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">
+                  {{f['note'].value}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Ghi chu end-->
+        </div>
+      </div>
+    </span>
+    <!-- ODF Lane -->
+    <span *ngIf="odfLane" class="ui-g-9 search-content pl-3 pr-2">
+      <div id="listArea" class="list_btn_grid">
+        <div class="panel panel-default">
+          <p-toast position="top-right"></p-toast>
+          <div class="panel-body panel-table">
+            <p-table #dt [columns]="selectedColumns" [value]="odfLaneList" [rows]="10"
+              [totalRecords]="weldingOdfList.length" [responsive]="true" [paginator]="true"
+              [(selection)]="selectedResult" [scrollable]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]"
+              (onRowSelect)="onRowSelect($event)" [resizableColumns]="true" [style]="{ 'max-width': '1650px' }"
+              (onLazyLoad)="onLazyLoad($event)">
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:3rem">
+                  <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                    class="text-center">
+                    {{col.header | translate}}
+                    <p-sortIcon [field]="col.field" class="ngIf field.selected "></p-sortIcon>
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" [ngSwitch]="col.typeFilter">
+                    <input *ngSwitchCase="'input'" pInputText type="text"
+                      (input)="searchInTable($event.target.value, col.field)">
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                <tr>
+                  <td class="text-center size-2">{{index}}</td>
+                  <td *ngFor="let col of columns" [ngClass]="col.classField" (copied)="copied($event)"
+                    [rightClickCopy]="rowData[col.field]" (dblclick)="onRowDblClick(rowData)">
+                    {{rowData[col.field]}}
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="summary">
+                <span *ngIf="dt?.totalRecords > 0">{{'pagination.record.from' | translate}}
+                  {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}
+                  {{'pagination.of' | translate}} {{dt?.totalRecords}} {{'pagination.record' | translate}}</span>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length+3">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </span>
+    <!-- Welding ODF -->
+    <span *ngIf="weldingOdf" class="ui-g-9 search-content pl-3 pr-2">
+      <welding-odf-list [data]="id"></welding-odf-list>
+    </span>
+    <div class="line-in-form-btn"></div>
+    <div *ngIf = "!odfLane" class="line_btn_form mt-0">
+      <div class="input_more_form">
+        <button type="button" (click)="onClosed()" class="btn_form02" *ngIf="odfDetail ? odfDetail : odfLane">
+          <i class="exit_ico"></i>
+          <span (click)="onClosed()" [innerHTML]="'common.button.close' | translate"></span>
+        </button>
+        <button #focusButton type="submit" (click)="onSubmit()" *ngIf="odfDetail"
+          ng-model="focusOnButton" class="btn_form">
+          <i class="add_ico"></i>
+          <span [innerHTML]="'common.label.update' | translate"></span>
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

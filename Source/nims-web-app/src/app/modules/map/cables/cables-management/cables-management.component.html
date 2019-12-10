@@ -1,0 +1,292 @@
+<div class="content_wrapper">
+  <p-messages></p-messages>
+  <p-toast key="cables" position="top-right"></p-toast>
+  <form [formGroup]="formAdd" (ngSubmit)="onSubmit()">
+    <div *ngIf="action != 'view'">
+      <div class="line_btn_form">
+        <button type="submit" (click)="onSubmit()" class="btn_form">
+          <i class="add_ico"></i>
+          <span [innerHTML]="'common.button.storage' | translate"></span>
+        </button>
+        <button type="button" class="btn_form02">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'common.label.cancel' | translate"></span>
+        </button>
+      </div>
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+          <!-- diem dau start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.source_id' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <!--<input pInputText type="text" formControlName="sourceCode" class="input_form"-->
+                       <!--maxlength="30" readonly>-->
+                <input pInputText type="text" formControlName="sourceCode" class="input_form"
+                       maxlength="30" readonly>
+              </div>
+            </div>
+          </div>
+          <!-- diem dau end-->
+
+          <!-- diem cuoi start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.dest_id' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <!--<input pInputText type="text" formControlName="destCode" class="input_form"-->
+                         <!--maxlength="30" readonly>-->
+                  <input pInputText type="text" formControlName="destCode" class="input_form"
+                         maxlength="30" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- diem cuoi end-->
+
+          <!-- Chi so doan cap start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0" *ngIf="action == 'add'">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.index' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <input pInputText type="text" formControlName="index" class="input_form"
+                         maxlength="30">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- form fields row 2-->
+
+          <!-- Ma doan cap start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0" *ngIf="action == 'add'">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.cable_code' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input pInputText type="text" formControlName="cableCode" class="input_form" readonly
+                       maxlength="30">
+              </div>
+            </div>
+          </div>
+
+          <!-- ma cong trinh start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.construction_code' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" formControlName="constructionCode" class="input_form" maxlength="20"
+                       [readonly]="action == 'view'">
+              </div>
+            </div>
+          </div>
+
+          <!-- Ma loai cap start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.cable_type_code' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['cableTypeId']" [options]="cableTypeList" optionLabel="label"
+                               [disabled]="action == 'view'"
+                               optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu dai start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.length' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" formControlName="length" class="input_form" maxlength="20"
+                       [readonly]="action == 'view'">
+              </div>
+            </div>
+          </div>
+
+          <!-- Trang thai start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.status' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['status']" [options]="statusList" optionLabel="label"
+                               [disabled]="action == 'view'"
+                               optionValue="value"></select-filter>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ngay lap dat start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.installationDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <p-calendar formControlName="installationDate" dateFormat="dd/mm/yy"
+                            [disabled]="action == 'view'"></p-calendar>
+              </div>
+            </div>
+          </div>
+          <!-- loai nha tram end-->
+
+          <!-- Ghi chu start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.note' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                          <textarea rows="5" cols="50" pInputTextarea formControlName="note" maxlength="500"
+                                    [readonly]="action == 'view'"></textarea>
+              </div>
+            </div>
+            <!-- Ghi chu end-->
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div *ngIf="action == 'view'">
+      <div class="line_btn_form">
+        <button type="button" class="btn_form02">
+          <i class="exit_ico"></i>
+          <span [innerHTML]="'common.label.cancel' | translate"></span>
+        </button>
+      </div>
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+          <!-- diem dau start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.source_id' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.sourceId : ''}}
+              </div>
+            </div>
+          </div>
+          <!-- diem dau end-->
+
+          <!-- diem cuoi start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.dest_id' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  {{result != null ? result.destId : ''}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- diem cuoi end-->
+
+          <!-- Ma doan cap start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.cable_code' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{data.properties.cable_code}}
+              </div>
+            </div>
+          </div>
+
+          <!-- ma cong trinh start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.construction_code' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.constructionCode : ''}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Ma loai cap start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.cable_type_code' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.cableTypeCode : ''}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu dai start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.length' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.length : ''}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Trang thai start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.status' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.status : ''}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Ngay lap dat start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'cable.installationDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.installationDate : ''}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chu start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label pt-0">
+                {{'station.note' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                {{result != null ? result.note : ''}}
+              </div>
+            </div>
+            <!-- Ghi chu end-->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

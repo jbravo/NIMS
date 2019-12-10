@@ -1,0 +1,344 @@
+<app-spinner></app-spinner>
+<div class="content_wrapper">
+  <form [formGroup]="formAdd">
+    <div class="ui-g-3 tree-list pl-0 pb-0">
+      <p-scrollPanel id="tree-list-data" [style]="{width: '100%', height: '100vh'}"
+                     styleClass="custom-sidebar clearfix">
+        <div>
+          <p-tree [value]="treeNodes" selectionMode="single" [(selection)]="selectedNode"
+                  (onNodeSelect)="onNodeSelect($event)">
+            <ng-template let-node pTemplate="default">
+              <span pTooltip="{{node.label}}" tooltipPosition="top">{{node.label}}</span>
+
+            </ng-template>
+          </p-tree>
+        </div>
+      </p-scrollPanel>
+    </div>
+    <div class="ui-g-9 search-content pl-3 pr-2">
+      <div class="content-section implementation" *ngIf="station">
+        <label class="view-title-label">
+          {{'station.manage.info' | translate}}
+        </label>
+        <div class="ui-g ui-fluid px-1">
+          <!-- form fields row 1 -->
+          <!-- ma nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.stationCode' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['stationCode'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Don vi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.dept' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['deptId'].value?.pathName}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 2 -->
+          <!-- Dia ban -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.location' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['locationId'].value?.pathLocalName}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dia hinh -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.terrainName' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['terrainName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 3 -->
+          <!-- Chu nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.houseOwnerName' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['houseOwnerName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- So dien thoai chu nha -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.houseOwnerPhone' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['houseOwnerPhone'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 4 -->
+          <!-- Dia chi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.address' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['address'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chu so huu -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.owner' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['ownerName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 5 -->
+          <!-- ngay xay dung -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.constructionDate' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['constructionDate'].value | date:'dd/MM/yyyy'}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trang thai -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.status' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['statusName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 6 -->
+          <!-- loai nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.houseStationType' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['houseStationTypeName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- loai tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.stationType' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['stationTypeName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 7 -->
+          <!-- Tinh chat nha tram -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.stationFeature' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['stationFeatureName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vu hoi -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.backupStatus' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['backupStatusName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 8 -->
+          <!-- Vi tri -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.position' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['positionName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu dai -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.length' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['length'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 9 -->
+          <!-- Chieu rong -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.width' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['width'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chieu cao -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.height' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['height'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 10 -->
+          <!-- Chieu cao cong trinh cao nhat -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.heightestBuilding' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['heightestBuilding'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- kinh do -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.longitude' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['longitude'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 11 -->
+          <!-- Vi do -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.latitude' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['latitude'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phan loai kiem dinh -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.auditType' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['auditTypeName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- form fields row 12 -->
+          <!-- Trang thai kiem dinh -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.auditStatus' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['auditStatusName'].value}}</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chu -->
+          <div class="ui-g-12 ui-md-6 ui-lg-6 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 view-name-label py-0 m-0">
+                {{'station.note' | translate}}<span>:</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content py-0">
+                <label class="view-detail mb-0">{{f['note'].value}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr/>
+        <div class="line_btn_form">
+          <button type="button" (click)="onClosed()" class="btn_form02" tabindex="1">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.button.out' | translate"></span>
+          </button>
+          <button type="submit" (click)="goToUpdate()" class="btn_form" tabindex="0">
+            <i class="add_ico"></i>
+            <span [innerHTML]="'common.label.update' | translate"></span>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="odf">
+        <!-- ODF -->
+        <odf-stations [inputStationId]="f['stationId'].value"></odf-stations>
+        <!-- <odf-stations [item]="28"></odf-stations> -->
+      </div>
+    </div>
+  </form>
+</div>
+

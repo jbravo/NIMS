@@ -1,0 +1,393 @@
+<app-spinner></app-spinner>
+<p-scrollPanel [style]="{width: '100%', height: 'calc(100vh - 140px)'}">
+  <div class="sleeve-list" [ngClass]="hideSearch !== true ? 'content_wrapper' : ''">
+    <!-- <div id="searchArea">  (keydown)="onEnter($event)"-->
+    <form id="formSearch" [formGroup]="formSearch">
+      <div *ngIf="hideSearch !== true">
+        <div class="search_header" *ngIf="advanceSearch == false">
+          <div class="form_search">
+            <input-search-control [type]="'sleeve'" formControlName="basicInfo" [isKeepFocus]="true" [showBtn]="true"
+              (onSearch)="basicSearchFunc()">
+              <!-- [focus]="firstFocus"  -->
+            </input-search-control>
+          </div>
+          <a class="search_advanced" (click)="showAdvance()">{{'common.label.advanced.search' | translate}}</a>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="content-section implementation" *ngIf="advanceSearch">
+          <!-- Row 1 -->
+          <div class="ui-g ui-fluid line_form">
+            <!-- ma mang xong -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'infra.sleeves.code' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <input type="text" pInputText class="input_form" formControlName="sleeveCode">
+            </div>
+            <!-- ma loai mang xong -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'infra.sleeves.type.code' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <div class="input_more_form">
+                <select-filter [property]="formControls['sleeveTypeId']" [options]="sleeveTypeList" optionLabel="label"
+                  optionValue="value" scrollHeight="270px"></select-filter>
+              </div>
+            </div>
+            <!-- muc dich -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'common.label.purpose' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <div class="input_more_form">
+                <p-dropdown optionLabel="label" (onChange)="setSelectedValue($event,'purpose')" [options]="purposeName"
+                  placeholder="{{'common.label.cboSelect' | translate}}" [showClear]="true">
+                  <ng-template let-item pTemplate="selectedItem">
+                    <span class="selectedDropFilter">{{item.label}}</span>
+                  </ng-template>
+                  <ng-template let-in pTemplate="item">
+                    <div class="ui-helper-clearfix listItemDropFilter">
+                      <div class="item">{{in.label}}</div>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+              </div>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="ui-g ui-fluid line_form">
+            <!-- serial -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label">
+              {{'common.label.serial' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content">
+              <input type="text" pInputText class="input_form" formControlName="serial">
+            </div>
+            <!-- cot -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label">
+              {{'infra.sleeves.contain.pillar' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content">
+              <div class="input_more_form">
+                <autocomplete-search-control [header]="headerPillar" [control]="formControls['pillarCode']"
+                  [contentType]="pillar" [disabled]="formControls['poolCode'].value" [displayFieldType]="'pillar'"
+                  [type]="'pillar'" (onChange)="onChangeRowSelectPillarPool($event, 'pillar')">
+                </autocomplete-search-control>
+              </div>
+            </div>
+            <!-- be -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0">
+              {{'infra.sleeves.contain.pool' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <div class="input_more_form">
+                <autocomplete-search-control [header]="headerPool" [control]="formControls['poolCode']"
+                  [contentType]="pool" [disabled]="formControls['pillarCode'].value" [displayFieldType]="'pool'"
+                  [type]="'pool'" (onChange)="onChangeRowSelectPillarPool($event, 'pool')">
+                </autocomplete-search-control>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="ui-g ui-fluid line_form">
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label pt-0"></label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0"></div>
+            <!-- don vi -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label">
+              {{'common.label.unit' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content">
+              <div class="input_more_form">
+                <autocomplete-search-control [header]="headerDept" [control]="formControls['deptId']"
+                  [contentType]="dept" [displayFieldType]="'dept'" [type]="'dept'">
+                </autocomplete-search-control>
+              </div>
+            </div>
+            <!-- tuyen -->
+            <label class="ui-g-12 ui-md-2 ui-lg-1 name_label">
+              {{'infra.sleeves.contain.lane' | translate}}
+            </label>
+            <div class="ui-g-12 ui-md-10 ui-lg-3 name_content pt-0">
+              <div class="input_more_form">
+                <autocomplete-search-control [header]="headerLaneSleeve" [control]="formControls['laneCode']"
+                  [contentType]="laneSleeve"
+                  [disabled]="!formControls['pillarCode'].value && !formControls['poolCode'].value"
+                  [displayFieldType]="'laneCode'" [type]="'laneSleeve'">
+                </autocomplete-search-control>
+              </div>
+            </div>
+          </div>
+          <div class="line_btn_form mt-0">
+            <button type="submit" (click)="advanceSearchFunc()" class="btn_form" keyCodeEnter><i
+                class="search_ico"></i><span>{{'common.button.search' | translate}}</span></button>
+            <a class="btn_collapse" (click)="hideAdvance()"> {{'common.label.advanced.search.hide' | translate}}</a>
+          </div>
+        </div>
+      </div>
+      <hr *ngIf="hideSearch !== true" />
+      <!--         -------------------------------------------------------------------------------------------------------         -->
+      <div id="listArea" class="list_btn_grid mt-3">
+        <div class="panel panel-default">
+          <p-toast position="top-right" key="toa" [style]="{marginTop: '80px'}"></p-toast>
+
+          <div class="panel-body panel-table">
+            <p-table #dt [columns]="selectedColumns" [value]="resultList.listData" [rows]="10"
+              [totalRecords]="resultList.totalRecords" [paginator]="true" [(selection)]="selectedResult"
+              [scrollable]="true" [rowsPerPageOptions]="[5,10,15,20,25,30]" (onRowSelect)="onRowSelect($event)"
+              (onLazyLoad)="onLazyLoad($event)" [lazy]="true" [ngClass]="{'cell-text-pre-wrap': isCollapse}">
+              <!-- [style]="{ 'max-width': '1650px' }" -->
+              <ng-template pTemplate="caption">
+                <div class="clearboth"></div>
+                <button href="#" class="btn_grid" *hasPermission="['action.create','resource.sleeve']" pTooltip="{{'common.label.add' | translate}}" tooltipPosition="top" (click)="saveOrEdit('save')">
+                  <i class="add_ico" (click)="saveOrEdit('save')"></i></button>
+                <button href="#" class="btn_grid" *hasPermission="['action.import','resource.sleeve']" pTooltip="{{'common.import.data' | translate}}" tooltipPosition="top"
+                  (click)="showDialog()"><i class="import_ico"></i></button>
+                <button href="#" class="btn_grid" pTooltip="{{'common.export.data' | translate}}" (click)="exportExcel()"
+                  tooltipPosition="top"><i class="export_excel_ico" ></i></button>
+                <button href="#" class="btn_grid" *hasPermission="['action.delete','resource.sleeve']" pTooltip="{{'common.button.delete' | translate}}" (click)="onDelete(null, this.selectedResult)"
+                  tooltipPosition="top"><i class="delete_ico" ></i>
+                </button>
+                <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" [ngModelOptions]="{standalone: true}"
+                  dataKey="id" optionLabel="headerTranslate" defaultLabel="" [filter]="true"
+                  filterBy="label, value.headerTranslate" resetFilterOnHide="true" [showToggleAll]="true"
+                  styleClass="ui-multiselect-columns-option" (onChange)="onChangeCols($event)" dropdownIcon="toggle_ico"
+                  pTooltip="{{'common.show.or.hide.column' | translate}}" tooltipPosition="top" appendTo="body">
+                </p-multiSelect>
+              </ng-template>
+
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <col style="width:2.5rem">
+                  <col style="width:3rem">
+                  <col style="width:8rem">
+                  <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th rowspan="2" class="text-center size-2">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th>
+                  <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                  <th rowspan="2" translate class="text-center size-6">common.table.action</th>
+                  <th *ngFor="let col of columns" [ngClass]="col.classHeader" [pSortableColumn]="col.field"
+                    (contextmenu)="onLinkRightClickedHeader(col.field, $event)">
+                    {{col.header | translate}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" [ngSwitch]="col.typeFilter">
+                    <input *ngSwitchCase="'input'" pInputText type="text" (keyup)="onInputSearch($event, col.field)" />
+                    <input *ngSwitchCase="'sSleeveCode'" pInputText type="text"
+                      (keyup)="onInputSearch($event, 'sSleeveCode')" />
+                    <input *ngSwitchCase="'sSerial'" pInputText type="text"
+                      (keyup)="onInputSearch($event, 'sSerial')" />
+                    <p-dropdown *ngSwitchCase="'sPurpose'" appendTo="body" [options]="purposeName"
+                      emptyFilterMessage="{{'non.data' | translate}}" [style]="{'width':'100%'}"
+                      (onChange)="setValueAndSearch($event,'sPurpose')" [disabled]="isDisablePurpose">
+                    </p-dropdown>
+                    <p-dropdown *ngSwitchCase="'sSleeveTypeId'" appendTo="body" optionLabel="label" scrollHeight="270px"
+                      (onChange)="setValueAndSearch($event,'sSleeveTypeId')" [options]="sleeveTypeList"
+                      filter="sleeveTypeId" emptyFilterMessage="{{'non.data' | translate}}" [disabled]="formControls['sleeveTypeId'].value">
+                    </p-dropdown>
+                    <p-dropdown *ngSwitchCase="'sStatus'" appendTo="body" [options]="statusName"
+                      emptyFilterMessage="{{'non.data' | translate}}" [style]="{'width':'100%'}"
+                      (onChange)="setValueAndSearch($event,'sStatus')">
+                    </p-dropdown>
+                    <!-- (onClearClick) -->
+                    <p-calendar *ngSwitchCase="'installationDate'" id="icon-calendar-table" appendTo="body"
+                      dateFormat="dd/mm/yy" showButtonBar="false" (onClearClick)="onClearCalenDa('installationDate')"
+                      (onSelect)="setValueAndSearch($event,'installationDate')" showIcon="true">
+                    </p-calendar>
+                    <p-calendar *ngSwitchCase="'updateTime'" id="icon-calendar-table" appendTo="body"
+                      dateFormat="dd/mm/yy" showButtonBar="false" showIcon="true"
+                      (onClearClick)="onClearCalenDa('updateTime')" (onSelect)="setValueAndSearch($event,'updateTime')">
+                    </p-calendar>
+                    <p-autoComplete *ngSwitchCase="'sPillarCode'" appendTo="body" [suggestions]="filteredPillarName"
+                      [style]="{'width':'100%'}" (completeMethod)="filteredPillarFunc($event)" [size]="10"
+                      [minLength]="1" (onSelect)="setValueAndSearch($event,'sPillarCode')"
+                      (keyup)="onInputSearch($event, 'sPillarCode')" scrollHeight="265px">
+                    </p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'sPoolCode'" [style]="{'width':'100%'}"
+                      [suggestions]="filteredPoolName" appendTo="body" (completeMethod)="filteredPoolFunc($event)"
+                      [size]="10" [minLength]="1" (onSelect)="setValueAndSearch($event,'sPoolCode')"
+                      (keyup)="onInputSearch($event, 'sPoolCode')" scrollHeight="265px">
+                    </p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'sDeptPath'" [style]="{'width':'100%'}"
+                      [suggestions]="filteredDeptName" appendTo="body" (completeMethod)="filteredDeptFunc($event)"
+                      [size]="10" [minLength]="1" (onSelect)="setValueAndSearch($event,'sDeptPath')"
+                      (keyup)="onInputSearch($event, 'sDeptPath')" scrollHeight="265px">
+                    </p-autoComplete>
+                    <p-autoComplete *ngSwitchCase="'sLaneName'" appendTo="body" [style]="{'width':'100%'}"
+                      [suggestions]="filteredLaneName" (completeMethod)="filteredLaneFunc($event)" [size]="10"
+                      [minLength]="1" (onSelect)="setValueAndSearch($event,'sLaneName')"
+                      (keyup)="onInputSearch($event, 'sLaneName')" scrollHeight="265px">
+                    </p-autoComplete>
+                    <p-dropdown *ngSwitchCase="'ownerName'" appendTo="body" [options]="ownerNameList"
+                      optionLabel="label" [style]="{'width':'100%'}" filter="true"
+                      (onChange)="setValueAndSearch($event,'ownerName')"
+                      emptyFilterMessage="{{'non.data' | translate}}" scrollHeight="270px">
+                    </p-dropdown>
+                    <p-dropdown *ngSwitchCase="'vendorName'" appendTo="body" [options]="vendorNameList"
+                      optionLabel="label" [style]="{'width':'100%'}" filter="true"
+                      (onChange)="setValueAndSearch($event,'vendorName')"
+                      emptyFilterMessage="{{'non.data' | translate}}" scrollHeight="270px">
+                    </p-dropdown>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                <tr [pContextMenuRow]="rowData">
+                  <td class="text-center size-2">
+                    <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                  </td>
+                  <td class="text-center size-2">{{index}}</td>
+                  <td class="size-6">
+                    <div class="d-flex justify-content-center">
+                      <a class="btn_action" *hasPermission="['action.view','resource.sleeve']" pTooltip="{{'common.label.view.detail' | translate}}" tooltipPosition="top"
+                        (click)="showDetail(rowData, 'view')">
+                        <i class="more_ico"></i></a>
+                      <a class="btn_action" *hasPermission="['action.update','resource.sleeve']" pTooltip="{{'common.label.edit' | translate}}" tooltipPosition="top"
+                        (click)="saveOrEdit('edit', rowData.sleeveId)">
+                        <i class="repair_ico"></i></a>
+                      <a class="btn_action" *hasPermission="['action.delete','resource.sleeve']" pTooltip="{{'common.button.delete' | translate}}" tooltipPosition="top"
+                        (click)="onDelete(rowData, null)"><i class="remove_ico"></i></a>
+                    </div>
+                  </td>
+                  <td *ngFor="let col of columns" [ngClass]="col.classField" [ngSwitch]="col.field"
+                    [style]="{ 'text-align': 'left' }" (contextmenu)="onLinkRightClickedRow(rowData[col.field], $event)"
+                    [rightClickCopy]="rowData[col.field]" (dblclick)="showDetail(rowData, 'view')">
+                    <!-- (copied)="copied($event)" -->
+                    <div *ngSwitchCase="'installationDate'">{{rowData.installationDate | date : environment.dateFormat}}
+                    </div>
+                    <div *ngSwitchCase="'updateTime'">{{rowData.updateTime | date : environment.dateFormat}}</div>
+                    <div *ngSwitchDefault class="cell-data">{{rowData[col.field]}}</div>
+                  </td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="summary">
+                <span *ngIf="dt?.totalRecords > 0">{{'pagination.record.from' | translate}}
+                  {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}
+                  {{'pagination.of' | translate}} {{dt?.totalRecords}} {{'pagination.record' | translate}}</span>
+              </ng-template>
+              <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                  <td [attr.colspan]="14" [style]="{ 'width': 'auto' }">
+                    {{'common.label.noData'|translate}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- </div> -->
+  </div>
+</p-scrollPanel>
+
+<p-toast key="copy" position="bottom-right" ></p-toast>
+<p-contextMenu #contextMenu [model]="items" appendTo="body"></p-contextMenu>
+<p-toast position="bottom-right"></p-toast>
+
+<p-dialog id="confirm-dialog" [(visible)]="displayConfirmDelete" [modal]="true" [responsive]="true"
+  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000" [focusOnShow]="false"
+  [draggable]="false">
+  <h4>{{'common.button.confirm' | translate}}</h4>
+  <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{'sleeve.message.confirm.delete' | translate}}</p>
+  <p-footer>
+    <button type="button" pButton (click)="onSubmitDelete()"
+      label="{{'common.message.confirm.closeTab' | translate}}"></button>
+    <button #focus type="button" pButton (click)="onReject('delete')" label="{{'common.label.no' | translate}}"
+      class="ui-button-secondary"></button>
+    <!-- (click)="onHideConfirmDelete()" -->
+  </p-footer>
+</p-dialog>
+
+<p-dialog id="warning-dialog" header="{{'common.warning.delete.title' | translate}}"
+  [(visible)]="displayWarningMessDelete" [modal]="true" [responsive]="true" [style]="{width: '600px'}" [minY]="70"
+  [baseZIndex]="10000" [focusOnShow]="false" [draggable]="false" (onHide)="onHideWarningDelete()">
+  <div class="row" *ngIf="warningMessDeleteReSleeve">
+    <div class="col-12">
+      <p class="mb-2">{{'sleeves.delete.error.weld.sleeve1' | translate}} {{warningMessDeleteReSleeve}}
+        {{'sleeves.delete.error.weld.sleeve2' | translate}}</p>
+    </div>
+  </div>
+</p-dialog>
+
+<p-dialog [showHeader]="false" [(visible)]="importDialog" [modal]="true" [responsive]="true"
+  [style]="{width: '700px', minWidth: '500px'}">
+
+  <!-- ------------------------- --------------- tabView --------------- ------------------------------------------ -->
+
+  <p-tabView>
+    <p-tabPanel header="{{'common.label.add' | translate}}">
+      <div class="ui-g ui-fluid line_form">
+        <label class="ui-g-12 ui-md-2 ui-lg-2 control-label text-right">{{'controls.choseFile' | translate}}</label>
+        <div class="ui-g-12 ui-md-9 ui-lg-9">
+          <upload-control #fileF [fileId]="'add'" [accept]="'.xls,.xlsx'" (onFileChange)="changeFile($event,1)"></upload-control>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <div class="ui-g-6 pt-0">
+            <a class="btn-table-common edit" (click)="downloadFileTemplate(1)" tabindex="2"
+              [innerHTML]="'station.download.file.teamplate' | translate">
+          </a>
+          </div>
+          <div class="ui-g-6 pt-0" *ngIf="resultImportAdd">
+            <a class="btn-table-common edit" (click)="downloadResult(resultImportAdd)" tabindex="3"
+              [innerHTML]="'station.download.file.result' | translate">
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <button class="btn_modal_action" (click)="doImport(1)" tabindex="4"
+            style="color: white">{{'station.button.import' | translate}}</button>
+          <button class="btn_modal_cancel" (click)="closeImportPopup()" tabindex="5"
+            style="color: #007CBB">{{'common.status.six' | translate}}</button>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="{{'common.label.update' | translate}}">
+      <div class="ui-g ui-fluid line_form">
+        <label class="ui-g-12 ui-md-2 ui-lg-2 control-label text-right">{{'controls.choseFile' | translate}}</label>
+        <div class="ui-g-12 ui-md-9 ui-lg-9">
+          <upload-control #fileE [fileId]="'edit'" [accept]="'.xls,.xlsx'" (onFileChange)="changeFile($event,2)"></upload-control>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <div class="ui-g-6 pt-0">
+            <a class="btn-table-common edit" tabindex="2" (click)="downloadFileTemplate(2)"
+              [innerHTML]="'station.download.file.teamplate' | translate">
+          </a>
+          </div>
+          <div class="ui-g-6 pt-0">
+            <a class="btn-table-common edit edit" tabindex="3" *ngIf="resultImportEdit"
+              (click)="downloadResult(resultImportEdit)" [innerHTML]="'station.download.file.result' | translate">
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="ui-g ui-fluid line_form">
+        <div class="ui-g-12 ui-md-2 ui-lg-2"></div>
+        <div class="ui-g-12 ui-md-9 ui-lg-9 pb-3">
+          <button class="btn_modal_action" (click)="doImport(2)" tabindex="4"
+            style="color: white">{{'station.button.import' | translate}}</button>
+          <button class="btn_modal_cancel" (click)="closeImportPopup()" tabindex="5"
+            style="color: #007CBB">{{'common.status.six' | translate}}</button>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</p-dialog>

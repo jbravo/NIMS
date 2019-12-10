@@ -1,0 +1,301 @@
+<app-spinner></app-spinner>
+<div class="content_wrapper">
+  <p-messages key="msgsPillar"></p-messages>
+  <form [formGroup]="formAdd">
+        <div class="ui-g-3 tree-list pl-0 pb-0">
+          <p-scrollPanel id="tree-list-data" [style]="{width: '100%', height: '100vh'}"
+                         styleClass="custom-sidebar clearfix">
+            <div>
+              <p-tree [value]="treeNodes" selectionMode="single" [(selection)]="selectedNode"
+                      (onNodeSelect)="onNodeSelect($event,item.pillarCode)">
+                <ng-template let-node pTemplate="default">
+                  <span pTooltip="{{node.label}}" tooltipPosition="top">{{node.label}}</span>
+
+                </ng-template>
+              </p-tree>
+            </div>
+          </p-scrollPanel>
+        </div>
+        <div *ngIf="pillarDetail" class="ui-g-9 search-content pl-3 pr-2">
+          <div class="content-section implementation">
+            <label class="view-title-label">
+              {{'pillar.manage.info' | translate}}
+            </label>
+            <div class="ui-g ui-fluid px-1">
+              <!-- ma tuyen cap-->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.laneCode' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.laneCode}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ma cot -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.pillarCode' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.pillarCode}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chi so cot -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.index' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.pillarIndex}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- form fields row 2-->
+
+              <!-- Ma loai cot -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.type.code' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.pillarTypeCode}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Don vi -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'common.label.unit' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.pathName}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chu so huu -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.ownerName' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.ownerName}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- form fields row 3-->
+
+              <!-- Tinh trang treo cap -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.status.cable' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.pillarStatusCable}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ngay xay dung -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.constructionDate' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.constructionDate | date:'dd/MM/yyyy'}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Trang thai -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'common.label.status' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.status}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- form fields row 4-->
+
+              <!-- Dia ban -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'pillar.locationName' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.pathLocalName}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dia chi -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'common.label.address' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.address}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ghi chu -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'common.label.note' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.note}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- form fields row 5-->
+
+              <!-- Vi do -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'common.latitude' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.latitude}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Kinh do -->
+              <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+                <div class="line_form ui-g ui-fluid">
+                  <label class="ui-g-12 ui-md-3 view-name-label py-0 m-0">
+                    {{'common.longitude' | translate}}<span>:</span>
+                  </label>
+                  <div class="ui-g-12 ui-md-9 name_content py-0">
+                    <label class="view-detail mb-0">
+                      {{item.longitude}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="line_btn_form mt-0">
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn_form" (click)="saveOrEdit(item.pillarId,'edit')">
+                <i class="add_ico"></i>
+                <span [innerHTML]="'common.label.update' | translate"></span>
+              </button>
+              <button type="button" (click)="onClosed()" class="btn_form02">
+                <i class="exit_ico"></i>
+                <span [innerHTML]="'common.button.close' | translate"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf='sleeveDetail' class="ui-g-9 search-content pl-3 pr-2">
+          <sleeve-list [hideSearch]='childData' [parentPillar]='parentPillar'></sleeve-list>
+        </div>
+        <div *ngIf="cableLaneDetail" class="ui-g-9 search-content pl-3 pr-2">
+          <p-panel header="Kết quả tìm kiếm" [toggleable]="true">
+            <div id="listArea" class="list_btn_grid">
+              <div class="panel panel-default">
+                <p-toast position="bottom-right" key="kkkk" [autoZIndex]="true"></p-toast>
+                <div class="panel-body panel-table">
+                  <p-table #dt [columns]="selectedColumns" [value]="cableLaneList.listData" [rows]="10" [totalRecords]="cableLaneList.totalRecords"
+                           [responsive]="true" [paginator]="true" [(selection)]="selectedResult" [scrollable]="true"
+                           [rowsPerPageOptions]="[5,10,15,20,25,30]" (onRowSelect)="onRowSelect($event)"
+                           [resizableColumns]="true" [style]="{ 'max-width': '1650px' }" [lazy]="true" (onLazyLoad)="onLazyLoad($event)">
+                    <ng-template pTemplate="colgroup" let-columns>
+                      <colgroup>
+                        <col style="width:3rem">
+                        <col *ngFor="let col of columns" [ngClass]="col.classHeader" style="width:15rem">
+                      </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th rowspan="2" translate class="text-center size-2">common.table.index</th>
+                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngClass]="col.classHeader"
+                            class="text-center">
+                          {{col.header | translate}}
+                          <p-sortIcon [field]="col.field" class="ngIf field.selected "></p-sortIcon>
+                        </th>
+                      </tr>
+                      <tr>
+                        <th *ngFor="let col of columns" [ngSwitch]="col.typeFilter">
+                          <input *ngSwitchCase="'input'" pInputText type="text" (input)="searchInTable($event,col)">
+                        </th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns" let-index="rowIndex+1">
+                      <tr>
+                        <td class="text-center size-2">{{index}}</td>
+                        <td *ngFor="let col of columns" [ngClass]="col.classField" (copied)="copied($event)"
+                            [rightClickCopy]="rowData[col.field]" (dblclick)="onRowDblClick(rowData)">
+                          {{rowData[col.field]}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                      <span *ngIf="cableLaneList.totalRecords > 0">{{'pagination.record.from' | translate}}
+                        {{(dt?.first + 1) + '-' + ((dt?.first + dt?.rows) < dt?.totalRecords ? (dt?.first + dt?.rows) : dt?.totalRecords)}}
+                        {{'pagination.of' | translate}} {{cableLaneList.totalRecords}} {{'pagination.record' | translate}}</span>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                      <tr>
+                        <td [attr.colspan]="8">
+                          {{'common.label.noData'|translate}}
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+  </form>
+</div>

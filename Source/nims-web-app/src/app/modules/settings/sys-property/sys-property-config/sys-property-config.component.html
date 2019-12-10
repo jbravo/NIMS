@@ -1,0 +1,191 @@
+<style>
+  .border-right{
+    border-right: #C8C8C8"
+  }
+</style>
+<div class="panel panel-default" *ngIf="selectedProperty && selectedProperty.propertyId">
+  <form id="formConfig" [formGroup]="formConfig" novalidate>
+    <div class="panel-heading">
+      <strong class="text-u-c">
+        <i class="fa fa-th"></i>&nbsp;{{'app.sys_property.form_detail' | translate}}
+      </strong>
+    </div>
+    <div class="panel-body padding-xl">
+      <p-tabView (onChange)="onchangeNation($event)">
+        <p-tabPanel *ngFor="let nation of nations;let i = index;let isFirst = first" [header]="nation.name" [selected]="isFirst">
+          <p-fieldset [toggleable]="true">
+            <p-header>Thuộc tính động</p-header>
+            <div class="ui-g content">
+              <div class="ui-g-12 ui-md-3 border-right">
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label ">{{'app.sys_property.code' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6 ">
+                    {{formConfig.get('propertyCode').value}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.nation' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    {{formConfig.get('nationName').value}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.iso' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    {{formConfig.get('nationCode').value}}
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.isHide' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" name="isHide" [value]="1" formControlName="isHide" />
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-5 border-right">
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.isTranslation' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" [value]="1" formControlName="isTranslation" name="isTranslation">
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.position' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <p-selectButton [options]="positions" name="align" formControlName="align"></p-selectButton>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.dateFormat' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="text" name="dateFormat" class="form-control" formControlName="dateFormat" placeholder="dd/mm/yy" />
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.numberFormat' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="text" name="numberFormat" class="form-control" formControlName="numberFormat"
+                      placeholder="###,###.##" />
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.currencyFormat' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="text" name="moneyFormat" class="form-control" formControlName="moneyFormat"
+                      placeholder="###.###.VND" />
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.css' | translate}}</label>
+                  <div class="ui-g-12 ui-md-8">
+                    <textarea cols="30" rows="4" class="form-control" formControlName="css" name="css"></textarea>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.js' | translate}}</label>
+                  <div class="ui-g-12 ui-md-8">
+                    <textarea cols="30" rows="4" class="form-control" formControlName="js" name="js"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-fieldset>
+          <br>
+          <p-fieldset *ngIf="selectedProperty && selectedProperty.isValidator" [toggleable]="true">
+            <p-header>Validate</p-header>
+            <div class="ui-g content">
+              <div class="ui-g-12 ui-md-3 border-right">
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label ">{{'app.sys_property.isRequire' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6 ">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" name="isRequire" [value]="1" formControlName="isRequire" />
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.isUrl' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" name="isUrl" [value]="1" formControlName="isUrl" />
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label ">{{'app.sys_property.isEmail' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" name="isEmail" [value]="1" formControlName="isEmail" />
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-5 border-right">
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label ">{{'app.sys_property.isNumber' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" name="isNumber" [value]="1" formControlName="isNumber" />
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.minLength' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="number" class="form-control" formControlName="minLength" placeholder="..." />
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.maxLength' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="number" class="form-control" formControlName="maxLength" placeholder="..." />
+                  </div>
+                </div>
+              </div>
+              <div class="ui-g-12 ui-md-4">
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.isIp' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <label class="i-switch bg-info m-t-xs m-r">
+                      <input type="checkbox" name="isIp" [value]="1" formControlName="isIp" />
+                      <i></i>
+                    </label>
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.numberMin' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="number" class="form-control" formControlName="numberMin" placeholder="..." />
+                  </div>
+                </div>
+                <div class="ui-g-12 ">
+                  <label class="ui-g-12 ui-md-4 control-label "> {{'app.sys_property.numberMax' | translate}}</label>
+                  <div class="ui-g-12 ui-md-6">
+                    <input type="number" class="form-control" formControlName="numberMax" placeholder="..." />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </p-fieldset>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+    <div class="panel-footer vt-area-button">
+        <button type="button" (click)="refreshPropertyDetails()" class="btn btn-sm btn-info" [innerHTML]="'common.button.refresh' | translate"></button>
+        <button type="submit" (click)="processSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.save' | translate"></button>
+        <button type="button" (click)="cancelPropertyDetails()" class="btn btn-sm btn-danger" [innerHTML]="'common.button.cancel' | translate"></button>
+    </div>
+  </form>
+</div>

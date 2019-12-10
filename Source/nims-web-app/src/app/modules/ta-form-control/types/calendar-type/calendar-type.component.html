@@ -1,0 +1,16 @@
+<div class="mb-2">
+    <label for="{{field.key}}" [ngClass]="{'text-danger':field.formControl.touched &&  field.formControl.invalid}">{{to.label}}</label>
+    <p-calendar id="{{field.key}}" [formControl]="formControl" [formlyAttributes]="field" dateFormat="dd/mm/yy"
+                [required]="to.required" [showIcon]="to.showIcon"
+                [stepSecond]="1" [maxDate]="datemax" [minDate]="dattmin" >
+    </p-calendar>
+</div>
+<formly-validation-message #validationMessage
+                           [field]="field"
+                           [style.display]="'none'">
+</formly-validation-message>
+
+<span *ngIf="field.formControl && field.formControl.touched &&  field.formControl.invalid && validationMessage.errorMessage"
+      class="text-danger">
+        <strong>{{ to.label }}</strong>: {{ validationMessage.errorMessage }}
+</span>

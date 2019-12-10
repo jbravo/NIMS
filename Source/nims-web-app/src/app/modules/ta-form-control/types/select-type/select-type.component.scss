@@ -1,0 +1,23 @@
+
+::ng-deep {
+  p-dropdown.ng-invalid.ng-touched {
+    .ui-dropdown {
+      border: 1px solid #a80000;
+    }
+  }
+
+  p-dropdown.inputwrapper-focus {
+    .ui-state-focus {
+      border: 1px solid #80bdff;
+    }
+  }
+
+  .ui-dropdown:not(.ui-state-disabled):focus {
+    border-color: #0071bc;
+    outline: 0 none;
+    -webkit-box-shadow: 0 0 5px rgba(0, 112, 210, 0.35);
+    -moz-box-shadow: 0 0 5px rgba(0, 112, 210, 0.35);
+    box-shadow: 0 0 5px rgba(0, 112, 210, 0.35);
+  }
+}
+

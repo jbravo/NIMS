@@ -1,0 +1,11 @@
+.line_btn_form {
+  margin-top: 115px;
+}
+
+.invalid-control {
+  border-color: #dc3545 !important;
+}
+
+.invalid-control:focus {
+  outline: none;
+}

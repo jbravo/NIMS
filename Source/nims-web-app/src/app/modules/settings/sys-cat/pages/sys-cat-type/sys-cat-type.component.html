@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <div class="panel-heading vt-relative">
+    <strong class="text-u-c">
+      <i class="fa fa-th"></i>
+      <span translate> app.sys_cat.sys_cat_type_list_title</span>
+    </strong>
+    <div class="vt-absolute vt-shotcut-button-in-heading">
+      <!-- <have-permission [actionCode]="'action.insert'" [resourceCode]="'resource.sysCatType'"> -->
+        <!-- <button type="button" (click)="prepareSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.addNew' | translate" ></button> -->
+      <!-- </have-permission> -->
+    </div>
+  </div>
+  <div class="panel-body vt-nopadding">
+    <div class="table-responsive">
+        <table class="table table-wrapper table-hover">
+            <thead class="ui-table-thead">
+                <tr>
+                  <th translate class="size-1 col-stt">common.table.index</th>
+                  <th translate>app.sys_cat.sys_cat_type_name</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="2">
+                  <input placeholder="{{'app.sys_cat.search_by_sys_cat_type_name' | translate}}" class="input-sm form-control" type="search" [(ngModel)]="scTypeFillter"/>
+                </td>
+              </tr>
+              <tr *ngFor="let item of resultList | filter : scTypeFillter; index as i" [ngClass]="{'bg-info' : item.sysCatTypeId === scTypeId}" (click)="onSelectSysCatType(item)">
+                <td class="vt-align-center">{{i + 1}}</td>
+                <td>{{item.name}}
+                  <!-- <have-permission [actionCode]="action.insert" [resourceCode]="resource.sysCatType"> -->
+                      <span *ngIf="item.sysCatTypeId === scTypeId" class="icon-export-2 pull-right" (click)="prepareTransfer(item)"
+                        style="cursor: pointer" [title]="'app.sys_cat.tranfer' | translate"></span>
+                  <!-- </have-permission> -->
+                  <!-- <have-permission [actionCode]="action.update" [resourceCode]="resource.sysCatType"> -->
+                      <span *ngIf="item.sysCatTypeId === scTypeId" class="fa fa-edit pull-right icon-edit-sys-cat-type"
+                        (click)="prepareSaveOrUpdate(item)" style="cursor: pointer" [title]="'common.label.edit' | translate"></span>
+                  <!-- </have-permission> -->
+                </td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+  </div>
+</div>

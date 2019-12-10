@@ -1,0 +1,4 @@
+---
+- include: "prepare.yml"
+- include: "deploy-manager-stack.yml"
+- include: "deploy-service-stack.yml"

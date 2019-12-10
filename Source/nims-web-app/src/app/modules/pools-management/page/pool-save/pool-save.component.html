@@ -1,0 +1,257 @@
+<app-spinner></app-spinner>
+<div class="content_wrapper pool-save-form">
+  <p-messages key="msgsPool_Number"></p-messages>
+  <p-messages key="msgsPool"></p-messages>
+
+  <!-- {{formAdd.value | json}} -->
+  <!-- {{formAdd.status}} -->
+  <form [formGroup]="formAdd">
+    <div *ngIf="action != 'view'">
+      <div class="content-section implementation">
+        <div class="ui-g ui-fluid">
+
+          <!-- Don vi 1 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="deptId">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.deptName' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteDept [header]="headerDept"
+                    [control]="formControls['deptId']" [contentType]="dept" [displayFieldType]="'dept'" [type]="'dept'"
+                    (onChange)="onChangeRowSelectDept($event)" (onSelect)="setautoCompleteValue($event,'deptId')"
+                    [disabled]="action == 'edit'" tabindex="1">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Don vi end-->
+
+          <!-- Chi so be 2 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="numberPool">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.poolNumber' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" [ngClass]="action == 'edit' ? 'disable' : ''" class="form-control input_form"
+                  formControlName="numberPool" [readonly]="action == 'edit'" maxlength="4"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '')" (blur)="myFunction($event)" tabindex="2">
+              </div>
+            </div>
+          </div>
+          <!-- Chi so be end-->
+
+          <!-- Ma be 3 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.poolCode' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="input_form disable" formControlName="poolCode" readonly tabindex="3">
+              </div>
+            </div>
+          </div>
+          <!-- Ma be end-->
+
+          <!-- Ma loai be 4 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="poolTypeId">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.poolTypeCode' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter id="select-filter" [property]="f['poolTypeId']" [options]="poolTypeList" optionLabel="label"
+                  optionValue="value" [disabled]="action == 'edit'" tabindex="4">
+                </select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- Ma loai be end-->
+
+          <!-- Dia ban 5 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="locationId">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'station.location' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <div class="input_more_form">
+                  <autocomplete-search-control #autoCompleteLocation [header]="headerLocation"
+                    [control]="formControls['locationId']" [contentType]="location" [displayFieldType]="'location'"
+                    [type]="'location'" [disabled]="!formControls['deptId'].value" tabindex="5">
+                  </autocomplete-search-control>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Dia ban end-->
+
+          <!-- Dia chi 6 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.address' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" formControlName="address" class="input_form" maxlength="500"
+                  [readonly]="action == 'view'" tabindex="6">
+              </div>
+            </div>
+          </div>
+          <!-- Dia chi end-->
+
+          <!-- ngay xay dung 7 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.constructionDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar formControlName="constructionDate" dateFormat="dd/mm/yy" showIcon="true"
+                  (onInput)="onInput($event, 'constructionDate')" [disabled]="action == 'view'" tabindex="7">
+                </p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker('constructionDate')"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- ngay xay dung end-->
+
+          <!-- ngay ban giao 8 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.deliveryDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar formControlName="deliveryDate" dateFormat="dd/mm/yy" showIcon="true"
+                  (onInput)="onInput($event, 'deliveryDate')" [disabled]="action == 'view'" tabindex="8">
+                </p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker('deliveryDate')"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- ngay ban giao end-->
+
+          <!-- ngay nghiem thu 9 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.acceptanceDate' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content date-picker pt-0">
+                <p-calendar formControlName="acceptanceDate" dateFormat="dd/mm/yy" showIcon="true"
+                  (onInput)="onInput($event, 'acceptanceDate')" [disabled]="action == 'view'" tabindex="9">
+                </p-calendar>
+                <a class="icon-clear-date" (click)="onClearDatePicker('acceptanceDate')"><i class="x_ico"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- ngay nghiem thu end-->
+
+
+          <!-- Chu so huu 10 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="ownerId">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.ownerId' | translate}} 
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <select-filter [property]="f['ownerId']" [options]="ownerList" optionLabel="label"
+                  [disabled]="action == 'view'" optionValue="value" tabindex="10"></select-filter>
+              </div>
+            </div>
+          </div>
+          <!-- Chu so huu end-->
+
+          <!-- kinh do 11 start -->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="longitude">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.longitude' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="form-control input_form" formControlName="longitude" [ngClass]="errorLongitude ? 'invalid-control-longLat' : ''"
+                  [readonly]="action == 'view'" oninput="this.value = this.value.replace(/[^-.0-9]/g, '')" tabindex="11">
+              </div>
+            </div>
+          </div>
+          <!-- kinh do end-->
+
+          <!-- Vi do 12 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid" hasError="latitude">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.latitude' | translate}} <span class="text-danger">*</span>
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <input type="text" class="form-control input_form" formControlName="latitude" [ngClass]="errorLatitude ? 'invalid-control-longLat' : ''"
+                  [readonly]="action == 'view'" oninput="this.value = this.value.replace(/[^-.0-9]/g, '')" tabindex="12">
+              </div>
+            </div>
+          </div>
+          <!-- Vi do end-->
+
+          <!-- Trang thai 13 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.status' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <p-dropdown [options]="statusListNew" [optionLabel]="label" formControlName="status" tabindex="13"></p-dropdown>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chu 14 start-->
+          <div class="ui-g-12 ui-md-6 ui-lg-4 pt-0">
+            <div class="line_form ui-g ui-fluid">
+              <label class="ui-g-12 ui-md-4 name_label">
+                {{'pool.note' | translate}}
+              </label>
+              <div class="ui-g-12 ui-md-8 name_content pt-0">
+                <textarea rows="5" cols="50" pInputTextarea formControlName="note" maxlength="500"
+                  [readonly]="action == 'view'" tabindex="14"></textarea>
+              </div>
+            </div>
+          </div>
+          <!-- Ghi chu end-->
+        </div>
+      </div>
+      <div class="line_btn_form mt-0">
+        <div class="d-flex justify-content-end">
+          <button type="submit" (click)="onSubmit()" class="btn_form">
+            <i class="add_ico"></i>
+            <span [innerHTML]="'common.button.storage' | translate"></span>
+          </button>
+          <button type="button" (click)="onClosedTab()" class="btn_form02">
+            <i class="exit_ico"></i>
+            <span [innerHTML]="'common.label.cancel' | translate"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--toast confirm Change PoolNumber-->
+<p-toast position="center" key="ToastnumberPool" (onClose)="onReject()" [modal]="true" styleClass="ui-toast-confirm"
+  [autoZIndex]="true">
+  <ng-template let-message pTemplate="message">
+    <div style="text-align: center">
+      <h3>{{message.summary}}</h3>
+      <p>{{message.detail}}</p>
+    </div>
+    <div class="btn_modal_footer" style="text-align: center">
+      <a (click)="onConfirm(message.data)" class="btn_modal_action"
+        style="color: white">{{'common.button.ok' | translate}}</a>
+      <a (click)="onReject()" class="btn_modal_cancel" style="color: #007CBB">{{'common.button.close1' | translate}}</a>
+    </div>
+  </ng-template>
+</p-toast>
+<!-- <p-toast key="leftCopy" position="top-right"></p-toast> -->
+<p-toast key="rightDown" position="bottom-right"></p-toast>

@@ -1,0 +1,112 @@
+---
+- name: Check if build.sh file is exists
+  stat:
+    path: "{{WORKING_DIR}}/build.sh"
+  register: build_sh_file_details
+
+- name: Check if deploy service folder exist
+  stat:
+    path: "{{WORKING_DIR}}/deploy/service"
+  register: service_folder_details
+
+- name: Get service stack and manager stack running list
+  shell:
+    cmd: "./build.sh service-stack-show --staging"
+    chdir: "{{WORKING_DIR}}"
+  register: stack_running_list
+  when:
+    - build_sh_file_details.stat.exists == True
+    - service_folder_details.stat.exists == True
+  ignore_errors: yes
+
+- debug:
+    msg: "{{stack_running_list}}"
+  when:
+    - service_folder_details.stat.exists == True
+    - build_sh_file_details.stat.exists == True
+
+- set_fact:
+    service_stack_exists: False
+
+- set_fact:
+    service_stack_exists: True
+  when:
+    - service_folder_details.stat.exists == True
+    - build_sh_file_details.stat.exists == True
+    - ' "configuration-service" in stack_running_list.stdout '
+
+- name: Stop existing old staging services stack if exists
+  shell:
+    cmd: "./build.sh service-stack-down --staging"
+    chdir: "{{WORKING_DIR}}"
+  when: service_stack_exists == True
+  register: service_stack_down_output
+
+- debug:
+    msg: "{{service_stack_down_output}}"
+  when: service_stack_exists == True
+
+- name: Create service stack working directory if not exists and clean it if exists
+  file:
+    mode: 0755
+    owner: "{{ansible_ssh_user}}"
+    group: "{{ansible_ssh_user}}"
+    state: "{{ item }}"
+    path: "{{WORKING_DIR}}/deploy/service"
+  with_items:
+    - absent
+    - directory
+
+- name: Copy bash file to staging server
+  copy:
+    mode: 0755
+    src: "{{CURRENT_JENKINS_LOCAL_DIR}}/../../../build.sh"
+    dest: "{{WORKING_DIR}}"
+
+- name: Create env file for current docker-compose stack
+  copy:
+    mode: 0755
+    dest: "{{WORKING_DIR}}/.env"
+    content: |
+      IMAGE_REGISTRY_URL={{IMAGE_REGISTRY_URL}}
+      IMAGE_STAGING_REGISTRY_URL={{IMAGE_STAGING_REGISTRY_URL}}
+      IMAGE_TYPE={{IMAGE_TYPE}}
+      STACK_VERSION={{STACK_VERSION}}
+
+- name: Copy deploy folder to staging server
+  copy:
+    src: "{{CURRENT_JENKINS_LOCAL_DIR}}/../../../deploy/service"
+    dest: "{{WORKING_DIR}}/deploy"
+
+- name: create folder for each service
+  file:
+    mode: 0755
+    owner: "{{ansible_ssh_user}}"
+    group: "{{ansible_ssh_user}}"
+    state: "directory"
+    path: "{{WORKING_DIR}}/{{item}}"
+  with_items: "{{SERVICE_LIST}}"
+
+- name: Pull service stack image
+  shell:
+    cmd: ./build.sh service-stack-pull --staging
+    chdir: "{{WORKING_DIR}}"
+
+- name: Start service stack
+  shell:
+    cmd: ./build.sh service-stack-up --staging
+    chdir: "{{WORKING_DIR}}"
+  register: service_stack_up_output
+
+- debug:
+    msg: "{{service_stack_up_output}}"
+
+- name: Verify microservices is up
+  shell:
+    cmd: "./build.sh check-service-health {{item}}"
+    chdir: "{{WORKING_DIR}}"
+  with_items: "{{SERVICE_LIST}}"
+
+- name: wait for service list refresh
+  shell:
+    cmd: "sleep {{REFRESH_SERVICE_LIST_TIMEOUT}}"

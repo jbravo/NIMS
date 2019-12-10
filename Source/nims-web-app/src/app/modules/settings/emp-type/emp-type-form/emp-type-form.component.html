@@ -1,0 +1,61 @@
+<div class="modal-body">
+    <form id="frmSaveEmpType">
+        <div class="panel panel-default">
+            <form id="formSave" [formGroup]="formSave">
+                <div class="panel-heading vt-relative">
+                    <strong class="text-u-c">
+                        <i class="fa fa-th"></i>&nbsp;
+                        <span *ngIf="!formSave.get('empTypeId').value" translate>app.empType.addTitle</span>
+                        <span *ngIf="formSave.get('empTypeId').value" translate>app.empType.updateTitle</span>
+                    </strong>
+                    <div class="vt-absolute vt-shotcut-button-in-heading">
+                        <span (click)="activeModal.close()" title="Đóng" class="btn btn-span btn-sm btn-info"><i class="fa fa-times"></i></span>
+                    </div>
+                </div>
+                <div class="panel-body padding-xl">
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right required">{{'app.empType.code' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" name="code" class="form-control" formControlName="code" />
+                            <app-control-messages [control]="f['code']"></app-control-messages>
+                        </div>
+                        <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right required">{{'app.empType.name' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                            <input type="text" name="name" class="form-control" formControlName="name" />
+                            <app-control-messages [control]="f['name']"></app-control-messages>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">{{'app.empType.isUsed' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <label class="i-switch bg-info m-t-xs m-r">
+                            <input type="checkbox" name="isUsed" [value]="1" formControlName="isUsed" />
+                            <i></i>
+                        </label>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <label class="ui-g-12 ui-md-6 ui-lg-2 control-label vt-align-right">{{'app.empType.hasSoldierInfo' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <label class="i-switch bg-info m-t-xs m-r">
+                            <input type="checkbox" name="hasSoldierInfo" [value]="1" formControlName="hasSoldierInfo" />
+                            <i></i>
+                        </label>
+                        </div>
+                        <label class="ui-g-12 ui-md-6 ui-lg-3 control-label vt-align-right">{{'app.empType.hasLabourContractInfo' | translate}}</label>
+                        <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <label class="i-switch bg-info m-t-xs m-r">
+                            <input type="checkbox" name="hasLabourContractInfo" [value]="1" formControlName="hasLabourContractInfo" />
+                            <i></i>
+                        </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer vt-area-button">
+                    <button type="submit" (click)="processSaveOrUpdate()" class="btn btn-sm btn-info" [innerHTML]="'common.button.save' | translate"></button>
+                    <button type="button" (click)="activeModal.close()" class="btn btn-sm btn-danger" [innerHTML]="'common.button.cancel' | translate"></button>
+                </div>
+            </form>
+        </div>
+    </form>
+</div>

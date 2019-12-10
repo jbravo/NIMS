@@ -1,0 +1,4 @@
+
+:host ::ng-deep p-table .ui-dropdown label.ui-dropdown-label{
+    line-height: normal !important;
+}

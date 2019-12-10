@@ -1,0 +1,18 @@
+version: '3.2'
+
+volumes:
+  nims_logs: {}
+
+services:
+  nims-web:
+    build:
+      context: "../../"
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+    image: "${DOCKER_STAGING_PUSH_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/nims-web:${TAG}"
+    container_name: "nims-web"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    restart: always

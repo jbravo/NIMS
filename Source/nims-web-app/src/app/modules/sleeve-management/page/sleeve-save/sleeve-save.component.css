@@ -1,0 +1,42 @@
+.view-detail {
+    font-weight: bold;
+}
+
+.view-name-label {
+    margin: 0;
+    /* text-align: right; */
+    font-size: 13px;
+    color: #333;
+}
+
+.view-title-label {
+    margin: 0;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: #007bff;
+}
+
+.line-in-form-btn {
+    border: 0.5px solid #d8d0d0;
+    margin: 26px;
+
+}
+
+.sleeve-tree-menu {
+    height: 1000px;
+    width: 30%;
+    margin-left: 20px;
+    /* margin-right: 40px; */
+    margin-top: 40px;
+    float: left;
+    color:#eaeaea;
+}
+
+.sleeve-tree-menu-2 {
+    height: 100%;
+    width: 70%;
+    margin-top: 40px;
+    margin-left: 10px;
+    float: left;
+    color:#eaeaea;
+}

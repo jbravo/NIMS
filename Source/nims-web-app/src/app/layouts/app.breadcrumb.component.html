@@ -1,0 +1,22 @@
+<!--<div class="route-bar">-->
+<!--    <div class="route-bar-breadcrumb">-->
+<!--        <i class="fa fa-home"></i>-->
+<!--        <span *ngIf="items && items.length > 0">/ </span>-->
+<!--        <ng-template ngFor let-item let-last="last" [ngForOf]="items">-->
+<!--            <a [routerLink]="item.routerLink" *ngIf="item.routerLink">{{item.label}}</a>-->
+<!--            <ng-container *ngIf="!item.routerLink">{{item.label}}</ng-container>-->
+<!--            <span *ngIf="!last">/</span>-->
+<!--        </ng-template>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="breadcrumb_link">
+  <ul>
+    <ng-template ngFor let-item let-last="last" [ngForOf]="items">
+      <li>
+        <ng-container *ngIf="!last">{{item.label}}</ng-container>
+        <span *ngIf="last">{{item.label}}</span>
+        <ng-container *ngIf="!last">/</ng-container>
+      </li>
+    </ng-template>
+  </ul>
+</div>

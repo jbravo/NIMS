@@ -1,0 +1,16 @@
+<p-calendar
+  monthNavigator="true"
+  yearNavigator= "true"
+  [showIcon]="showIcon"
+  [(ngModel)]="dateValue"
+  [dateFormat]="dateFormat"
+  [yearRange]="yearRange"
+  (onInput)="onInput()"
+  (onSelect)="onInput()"
+  (onBlur)="onBlur($event)"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  yearRange="1900:2900"
+  [showTime]="showTime"
+  >
+</p-calendar>
