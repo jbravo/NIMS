@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+logging:
+  file: ./log/geo-service.log
+  file.max-history: 10
+  file.max-size: 10MB
+  level:
+    ROOT: info
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: com.viettel.dialect.PostgreSQL95JsonDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
+    show-sql: true
+  datasource.url: jdbc:postgresql://10.240.202.44:8081/nims_fcn
+  datasource.username: nims
+  datasource.password: Viettel@123
+  datasource.driver-class-name: org.postgresql.Driver
+  h2.console.enabled: true
+
+app:
+  prefix: nims-geo-service

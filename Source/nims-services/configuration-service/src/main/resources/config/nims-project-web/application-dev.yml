@@ -1,0 +1,7 @@
+server:
+  port: 8001
+
+opentracing:
+  jaeger:
+    const-sampler:
+      decision: true

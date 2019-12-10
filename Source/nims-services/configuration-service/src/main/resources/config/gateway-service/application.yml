@@ -1,0 +1,43 @@
+server:
+  port: 8060
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+logging:
+  file: ./log/gateway-service.log
+  file.max-history: 10
+  file.max-size: 10MB
+  level:
+    ROOT: info
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  cloud.gateway:
+    discovery:
+      locator:
+        enabled: true
+        lowerCaseServiceId: true
+    routes:
+      - id: geo-service
+        uri: lb://geo-service
+        predicates:
+          - Path=/nims-geo-service/**
+      - id: commons-service
+        uri: lb://commons-service
+        predicates:
+          - Path=/nims-commons-service/**
+      - id: radio-service
+        uri: lb://radio-service
+        predicates:
+          - Path=/nims-radio-service/**
+      - id: transmission-service
+        uri: lb://transmission-service
+        predicates:
+          - Path=/nims-transmission-service/**

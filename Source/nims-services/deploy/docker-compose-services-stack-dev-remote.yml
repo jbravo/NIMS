@@ -1,0 +1,70 @@
+version: '3.2'
+
+services:
+  configuration-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9088", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/configuration-service.jar"]
+    command: ["--spring.profiles.active=dev,native", "--server.port=8088"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8088/actuator/health"]
+
+  discovery-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9061", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/discovery-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8061"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8061/actuator/health"]
+
+  gateway-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9060", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/gateway-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8060"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      test: ["CMD", "curl", "-f", "http://localhost:8060/actuator/health"]
+
+  commons-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9081", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/commons-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8081"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+  geo-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9082", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/geo-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8082"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+  radio-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9083", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/commons-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8083"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8083/actuator/health"]
+  transmission-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9084", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/transmission-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8084"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8084/actuator/health"]
+  optimal-design-service:
+    entrypoint: ["java", "-Xmx512m", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:9085", "-Djava.security.egd=file:///dev/urandom","-jar", "/app/optimal-design-service.jar"]
+    command: ["--spring.profiles.active=dev", "--server.port=8085"]
+    healthcheck:
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      test: ["CMD", "curl", "-f", "http://localhost:8085/actuator/health"]

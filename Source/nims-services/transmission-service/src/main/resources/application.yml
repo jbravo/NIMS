@@ -1,0 +1,50 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /nims-transmission-service
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+logging:
+  file: ./log/commons-service.log
+  file.max-history: 10
+  file.max-size: 10MB
+  level:
+    ROOT: info
+
+spring.jpa.database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.show-sql: true
+spring.jpa.hibernate:
+  naming:
+    physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+datasource.maria.primary.jdbcUrl: jdbc:mariadb://192.168.100.108:3306/nims
+datasource.maria.primary.username: iist
+datasource.maria.primary.password: Hanoi@1900
+datasource.maria.primary.driverClassName: org.mariadb.jdbc.Driver
+
+datasource.postgresql.second.jdbcUrl: jdbc:postgresql://192.168.100.108:5432/nims
+datasource.postgresql.second.username: postgres
+datasource.postgresql.second.password: Hanoi@1900
+datasource.postgresql.second.driverClassName: org.postgresql.Driver
+
+#spring:
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    show-sql: true
+#    hibernate:
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
+#  datasource.url: jdbc:mariadb://192.168.100.108:3306/nims
+#  datasource.username: iist
+#  datasource.password: Hanoi@1900
+#  datasource.driver-class-name: org.mariadb.jdbc.Driver
+#  h2.console.enabled: true

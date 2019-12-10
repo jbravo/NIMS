@@ -1,0 +1,7 @@
+---
+- name: Create inventory files for production environments
+  hosts: local
+  template:
+    src: "vsmart_heat_template.yaml.j2"
+    dest: "{{CURRENT_JENKINS_LOCAL_DIR}}/vsmart_heat_template.yaml"
+    mode: 0644

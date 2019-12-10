@@ -1,0 +1,16 @@
+server:
+  port: 8060
+
+spring:
+  cloud:
+    config:
+      allowOverride: true
+      overrideSystemProperties: false
+  devtools:
+    remote:
+      secret: nims
+
+opentracing:
+  jaeger:
+    const-sampler:
+      decision: true

@@ -1,0 +1,26 @@
+version: '3.2'
+
+services:
+  configuration-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/configuration-service:${TAG}"
+
+  discovery-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/discovery-service:${TAG}"
+
+  commons-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/commons-service:${TAG}"
+
+  geo-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/geo-service:${TAG}"
+
+  radio-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/commons-service:${TAG}"
+
+  transmission-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/transmission-service:${TAG}"
+
+  optimal-design-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/optimal-design-service:${TAG}"
+
+  gateway-service:
+    image: "${DOCKER_STAGING_REGISTRY}/${PROJECT_CODE}/${IMAGE_TYPE}/gateway-service:${TAG}"

@@ -1,0 +1,136 @@
+version: '3.2'
+
+volumes:
+  nims_logs: {}
+
+services:
+  configuration-service:
+    build:
+      context: ../configuration-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/configuration-service:${TAG}"
+    container_name: "configuration-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    restart: always
+
+  discovery-service:
+    build:
+      context: ../discovery-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/discovery-service:${TAG}"
+    container_name: "discovery-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+    restart: always
+
+  gateway-service:
+    build:
+      context: ../gateway-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/gateway-service:${TAG}"
+    container_name: "gateway-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+
+  geo-service:
+    build:
+      context: ../geo-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/geo-service:${TAG}"
+    container_name: "geo-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+
+  commons-service:
+    build:
+      context: ../commons-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/commons-service:${TAG}"
+    container_name: "commons-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+
+  radio-service:
+    build:
+      context: ../radio-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/commons-service:${TAG}"
+    container_name: "commons-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+
+  transmission-service:
+    build:
+      context: ../transmission-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/transmission-service:${TAG}"
+    container_name: "transmission-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always
+  optimal-design-service:
+    build:
+      context: ../optimal-design-service
+      args:
+        PROJECT_VERSION: ${PROJECT_VERSION}
+        JDK_BASE_IMAGE: ${JDK_BASE_IMAGE}
+    image: "${IMAGE_REGISTRY_URL}/${PROJECT_CODE}/${IMAGE_TYPE}/optimal-design-service:${TAG}"
+    container_name: "optimal-design-service"
+    network_mode: "host"
+    volumes: ['nims_logs:/app/log']
+    environment:
+      TZ: "Asia/Ho_Chi_Minh"
+    depends_on:
+      - configuration-service
+      - discovery-service
+    restart: always

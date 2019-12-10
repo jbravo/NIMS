@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+logging:
+  file: ./log/radio-service.log
+  file.max-history: 10
+  file.max-size: 10MB
+  level:
+    ROOT: info
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  datasource.url: jdbc:mariadb://10.61.2.219:3306/nims
+  datasource.username: nims_app
+  datasource.password: 123456a@
+  datasource.driver-class-name: org.mariadb.jdbc.Driver
+  h2.console.enabled: true
+
+app:
+  prefix: nims-radio-service

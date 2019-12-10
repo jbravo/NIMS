@@ -1,0 +1,7 @@
+---
+- name: Create inventory files for production environments
+  hosts: local
+  template:
+    src: "production_inventory.ini.j2"
+    dest: "{{CURRENT_JENKINS_LOCAL_DIR}}/production_inventory.ini"
+    mode: 0644

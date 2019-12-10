@@ -1,0 +1,6 @@
+[
+    {
+      "Name": "vsmart-testbed",
+      "URL": "unix:///var/run/docker.sock"
+    }
+]
